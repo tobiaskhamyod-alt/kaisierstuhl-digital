@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Leistungen – Kaiserstuhl Digital</title>
+<meta name="description" content="Webdesign, Hosting & Domain, Wartung & Support – alle Leistungen von Kaiserstuhl Digital aus Teningen für lokale Unternehmen."/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f1628;--gold:#C9A84C;--gold-d:#b8942e;--white:#FFFFFF;--gray-l:#F5F5F5;--gray-d:#333333;--gray-m:#999999}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;font-size:17px;color:var(--gray-d);background:var(--white);line-height:1.6}
+@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+[data-anim]{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,.68,0,1.2),transform .7s cubic-bezier(.22,.68,0,1.2)}
+[data-anim].in{opacity:1;transform:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy);height:68px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.45)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-t{font-size:20px;font-weight:700}
+.logo-t .w{color:var(--white)}.logo-t .g{color:var(--gold)}
+.nav-ul{display:flex;align-items:center;gap:22px;list-style:none}
+.nav-ul a{color:rgba(255,255,255,.85);text-decoration:none;font-size:15px;font-weight:500;position:relative;padding-bottom:2px;transition:color .2s}
+.nav-ul a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width .25s}
+.nav-ul a:hover{color:var(--white)}.nav-ul a:hover::after{width:100%}
+.nav-ul a.on{color:var(--gold)}.nav-ul a.on::after{width:100%}
+.cta-a{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;padding:9px 20px;border-radius:6px;transition:background .2s,transform .15s,box-shadow .2s!important}
+.cta-a::after{display:none!important}
+.cta-a:hover{background:var(--gold-d)!important;transform:translateY(-2px);box-shadow:0 4px 16px rgba(201,168,76,.4)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+.mob{display:none;position:fixed;top:68px;left:0;right:0;background:var(--navy);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.mob.open{display:block}
+.mob a{display:block;color:rgba(255,255,255,.85);text-decoration:none;font-size:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s}
+.mob a:hover,.mob a.on{color:var(--gold)}
+.mob-cta{display:block!important;margin-top:18px;background:var(--gold);color:var(--navy)!important;font-weight:700;text-align:center;padding:13px;border-radius:6px;border-bottom:none!important;transition:background .2s}
+.mob-cta:hover{background:var(--gold-d)!important}
+.btn{display:inline-block;padding:14px 30px;border-radius:7px;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;border:none;font-family:Arial,sans-serif;transition:transform .2s cubic-bezier(.22,.68,0,1.4),background .2s,box-shadow .2s}
+.btn-p{background:var(--gold);color:var(--navy)}
+.btn-p:hover{background:var(--gold-d);transform:translateY(-3px) scale(1.02);box-shadow:0 8px 28px rgba(201,168,76,.45)}
+.btn-o{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.7)}
+.btn-o:hover{background:rgba(255,255,255,.1);border-color:var(--white);transform:translateY(-3px) scale(1.02)}
+.section{padding:90px 5%}
+.si{max-width:1200px;margin:0 auto}
+.bg-n{background:var(--navy)}.bg-g{background:var(--gray-l)}
+.sh{text-align:center;margin-bottom:56px}
+.sh h2{font-size:clamp(26px,3vw,32px);font-weight:700;color:var(--gold);margin-bottom:14px}
+.sh p{font-size:17px;color:var(--gray-m);max-width:560px;margin:0 auto}
+/* PAGE HERO */
+.ph{background:var(--navy);padding:140px 5% 80px;text-align:center;position:relative;overflow:hidden}
+.ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.1) 0%,transparent 65%);pointer-events:none}
+.ph .tag{position:relative;display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);border:1px solid rgba(201,168,76,.35);background:rgba(201,168,76,.1);padding:5px 16px;border-radius:20px;margin-bottom:20px;animation:heroIn .8s ease both}
+.ph h1{position:relative;font-size:clamp(30px,4vw,46px);font-weight:700;color:var(--white);margin-bottom:16px;animation:heroIn .9s .1s ease both}
+.ph .sub{position:relative;font-size:18px;color:rgba(255,255,255,.72);max-width:580px;margin:0 auto;animation:heroIn .9s .22s ease both}
+/* SERVICE BLOCKS */
+.svc-block{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.svc-block.rev{direction:rtl}
+.svc-block.rev > *{direction:ltr}
+.svc-meta{}
+.svc-num{font-size:72px;font-weight:700;color:rgba(201,168,76,.12);line-height:1;margin-bottom:-12px;font-family:Arial,sans-serif}
+.svc-icon-lg{width:70px;height:70px;background:rgba(201,168,76,.12);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:background .3s,transform .3s cubic-bezier(.22,.68,0,1.4)}
+.svc-icon-lg:hover{background:rgba(201,168,76,.22);transform:scale(1.08) rotate(-3deg)}
+.svc-icon-lg svg{width:36px;height:36px;color:var(--gold)}
+.svc-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.svc-meta h2{font-size:clamp(24px,3vw,30px);font-weight:700;color:var(--navy);margin-bottom:16px}
+.svc-meta .lead{font-size:17px;color:var(--gray-d);line-height:1.7;margin-bottom:24px}
+.svc-desc p{font-size:16px;color:var(--gray-d);line-height:1.75;margin-bottom:16px}
+.svc-desc p:last-child{margin-bottom:0}
+/* FEATURE LIST */
+.feat-list{list-style:none;margin-top:28px}
+.feat-list li{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:16px;color:var(--gray-d);transition:background .2s}
+.feat-list li:last-child{border-bottom:none}
+.feat-list li .chk{width:22px;height:22px;background:rgba(201,168,76,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.feat-list li .chk svg{width:12px;height:12px;color:var(--gold)}
+.feat-list h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px}
+/* CTA BANNER */
+.cta-sec{background:var(--navy);position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.12) 0%,transparent 70%);pointer-events:none}
+.cta-box{position:relative;text-align:center;max-width:640px;margin:0 auto}
+.cta-box h2{font-size:clamp(26px,3vw,34px);font-weight:700;color:var(--white);margin-bottom:16px}
+.cta-box p{font-size:17px;color:rgba(255,255,255,.7);margin-bottom:34px;line-height:1.65}
+/* FOOTER */
+footer{background:#080e1c;padding:52px 5% 30px;border-top:1px solid rgba(255,255,255,.06)}
+.fi{max-width:1200px;margin:0 auto}
+.ft{display:flex;justify-content:space-between;gap:40px;margin-bottom:36px;flex-wrap:wrap}
+.fb p{font-size:14px;color:rgba(255,255,255,.48);max-width:280px;line-height:1.65;margin-top:14px}
+.fl h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray-m);margin-bottom:16px}
+.fl a{display:block;color:rgba(255,255,255,.5);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color .2s,transform .2s}
+.fl a:hover{color:var(--gold);transform:translateX(3px)}
+.fc{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.fc p{font-size:13px;color:rgba(255,255,255,.3)}
+/* RESPONSIVE */
+@media(max-width:900px){.svc-block{grid-template-columns:1fr;gap:36px}.svc-block.rev{direction:ltr}}
+@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}.section{padding:70px 5%}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 60px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/><circle cx="14" cy="8" r="1.5" fill="#0f1628" opacity=".4"/></svg>
+    <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
+  </a>
+  <ul class="nav-ul">
+    <li><a href="leistungen.html" class="on">Leistungen</a></li>
+    <li><a href="preise.html">Preise</a></li>
+    <li><a href="ueber-uns.html">Über uns</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+    <li><a href="kontakt.html" class="cta-a">Kostenlose Demo</a></li>
+  </ul>
+  <button class="hbg" id="hbg" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <a href="leistungen.html" class="on" onclick="closeMob()">Leistungen</a>
+  <a href="preise.html" onclick="closeMob()">Preise</a>
+  <a href="ueber-uns.html" onclick="closeMob()">Über uns</a>
+  <a href="kontakt.html" onclick="closeMob()">Kontakt</a>
+  <a href="kontakt.html" class="mob-cta" onclick="closeMob()">Kostenlose Demo anfragen</a>
+</div>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="ph">
+  <div class="tag">Was ich anbiete</div>
+  <h1>Unsere Leistungen</h1>
+  <p class="sub">Alles aus einer Hand – von der ersten Idee bis zur fertigen Website, die wirklich für dich arbeitet.</p>
+</div>
+
+<!-- ─── WEBDESIGN ─── -->
+<section id="webdesign" class="section bg-g">
+  <div class="si">
+    <div class="svc-block">
+      <div class="svc-meta" data-anim>
+        <div class="svc-num">01</div>
+        <div class="svc-icon-lg">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
+        </div>
+        <div class="svc-tag">Leistung 01</div>
+        <h2>Webdesign</h2>
+        <p class="lead">Deine Website ist dein digitaler Empfangsraum – und der erste Eindruck zählt. Ich gestalte für dich eine Website, die deine Kunden überzeugt, bevor du auch nur ein Wort gesagt hast.</p>
+      </div>
+      <div class="svc-desc" data-anim data-delay="1">
+        <p>Jede Website, die ich erstelle, ist ein Unikat. Kein generisches Template, kein Copy-Paste-Design – sondern ein individuelles Erscheinungsbild, das zu deinem Unternehmen, deiner Branche und deiner Zielgruppe passt.</p>
+        <p>Ich entwickle Websites, die auf jedem Gerät perfekt aussehen und funktionieren – ob am Desktop, Tablet oder Smartphone. Das nennt man Mobile-First: Die Mehrheit deiner Kunden kommt heute vom Handy.</p>
+        <p>Selbstverständlich enthält jede Website alle rechtlich notwendigen Seiten (Impressum, Datenschutz) sowie eine SEO-Grundoptimierung, damit Google dich auch findet.</p>
+        <div class="feat-list">
+          <h3>Was du bekommst</h3>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Individuelles, maßgeschneidertes Design</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Mobile-First – perfekt auf jedem Gerät</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Kontaktformular mit E-Mail-Weiterleitung</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Bildergalerie (im Professionell-Paket)</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Schnelle Ladezeiten &amp; Performance-Optimierung</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> SEO-Grundoptimierung für Google</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Impressum &amp; Datenschutzseite inklusive</li>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOSTING & DOMAIN ─── -->
+<section id="hosting" class="section">
+  <div class="si">
+    <div class="svc-block rev">
+      <div class="svc-meta" data-anim>
+        <div class="svc-num">02</div>
+        <div class="svc-icon-lg">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z"/></svg>
+        </div>
+        <div class="svc-tag">Leistung 02</div>
+        <h2>Hosting &amp; Domain</h2>
+        <p class="lead">Nach dem Launch kümmere ich mich um alles Technische – du musst dich um nichts kümmern. Deine Website läuft sicher, schnell und zuverlässig.</p>
+      </div>
+      <div class="svc-desc" data-anim data-delay="1">
+        <p>Ich übernehme die komplette technische Infrastruktur deiner Website – von der Domain-Registrierung über das Hosting bis hin zur SSL-Verschlüsselung. Das bedeutet: Deine Website ist von Anfang an professionell aufgestellt.</p>
+        <p>Deine Website läuft auf leistungsstarken europäischen Servern mit einer garantierten Verfügbarkeit von 99,9 %. Tägliche automatische Backups stellen sicher, dass im unwahrscheinlichen Fehlerfall nichts verloren geht.</p>
+        <p>Inklusive im Preis: eine professionelle E-Mail-Adresse mit deiner Domain (z.B. info@dein-unternehmen.de) – das macht einen deutlichen Unterschied bei deinen Kunden.</p>
+        <div class="feat-list">
+          <h3>Was du bekommst</h3>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Wunsch-Domain (.de oder .com) – 1. Jahr inklusive</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> SSL-Zertifikat (HTTPS) – kostenlos &amp; automatisch</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> 99,9 % Verfügbarkeit garantiert</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Tägliche automatische Backups</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Professionelle E-Mail-Adresse mit deiner Domain</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Performance-optimierte europäische Server</li>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WARTUNG & SUPPORT ─── -->
+<section id="wartung" class="section bg-g">
+  <div class="si">
+    <div class="svc-block">
+      <div class="svc-meta" data-anim>
+        <div class="svc-num">03</div>
+        <div class="svc-icon-lg">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+        </div>
+        <div class="svc-tag">Leistung 03</div>
+        <h2>Wartung &amp; Support</h2>
+        <p class="lead">Mein Job endet nicht beim Launch. Ich bin dein persönlicher Webprofi – langfristig an deiner Seite, damit deine Website immer aktuell und sicher bleibt.</p>
+      </div>
+      <div class="svc-desc" data-anim data-delay="1">
+        <p>Das Internet verändert sich ständig – Browser-Updates, Sicherheits-Patches, neue Designtrends. Ich halte deine Website auf dem neuesten Stand, damit du dich auf dein Kerngeschäft konzentrieren kannst.</p>
+        <p>Brauchst du neue Fotos einpflegen? Einen Preis aktualisieren? Eine neue Dienstleistung ergänzen? Kein Problem – schreib mir kurz und ich kümmere mich darum. Kein lästiges Ticket-System, sondern direkter Kontakt per Telefon oder E-Mail.</p>
+        <p>Regelmäßige Performance-Checks stellen sicher, dass deine Website auch nach Monaten noch schnell und fehlerfrei läuft. Bei technischen Problemen reagiere ich schnell – denn jede Ausfallminute kostet dich potenzielle Kunden.</p>
+        <div class="feat-list">
+          <h3>Was du bekommst</h3>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Regelmäßige Software- &amp; Sicherheits-Updates</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Inhaltspflege (Texte, Bilder, Preise)</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Direkter Ansprechpartner per Telefon &amp; E-Mail</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Monatliche Performance-Checks</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Schnelle Reaktionszeit bei Problemen</li>
+          <li><div class="chk"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div> Transparente monatliche Abrechnung</li>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="section cta-sec">
+  <div class="si">
+    <div class="cta-box">
+      <h2 data-anim>Bereit für deine neue Website?</h2>
+      <p data-anim data-delay="1">Lass uns gemeinsam schauen, welches Paket zu dir passt. Die erste Beratung ist immer kostenlos und unverbindlich.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap" data-anim data-delay="2">
+        <a href="kontakt.html" class="btn btn-p">Jetzt anfragen</a>
+        <a href="preise.html" class="btn btn-o">Preise ansehen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="ft">
+      <div class="fb">
+        <a href="index.html" class="logo">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/></svg>
+          <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
+        </a>
+        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell und aus der Region.</p>
+      </div>
+      <div class="fl"><h4>Navigation</h4><a href="leistungen.html">Leistungen</a><a href="preise.html">Preise</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a></div>
+      <div class="fl"><h4>Rechtliches</h4><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+      <div class="fl"><h4>Kontakt</h4><a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><a href="tel:+4915153522586">+49 1515 3522586</a></div>
+    </div>
+    <div class="fc"><p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p><p>Made with ♥ in Teningen</p></div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('[data-anim]').forEach(el => {
+  if(el.dataset.delay) el.style.transitionDelay = (Number(el.dataset.delay) * 0.13) + 's';
+  obs.observe(el);
+});
+window.addEventListener('scroll', () => { document.querySelector('nav').classList.toggle('scrolled', scrollY > 20); }, { passive: true });
+const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
+let open = false;
+hbg.addEventListener('click', () => {
+  open = !open; mob.classList.toggle('open', open);
+  const s = hbg.querySelectorAll('span');
+  if(open){ s[0].style.transform='rotate(45deg) translate(5px,5px)'; s[1].style.opacity='0'; s[2].style.transform='rotate(-45deg) translate(5px,-5px)'; }
+  else { s.forEach(x => { x.style.transform=''; x.style.opacity=''; }); }
+});
+function closeMob(){ open=false; mob.classList.remove('open'); hbg.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }
+</script>
+</body>
+</html>

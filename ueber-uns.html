@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Über uns – Kaiserstuhl Digital</title>
+<meta name="description" content="Lerne Kaiserstuhl Digital kennen – lokales Webdesign aus Teningen mit Herz, Haltung und echtem Engagement für die Region."/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f1628;--gold:#C9A84C;--gold-d:#b8942e;--white:#FFFFFF;--gray-l:#F5F5F5;--gray-d:#333333;--gray-m:#999999}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;font-size:17px;color:var(--gray-d);background:var(--white);line-height:1.6}
+@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+[data-anim]{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,.68,0,1.2),transform .7s cubic-bezier(.22,.68,0,1.2)}
+[data-anim].in{opacity:1;transform:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy);height:68px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.45)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-t{font-size:20px;font-weight:700}
+.logo-t .w{color:var(--white)}.logo-t .g{color:var(--gold)}
+.nav-ul{display:flex;align-items:center;gap:22px;list-style:none}
+.nav-ul a{color:rgba(255,255,255,.85);text-decoration:none;font-size:15px;font-weight:500;position:relative;padding-bottom:2px;transition:color .2s}
+.nav-ul a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width .25s}
+.nav-ul a:hover{color:var(--white)}.nav-ul a:hover::after{width:100%}
+.nav-ul a.on{color:var(--gold)}.nav-ul a.on::after{width:100%}
+.cta-a{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;padding:9px 20px;border-radius:6px;transition:background .2s,transform .15s,box-shadow .2s!important}
+.cta-a::after{display:none!important}
+.cta-a:hover{background:var(--gold-d)!important;transform:translateY(-2px);box-shadow:0 4px 16px rgba(201,168,76,.4)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+.mob{display:none;position:fixed;top:68px;left:0;right:0;background:var(--navy);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.mob.open{display:block}
+.mob a{display:block;color:rgba(255,255,255,.85);text-decoration:none;font-size:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s}
+.mob a:hover,.mob a.on{color:var(--gold)}
+.mob-cta{display:block!important;margin-top:18px;background:var(--gold);color:var(--navy)!important;font-weight:700;text-align:center;padding:13px;border-radius:6px;border-bottom:none!important;transition:background .2s}
+.mob-cta:hover{background:var(--gold-d)!important}
+.btn{display:inline-block;padding:14px 30px;border-radius:7px;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;border:none;font-family:Arial,sans-serif;transition:transform .2s cubic-bezier(.22,.68,0,1.4),background .2s,box-shadow .2s}
+.btn-p{background:var(--gold);color:var(--navy)}
+.btn-p:hover{background:var(--gold-d);transform:translateY(-3px) scale(1.02);box-shadow:0 8px 28px rgba(201,168,76,.45)}
+.btn-o{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.7)}
+.btn-o:hover{background:rgba(255,255,255,.1);border-color:var(--white);transform:translateY(-3px) scale(1.02)}
+.section{padding:90px 5%}
+.si{max-width:1200px;margin:0 auto}
+.bg-g{background:var(--gray-l)}.bg-n{background:var(--navy)}
+/* PAGE HERO */
+.ph{background:var(--navy);padding:140px 5% 80px;text-align:center;position:relative;overflow:hidden}
+.ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.1) 0%,transparent 65%);pointer-events:none}
+.ph .tag{position:relative;display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);border:1px solid rgba(201,168,76,.35);background:rgba(201,168,76,.1);padding:5px 16px;border-radius:20px;margin-bottom:20px;animation:heroIn .8s ease both}
+.ph h1{position:relative;font-size:clamp(30px,4vw,46px);font-weight:700;color:var(--white);margin-bottom:16px;animation:heroIn .9s .1s ease both}
+.ph .sub{position:relative;font-size:18px;color:rgba(255,255,255,.72);max-width:580px;margin:0 auto;animation:heroIn .9s .22s ease both}
+/* INTRO SECTION */
+.intro-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:70px;align-items:center}
+.intro-photo{position:relative}
+.photo-box{width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,rgba(201,168,76,.15) 0%,rgba(15,22,40,.5) 100%);border-radius:16px;border:2px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.photo-box svg{width:55%;height:auto;color:rgba(201,168,76,.25)}
+.photo-badge{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:12px 20px;text-align:center;white-space:nowrap}
+.photo-badge .name{font-size:17px;font-weight:700;color:var(--white)}
+.photo-badge .role{font-size:13px;color:var(--gold)}
+.intro-text h2{font-size:clamp(26px,3vw,34px);font-weight:700;color:var(--navy);margin-bottom:20px}
+.intro-text h2 span{color:var(--gold)}
+.intro-text p{font-size:17px;color:var(--gray-d);line-height:1.78;margin-bottom:18px}
+.intro-text p:last-child{margin-bottom:0}
+.intro-quote{margin-top:32px;padding:22px 26px;border-left:3px solid var(--gold);background:var(--gray-l);border-radius:0 10px 10px 0}
+.intro-quote p{font-size:16px;color:var(--gray-d);font-style:italic;line-height:1.7}
+.intro-quote cite{display:block;margin-top:10px;font-size:14px;font-weight:700;color:var(--gold);font-style:normal}
+/* VALUES */
+.val-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.val-card{background:var(--white);border-radius:14px;padding:34px 28px;box-shadow:0 2px 16px rgba(0,0,0,.07);border-top:4px solid var(--gold);transition:transform .3s cubic-bezier(.22,.68,0,1.2),box-shadow .3s;position:relative;overflow:hidden}
+.val-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.05) 0%,transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.val-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 50px rgba(0,0,0,.1)}
+.val-card:hover::before{opacity:1}
+.val-ic{width:50px;height:50px;background:rgba(201,168,76,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:background .3s,transform .3s cubic-bezier(.22,.68,0,1.4)}
+.val-card:hover .val-ic{background:rgba(201,168,76,.22);transform:scale(1.1) rotate(-4deg)}
+.val-ic svg{width:24px;height:24px;color:var(--gold)}
+.val-card h3{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:10px}
+.val-card p{font-size:15px;color:var(--gray-d);line-height:1.65}
+/* LOCAL SECTION */
+.local-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.local-map{background:linear-gradient(135deg,rgba(201,168,76,.08) 0%,rgba(201,168,76,.02) 100%);border:1px solid rgba(201,168,76,.2);border-radius:16px;padding:48px;display:flex;align-items:center;justify-content:center;min-height:320px;position:relative;overflow:hidden}
+.local-map::before{content:'';position:absolute;width:180px;height:180px;border:1px solid rgba(201,168,76,.15);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.local-map::after{content:'';position:absolute;width:100px;height:100px;border:1px solid rgba(201,168,76,.2);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.map-center{text-align:center;position:relative;z-index:1}
+.map-center svg{width:40px;height:40px;color:var(--gold);display:block;margin:0 auto 12px}
+.map-center strong{display:block;font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px}
+.map-center span{font-size:14px;color:rgba(255,255,255,.55)}
+.local-text h2{font-size:clamp(24px,3vw,30px);font-weight:700;color:var(--white);margin-bottom:16px}
+.local-text p{font-size:16px;color:rgba(255,255,255,.7);line-height:1.78;margin-bottom:16px}
+.region-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.rtag{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:13px;font-weight:600;padding:5px 14px;border-radius:20px}
+/* CTA */
+.cta-sec{background:var(--navy);position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.12) 0%,transparent 70%);pointer-events:none}
+.cta-box{position:relative;text-align:center;max-width:640px;margin:0 auto}
+.cta-box h2{font-size:clamp(26px,3vw,34px);font-weight:700;color:var(--white);margin-bottom:16px}
+.cta-box p{font-size:17px;color:rgba(255,255,255,.7);margin-bottom:34px;line-height:1.65}
+/* FOOTER */
+footer{background:#080e1c;padding:52px 5% 30px;border-top:1px solid rgba(255,255,255,.06)}
+.fi{max-width:1200px;margin:0 auto}
+.ft{display:flex;justify-content:space-between;gap:40px;margin-bottom:36px;flex-wrap:wrap}
+.fb p{font-size:14px;color:rgba(255,255,255,.48);max-width:280px;line-height:1.65;margin-top:14px}
+.fl h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray-m);margin-bottom:16px}
+.fl a{display:block;color:rgba(255,255,255,.5);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color .2s,transform .2s}
+.fl a:hover{color:var(--gold);transform:translateX(3px)}
+.fc{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.fc p{font-size:13px;color:rgba(255,255,255,.3)}
+@media(max-width:900px){.intro-grid{grid-template-columns:1fr;gap:40px}.local-grid{grid-template-columns:1fr;gap:36px}.val-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}.section{padding:70px 5%}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 60px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/><circle cx="14" cy="8" r="1.5" fill="#0f1628" opacity=".4"/></svg>
+    <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
+  </a>
+  <ul class="nav-ul">
+    <li><a href="leistungen.html">Leistungen</a></li>
+    <li><a href="preise.html">Preise</a></li>
+    <li><a href="ueber-uns.html" class="on">Über uns</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+    <li><a href="kontakt.html" class="cta-a">Kostenlose Demo</a></li>
+  </ul>
+  <button class="hbg" id="hbg" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <a href="leistungen.html" onclick="closeMob()">Leistungen</a>
+  <a href="preise.html" onclick="closeMob()">Preise</a>
+  <a href="ueber-uns.html" class="on" onclick="closeMob()">Über uns</a>
+  <a href="kontakt.html" onclick="closeMob()">Kontakt</a>
+  <a href="kontakt.html" class="mob-cta" onclick="closeMob()">Kostenlose Demo anfragen</a>
+</div>
+
+<div class="ph">
+  <div class="tag">Lokal verwurzelt</div>
+  <h1>Über Kaiserstuhl Digital</h1>
+  <p class="sub">Kein anonymes Unternehmen, kein Callcenter – sondern eine Person aus der Region, der es wirklich wichtig ist, was sie tut.</p>
+</div>
+
+<!-- ─── PERSÖNLICHE VORSTELLUNG ─── -->
+<section class="section">
+  <div class="si">
+    <div class="intro-grid">
+      <div class="intro-photo" data-anim>
+        <div class="photo-box">
+          <svg viewBox="0 0 100 100" fill="currentColor">
+            <circle cx="50" cy="35" r="20"/>
+            <path d="M10 80c0-22.1 17.9-40 40-40s40 17.9 40 40"/>
+          </svg>
+          <div class="photo-badge">
+            <div class="name">Tobias</div>
+            <div class="role">Gründer · Kaiserstuhl Digital</div>
+          </div>
+        </div>
+      </div>
+      <div class="intro-text" data-anim data-delay="1">
+        <h2>Hallo, ich bin <span>Tobias</span> –<br>der Kopf hinter Kaiserstuhl Digital.</h2>
+        <p>Ich lebe und arbeite in Teningen, direkt in der Region, für die ich arbeite. Was als persönliche Leidenschaft für gutes Webdesign begann, ist heute mein Vollzeit-Job – und ich liebe jeden Tag davon.</p>
+        <p>Was mich antreibt: Ich sehe täglich lokale Unternehmen, die hervorragende Arbeit leisten, aber online kaum sichtbar sind. Ein Friseur, der seit 20 Jahren fantastische Arbeit macht – aber seine Website sieht aus wie ein Word-Dokument aus dem Jahr 2009. Das muss nicht sein.</p>
+        <p>Ich helfe genau diesen Unternehmen, endlich professionell im Internet aufzutreten – ohne technisches Kauderwelsch, ohne überrissene Preise und ohne den Umweg über eine Agentur, die deinen Namen nicht kennt.</p>
+        <div class="intro-quote">
+          <p>"Eine gute Website ist nicht Luxus – sie ist Handwerk. Und gutes Handwerk verdient gute Sichtbarkeit."</p>
+          <cite>– Tobias, Kaiserstuhl Digital</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WERTE ─── -->
+<section class="section bg-g">
+  <div class="si">
+    <div style="text-align:center;margin-bottom:56px" data-anim>
+      <h2 style="font-size:clamp(26px,3vw,32px);font-weight:700;color:var(--gold);margin-bottom:14px">Das sind meine Werte</h2>
+      <p style="font-size:17px;color:var(--gray-m);max-width:520px;margin:0 auto">Was mich von einer großen Agentur unterscheidet – und warum das für dich ein Vorteil ist.</p>
+    </div>
+    <div class="val-grid">
+      <div class="val-card" data-anim data-delay="0">
+        <div class="val-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <h3>Nähe &amp; Persönlichkeit</h3>
+        <p>Du arbeitest nicht mit einer Agentur – du arbeitest mit mir. Ich kenne deinen Namen, kenne die Region und bin direkt erreichbar. Kein Ticketsystem, keine anonyme Hotline.</p>
+      </div>
+      <div class="val-card" data-anim data-delay="1">
+        <div class="val-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+        <h3>Ehrlichkeit &amp; Transparenz</h3>
+        <p>Ich sage dir, was du wirklich brauchst – auch wenn das manchmal das günstigere Paket ist. Keine Overselling-Taktik, keine versteckten Kosten. Punkt.</p>
+      </div>
+      <div class="val-card" data-anim data-delay="2">
+        <div class="val-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></div>
+        <h3>Qualität &amp; Handwerk</h3>
+        <p>Jede Website, die ich erstelle, bekommt die gleiche Sorgfalt – egal ob kleiner Friseur oder mittelgroßes Unternehmen. Ich bin stolz auf meine Arbeit und das sieht man.</p>
+      </div>
+      <div class="val-card" data-anim data-delay="3">
+        <div class="val-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+        <h3>Langfristige Partnerschaft</h3>
+        <p>Mein Ziel ist keine einmalige Transaktion – ich möchte dein verlässlicher Partner für alles Digitale sein. Jetzt und in fünf Jahren.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LOKALER BEZUG ─── -->
+<section class="section bg-n">
+  <div class="si">
+    <div class="local-grid">
+      <div class="local-map" data-anim>
+        <div class="map-center">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <strong>Teningen</strong>
+          <span>Baden-Württemberg</span>
+        </div>
+      </div>
+      <div class="local-text" data-anim data-delay="1">
+        <h2>Die Region liegt mir am Herzen</h2>
+        <p>Ich bin hier aufgewachsen, lebe hier und kenne die Unternehmen in der Region. Wenn ich mit einem Kunden aus Breisach spreche, weiß ich, was er meint. Wenn jemand aus Vogtsburg anruft, kenne ich den Kontext.</p>
+        <p>Diese Nähe ist kein Marketingversprechen – sie ist mein tatsächlicher Alltag. Ich fahre zu Kunden hin, wenn gewünscht. Ich bin nicht nur online erreichbar, sondern auch persönlich.</p>
+        <p>Die Kaiserstuhl-Region hat so viel zu bieten – tolle Unternehmen, engagierte Menschen, handwerkliche Qualität. Das soll auch im Internet sichtbar sein.</p>
+        <div class="region-tags">
+          <span class="rtag">Teningen</span>
+          <span class="rtag">Emmendingen</span>
+          <span class="rtag">Kaiserstuhl</span>
+          <span class="rtag">Breisach</span>
+          <span class="rtag">Freiburg</span>
+          <span class="rtag">Breisgau</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="section cta-sec">
+  <div class="si">
+    <div class="cta-box">
+      <h2 data-anim>Lass uns kennenlernen</h2>
+      <p data-anim data-delay="1">Ich freue mich auf ein unkompliziertes Erstgespräch – kostenlos, ohne Druck und auf Augenhöhe. Einfach anschreiben oder anrufen.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap" data-anim data-delay="2">
+        <a href="kontakt.html" class="btn btn-p">Jetzt Kontakt aufnehmen</a>
+        <a href="leistungen.html" class="btn btn-o">Leistungen ansehen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="ft">
+      <div class="fb">
+        <a href="index.html" class="logo">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/></svg>
+          <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
+        </a>
+        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell und aus der Region.</p>
+      </div>
+      <div class="fl"><h4>Navigation</h4><a href="leistungen.html">Leistungen</a><a href="preise.html">Preise</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a></div>
+      <div class="fl"><h4>Rechtliches</h4><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+      <div class="fl"><h4>Kontakt</h4><a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><a href="tel:+4915153522586">+49 1515 3522586</a></div>
+    </div>
+    <div class="fc"><p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p><p>Made with ♥ in Teningen</p></div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('[data-anim]').forEach(el => {
+  if(el.dataset.delay) el.style.transitionDelay = (Number(el.dataset.delay) * 0.13) + 's';
+  obs.observe(el);
+});
+window.addEventListener('scroll', () => { document.querySelector('nav').classList.toggle('scrolled', scrollY > 20); }, { passive: true });
+const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
+let open = false;
+hbg.addEventListener('click', () => {
+  open = !open; mob.classList.toggle('open', open);
+  const s = hbg.querySelectorAll('span');
+  if(open){ s[0].style.transform='rotate(45deg) translate(5px,5px)'; s[1].style.opacity='0'; s[2].style.transform='rotate(-45deg) translate(5px,-5px)'; }
+  else { s.forEach(x => { x.style.transform=''; x.style.opacity=''; }); }
+});
+function closeMob(){ open=false; mob.classList.remove('open'); hbg.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }
+</script>
+</body>
+</html>
