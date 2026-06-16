@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Impressum – Kaiserstuhl Digital</title>
+<meta name="description" content="Impressum von Kaiserstuhl Digital – Angaben gemäß § 5 TMG."/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f1628;--gold:#C9A84C;--gold-d:#b8942e;--white:#FFFFFF;--gray-l:#F5F5F5;--gray-d:#333333;--gray-m:#999999}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;font-size:17px;color:var(--gray-d);background:var(--white);line-height:1.6}
+@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy);height:68px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.45)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-ul{display:flex;align-items:center;gap:22px;list-style:none}
+.nav-ul a{color:rgba(255,255,255,.85);text-decoration:none;font-size:15px;font-weight:500;position:relative;padding-bottom:2px;transition:color .2s}
+.nav-ul a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--gold);transition:width .25s}
+.nav-ul a:hover{color:var(--white)}.nav-ul a:hover::after{width:100%}
+.cta-a{background:var(--gold)!important;color:var(--navy)!important;font-weight:700!important;padding:9px 20px;border-radius:6px;transition:background .2s,transform .15s,box-shadow .2s!important}
+.cta-a::after{display:none!important}
+.cta-a:hover{background:var(--gold-d)!important;transform:translateY(-2px);box-shadow:0 4px 16px rgba(201,168,76,.4)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
+.mob{display:none;position:fixed;top:68px;left:0;right:0;background:var(--navy);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.mob.open{display:block}
+.mob a{display:block;color:rgba(255,255,255,.85);text-decoration:none;font-size:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s}
+.mob a:hover{color:var(--gold)}
+.mob-cta{display:block!important;margin-top:18px;background:var(--gold);color:var(--navy)!important;font-weight:700;text-align:center;padding:13px;border-radius:6px;border-bottom:none!important;transition:background .2s}
+.mob-cta:hover{background:var(--gold-d)!important}
+/* PAGE HERO */
+.ph{background:var(--navy);padding:140px 5% 75px;text-align:center;position:relative;overflow:hidden}
+.ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.1) 0%,transparent 65%);pointer-events:none}
+.ph .tag{position:relative;display:inline-block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);border:1px solid rgba(201,168,76,.35);background:rgba(201,168,76,.1);padding:5px 16px;border-radius:20px;margin-bottom:20px;animation:heroIn .8s ease both}
+.ph h1{position:relative;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--white);margin-bottom:16px;animation:heroIn .9s .1s ease both}
+.ph .sub{position:relative;font-size:17px;color:rgba(255,255,255,.68);max-width:540px;margin:0 auto;animation:heroIn .9s .22s ease both}
+/* CONTENT */
+.section{padding:80px 5%}
+.si{max-width:860px;margin:0 auto}
+/* LEGAL BLOCKS */
+.legal-block{margin-bottom:48px}
+.legal-block:last-child{margin-bottom:0}
+.legal-block h2{font-size:22px;font-weight:700;color:var(--gold);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid rgba(201,168,76,.2)}
+.legal-block p{font-size:16px;color:var(--gray-d);line-height:1.78;margin-bottom:10px}
+.legal-block p:last-child{margin-bottom:0}
+.legal-block a{color:var(--gold);text-decoration:none;transition:color .2s}
+.legal-block a:hover{color:var(--gold-d);text-decoration:underline}
+/* IMPRINT CARD */
+.imp-card{background:var(--gray-l);border-radius:12px;padding:32px 36px;margin-bottom:14px;border-left:4px solid var(--gold)}
+.imp-card h3{font-size:15px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
+.imp-card p{font-size:16px;color:var(--gray-d);line-height:1.8;margin:0}
+.imp-card a{color:var(--gold);text-decoration:none}
+.imp-card a:hover{text-decoration:underline}
+/* FOOTER */
+footer{background:#080e1c;padding:52px 5% 30px;border-top:1px solid rgba(255,255,255,.06)}
+.fi{max-width:1200px;margin:0 auto}
+.ft{display:flex;justify-content:space-between;gap:40px;margin-bottom:36px;flex-wrap:wrap}
+.logo-t{font-size:20px;font-weight:700}
+.logo-t .w{color:var(--white)}.logo-t .g{color:var(--gold)}
+.fb p{font-size:14px;color:rgba(255,255,255,.48);max-width:280px;line-height:1.65;margin-top:14px}
+.fl h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gray-m);margin-bottom:16px}
+.fl a{display:block;color:rgba(255,255,255,.5);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color .2s,transform .2s}
+.fl a:hover{color:var(--gold);transform:translateX(3px)}
+.fc{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.fc p{font-size:13px;color:rgba(255,255,255,.3)}
+@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}.section{padding:60px 5%}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 55px}.imp-card{padding:24px 22px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="logo-weiss.png" alt="Kaiserstuhl Digital" width="150" style="height:auto">
+  </a>
+  <ul class="nav-ul">
+    <li><a href="leistungen.html">Leistungen</a></li>
+    <li><a href="preise.html">Preise</a></li>
+    <li><a href="ueber-uns.html">Über uns</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+    <li><a href="kontakt.html" class="cta-a">Kostenlose Demo</a></li>
+  </ul>
+  <button class="hbg" id="hbg" aria-label="Menü"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <a href="leistungen.html" onclick="closeMob()">Leistungen</a>
+  <a href="preise.html" onclick="closeMob()">Preise</a>
+  <a href="ueber-uns.html" onclick="closeMob()">Über uns</a>
+  <a href="kontakt.html" onclick="closeMob()">Kontakt</a>
+  <a href="kontakt.html" class="mob-cta" onclick="closeMob()">Kostenlose Demo anfragen</a>
+</div>
+
+<div class="ph">
+  <div class="tag">Rechtliches</div>
+  <h1>Impressum</h1>
+  <p class="sub">Angaben gemäß § 5 TMG.</p>
+</div>
+
+<section class="section">
+  <div class="si">
+
+    <!-- ANGABEN -->
+    <div class="legal-block">
+      <h2>Angaben gemäß § 5 TMG</h2>
+
+      <div class="imp-card">
+        <h3>Betreiber</h3>
+        <p>Tobias Khamyod<br>Stockbrunnenstraße 1<br>79331 Teningen</p>
+      </div>
+
+      <div class="imp-card">
+        <h3>Kontakt</h3>
+        <p>
+          Telefon: <a href="tel:+4915115636367">+49 151 15636367</a><br>
+          E-Mail: <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><br>
+          Website: <a href="https://kaiserstuhl-digital.de" target="_blank" rel="noopener">kaiserstuhl-digital.de</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- KLEINUNTERNEHMER -->
+    <div class="legal-block">
+      <h2>Kleinunternehmerregelung gemäß § 19 UStG</h2>
+      <div class="imp-card">
+        <h3>Umsatzsteuer</h3>
+        <p>Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.</p>
+      </div>
+    </div>
+
+    <!-- VERANTWORTLICH -->
+    <div class="legal-block">
+      <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+      <div class="imp-card">
+        <h3>Inhaltlich verantwortlich</h3>
+        <p>Tobias Khamyod<br>Stockbrunnenstraße 1<br>79331 Teningen</p>
+      </div>
+    </div>
+
+    <!-- STREITSCHLICHTUNG -->
+    <div class="legal-block">
+      <h2>Streitschlichtung</h2>
+      <div class="imp-card">
+        <h3>Online-Streitbeilegung</h3>
+        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.</p>
+      </div>
+      <p style="margin-top:16px;font-size:15px;color:var(--gray-m)">Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="ft">
+      <div class="fb">
+        <a href="index.html" class="logo">
+          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/></svg>
+          <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
+        </a>
+        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell und aus der Region.</p>
+      </div>
+      <div class="fl"><h4>Navigation</h4><a href="leistungen.html">Leistungen</a><a href="preise.html">Preise</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a></div>
+      <div class="fl"><h4>Rechtliches</h4><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+      <div class="fl"><h4>Kontakt</h4><a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><a href="tel:+4915153522586">+49 1515 3522586</a></div>
+    </div>
+    <div class="fc"><p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p><p>Made with ♥ in Teningen</p></div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => { document.querySelector('nav').classList.toggle('scrolled', scrollY > 20); }, { passive: true });
+const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
+let open = false;
+hbg.addEventListener('click', () => {
+  open = !open; mob.classList.toggle('open', open);
+  const s = hbg.querySelectorAll('span');
+  if(open){ s[0].style.transform='rotate(45deg) translate(5px,5px)'; s[1].style.opacity='0'; s[2].style.transform='rotate(-45deg) translate(5px,-5px)'; }
+  else { s.forEach(x => { x.style.transform=''; x.style.opacity=''; }); }
+});
+function closeMob(){ open=false; mob.classList.remove('open'); hbg.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }
+</script>
+</body>
+</html>
