@@ -81,6 +81,8 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.45)}
 .f-success svg{color:var(--gold);width:48px;height:48px;margin-bottom:16px}
 .f-success h4{color:var(--white);font-size:20px;margin-bottom:8px}
 .f-success p{color:rgba(255,255,255,.65);font-size:15px}
+.f-error{display:none;background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);border-radius:8px;padding:14px 18px;color:rgba(255,200,200,.9);font-size:15px;margin-top:14px;text-align:center}
+.f-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
 /* FOOTER */
 footer{background:#080e1c;padding:52px 5% 30px;border-top:1px solid rgba(255,255,255,.06)}
 .fi{max-width:1200px;margin:0 auto}
@@ -185,13 +187,13 @@ footer{background:#080e1c;padding:52px 5% 30px;border-top:1px solid rgba(255,255
       <div class="c-form" data-anim data-delay="1">
         <form id="cForm" onsubmit="sendForm(event)">
           <div class="f-row">
-            <div class="fg"><label for="fn">Name</label><input type="text" id="fn" placeholder="Dein Name" required/></div>
-            <div class="fg"><label for="fe">E-Mail</label><input type="email" id="fe" placeholder="deine@email.de" required/></div>
+            <div class="fg"><label for="fn">Name</label><input type="text" id="fn" name="name" placeholder="Dein Name" required/></div>
+            <div class="fg"><label for="fe">E-Mail</label><input type="email" id="fe" name="email" placeholder="deine@email.de" required/></div>
           </div>
-          <div class="fg"><label for="fp">Telefon (optional)</label><input type="tel" id="fp" placeholder="+49 ..."/></div>
+          <div class="fg"><label for="fp">Telefon (optional)</label><input type="tel" id="fp" name="phone" placeholder="+49 ..."/></div>
           <div class="fg">
             <label for="fint">Dein Interesse</label>
-            <select id="fint">
+            <select id="fint" name="interesse">
               <option value="">Bitte wählen ...</option>
               <option>Starter-Paket (499 €)</option>
               <option>Professionell-Paket (749 €)</option>
@@ -199,14 +201,15 @@ footer{background:#080e1c;padding:52px 5% 30px;border-top:1px solid rgba(255,255
               <option>Allgemeine Frage</option>
             </select>
           </div>
-          <div class="fg"><label for="fm">Nachricht</label><textarea id="fm" placeholder="Erzähl mir kurz von deinem Unternehmen und was du dir vorstellst ..." required></textarea></div>
-          <button type="submit" class="f-submit">Nachricht senden →</button>
+          <div class="fg"><label for="fm">Nachricht</label><textarea id="fm" name="nachricht" placeholder="Erzähl mir kurz von deinem Unternehmen und was du dir vorstellst ..." required></textarea></div>
+          <button type="submit" class="f-submit" id="fBtn">Nachricht senden →</button>
         </form>
         <div class="f-success" id="fSuccess">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
           <h4>Nachricht gesendet!</h4>
           <p>Danke – ich melde mich persönlich bei dir, normalerweise innerhalb von 24 Stunden.</p>
         </div>
+        <div class="f-error" id="fError">Es gab einen Fehler beim Senden. Bitte versuche es erneut oder schreib mir direkt an <a href="mailto:info@kaiserstuhl-digital.de" style="color:rgba(255,200,200,.9)">info@kaiserstuhl-digital.de</a>.</div>
       </div>
     </div>
   </div>
@@ -248,10 +251,30 @@ hbg.addEventListener('click', () => {
   else { s.forEach(x => { x.style.transform=''; x.style.opacity=''; }); }
 });
 function closeMob(){ open=false; mob.classList.remove('open'); hbg.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }
-function sendForm(e){
+async function sendForm(e) {
   e.preventDefault();
-  document.getElementById('cForm').style.display = 'none';
-  document.getElementById('fSuccess').style.display = 'block';
+  const btn = document.getElementById('fBtn');
+  const errDiv = document.getElementById('fError');
+  btn.disabled = true;
+  btn.textContent = 'Wird gesendet …';
+  errDiv.style.display = 'none';
+  try {
+    const res = await fetch('https://formspree.io/f/xvznydkk', {
+      method: 'POST',
+      body: new FormData(document.getElementById('cForm')),
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('cForm').style.display = 'none';
+      document.getElementById('fSuccess').style.display = 'block';
+    } else {
+      throw new Error();
+    }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Nachricht senden →';
+    errDiv.style.display = 'block';
+  }
 }
 </script>
 </body>
