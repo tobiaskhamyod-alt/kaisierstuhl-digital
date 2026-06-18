@@ -12,7 +12,19 @@
       "Bash(sips -g pixelWidth -g pixelHeight logo-weiss.png)",
       "Bash(cp logo-weiss.png logo-weiss-original.png)",
       "Bash(sips -c 680 900 logo-weiss.png --out logo-weiss-trim.png)",
-      "Bash(sips -g pixelWidth -g pixelHeight logo-weiss-trim.png)"
+      "Bash(sips -g pixelWidth -g pixelHeight logo-weiss-trim.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha \"logo neu.jpg\")",
+      "Bash(sips -g pixelWidth -g pixelHeight \"logo neu.jpg\")",
+      "Bash(sips -c 40 40 \"logo neu.jpg\" --out _corner_tl.png)",
+      "Bash(sips --cropToHeightWidth 40 40 \"logo neu.jpg\")",
+      "Read(//Users/tobiaskhamyod/**)",
+      "Read(//Users/tobiaskhamyod/Downloads/**)",
+      "Bash(python3 /tmp/savelogo.py)",
+      "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha logo-final.png)",
+      "Bash(pkill -f savelogo.py)",
+      "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha \"logo.PNG\")",
+      "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha favicon.png)",
+      "Bash(perl -i -pe 's{\\(<meta name=\"viewport\"[^>]*/>\\)}{$1\\\\n<link rel=\"icon\" type=\"image/png\" href=\"favicon.png\"/>\\\\n<link rel=\"apple-touch-icon\" href=\"favicon.png\"/>}' index.html leistungen.html preise.html ueber-uns.html kontakt.html impressum.html datenschutz.html)"
     ]
   }
 }
