@@ -4,7 +4,15 @@
       "mcp__Claude_Preview__preview_start",
       "Bash(git checkout *)",
       "Bash(git add *)",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(ls -la Portrait.png)",
+      "Bash(file Portrait.png)",
+      "Bash(which magick *)",
+      "Bash(sed -i '' -e 's/\\\\.logo img{height:80px;width:auto}/.logo img{height:80px!important;width:auto}/g' -e 's/\\\\.logo img{height:52px}/.logo img{height:52px!important}/g' -e 's/background:var\\(--navy\\);height:84px;display:flex/background:var\\(--navy\\);height:88px;display:flex/g' -e 's/top:84px;left:0/top:88px;left:0/g' index.html leistungen.html preise.html ueber-uns.html kontakt.html impressum.html datenschutz.html)",
+      "Bash(sips -g pixelWidth -g pixelHeight logo-weiss.png)",
+      "Bash(cp logo-weiss.png logo-weiss-original.png)",
+      "Bash(sips -c 680 900 logo-weiss.png --out logo-weiss-trim.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight logo-weiss-trim.png)"
     ]
   }
 }
