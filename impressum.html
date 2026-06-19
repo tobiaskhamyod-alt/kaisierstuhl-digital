@@ -23,10 +23,10 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;font-size:17px;font-weight:300;color:rgba(255,255,255,.7);background-color:#0a0f1e;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(30,45,80,.8) 0%,#0a0f1e 60%);background-attachment:fixed;line-height:1.7;-webkit-font-smoothing:antialiased}
 @keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,15,30,.7);backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);border-bottom:1px solid rgba(255,255,255,.06);height:64px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:background .3s ease,box-shadow .3s ease}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,15,30,.7);backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);border-bottom:1px solid rgba(255,255,255,.06);height:112px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:background .3s ease,box-shadow .3s ease}
 nav.scrolled{background:rgba(8,12,24,.88);box-shadow:0 2px 30px rgba(0,0,0,.45)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.logo img{height:44px!important;width:auto}
+.logo img{height:100px!important;width:auto}
 .logo-t{font-size:20px;font-weight:600;letter-spacing:-.02em}
 .logo-t .w{color:var(--white)}.logo-t .g{color:var(--gold)}
 .nav-ul{display:flex;align-items:center;gap:28px;list-style:none}
@@ -36,7 +36,7 @@ nav.scrolled{background:rgba(8,12,24,.88);box-shadow:0 2px 30px rgba(0,0,0,.45)}
 .cta-a:hover{box-shadow:0 0 44px rgba(201,168,76,.45)!important;transform:scale(1.02)!important}
 .hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .hbg span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
-.mob{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(8,12,24,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.06);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.mob{display:none;position:fixed;top:112px;left:0;right:0;background:rgba(8,12,24,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.06);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 .mob.open{display:block}
 .mob a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:16px;font-weight:400;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
 .mob a:hover{color:var(--white)}
@@ -75,14 +75,14 @@ footer{background:rgba(5,8,18,.95);padding:52px 5% 30px;border-top:1px solid rgb
 .fl a:hover{color:var(--white);transform:translateX(3px)}
 .fc{border-top:1px solid rgba(255,255,255,.06);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .fc p{font-size:13px;color:rgba(255,255,255,.25);font-weight:300}
-@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}nav{height:56px}.mob{top:56px}.logo img{height:36px!important}.section{padding:60px 5%}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 55px}.imp-card{padding:22px 20px}}
+@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}nav{height:72px}.mob{top:72px}.logo img{height:64px!important}.section{padding:60px 5%}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 55px}.imp-card{padding:22px 20px}}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="logo">
-    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="120">
+    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="100">
   </a>
   <ul class="nav-ul">
     <li><a href="leistungen.html">Leistungen</a></li>
