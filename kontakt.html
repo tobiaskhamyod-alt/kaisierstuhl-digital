@@ -1,291 +1,196 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>document.documentElement.className='js';setTimeout(function(){var h=document.documentElement;if(h.dataset.animReady!=='1')h.classList.add('anim-fallback');},2200);</script>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<title>Kontakt & kostenlose Beratung | Kaiserstuhl Digital</title>
-<meta name="description" content="Kostenlose Erstberatung für dein Webdesign-Projekt in Emmendingen, Teningen & der Kaiserstuhl-Region. Antwort innerhalb von 24 Stunden – ruf an oder schreib uns."/>
+<title>Kontakt &amp; kostenlose Beratung | Kaiserstuhl Digital</title>
+<meta name="description" content="Kostenlose Erstberatung für dein Webdesign-Projekt in Emmendingen, Teningen &amp; der Kaiserstuhl-Region. Antwort innerhalb von 24 Stunden – ruf an oder schreib uns."/>
 <link rel="canonical" href="https://kaiserstuhl-digital.de/kontakt.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://kaiserstuhl-digital.de/kontakt.html"/>
-<meta property="og:title" content="Kontakt & kostenlose Beratung | Kaiserstuhl Digital"/>
-<meta property="og:description" content="Kostenlose Erstberatung für dein Webdesign-Projekt in Emmendingen, Teningen & der Kaiserstuhl-Region. Antwort innerhalb von 24 Stunden – ruf an oder schreib uns."/>
+<meta property="og:title" content="Kontakt &amp; kostenlose Beratung | Kaiserstuhl Digital"/>
+<meta property="og:description" content="Kostenlose Erstberatung für dein Webdesign-Projekt in Emmendingen, Teningen &amp; der Kaiserstuhl-Region. Antwort innerhalb von 24 Stunden – ruf an oder schreib uns."/>
 <meta property="og:image" content="https://kaiserstuhl-digital.de/og-image.jpg"/>
 <meta property="og:locale" content="de_DE"/>
 <meta property="og:site_name" content="Kaiserstuhl Digital"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0a0f1e;--gold:#C9A84C;--gold-d:#b8942e;--white:#FFFFFF;--gray-m:#999999}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;font-size:17px;font-weight:300;color:rgba(255,255,255,.7);background-color:#0a0f1e;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(30,45,80,.8) 0%,#0a0f1e 60%);background-attachment:fixed;line-height:1.7;-webkit-font-smoothing:antialiased}
-@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(24px) scale(.99);filter:blur(4px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-[data-anim]{opacity:0}
-[data-anim].in{animation:fadeInUp .7s cubic-bezier(.16,1,.3,1) forwards}
-@media(prefers-reduced-motion:reduce){[data-anim]{opacity:1}[data-anim].in{animation:none}}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,15,30,.7);backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);border-bottom:1px solid rgba(255,255,255,.06);height:112px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:background .3s ease,box-shadow .3s ease}
-nav.scrolled{background:rgba(8,12,24,.88);box-shadow:0 2px 30px rgba(0,0,0,.45)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.logo img{height:100px!important;width:auto}
-.logo-t{font-size:20px;font-weight:600;letter-spacing:-.02em}
-.logo-t .w{color:var(--white)}.logo-t .g{color:var(--gold)}
-.nav-ul{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-ul a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.9rem;font-weight:400;transition:color .25s cubic-bezier(.16,1,.3,1)}
-.nav-ul a:hover,.nav-ul a.on{color:var(--white)}
-.cta-a{background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%)!important;color:#0a0f1e!important;font-weight:500!important;padding:10px 22px;border-radius:980px;font-size:.9rem;letter-spacing:-.01em;box-shadow:0 0 24px rgba(201,168,76,.25);transition:box-shadow .3s ease,transform .3s ease!important}
-.cta-a:hover{box-shadow:0 0 44px rgba(201,168,76,.45)!important;transform:scale(1.02)!important}
-.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hbg span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
-.mob{display:none;position:fixed;top:112px;left:0;right:0;background:rgba(8,12,24,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.06);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.mob.open{display:block}
-.mob a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:16px;font-weight:400;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
-.mob a:hover,.mob a.on{color:var(--white)}
-.mob-cta{display:block!important;margin-top:18px;background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%);color:#0a0f1e!important;font-weight:500;text-align:center;padding:13px;border-radius:980px;text-decoration:none;border-bottom:none!important;transition:opacity .2s}
-.mob-cta:hover{opacity:.88}
-.section{padding:120px 5%}
-.si{max-width:1200px;margin:0 auto}
-.bg-n{background:transparent}.bg-g{background:rgba(5,8,18,.45)}
-/* PAGE HERO */
-.ph{background:transparent;padding:140px 5% 80px;text-align:center;position:relative;overflow:hidden}
-.ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.06) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 50% 0%,rgba(50,80,150,.1) 0%,transparent 70%);pointer-events:none}
-.ph .tag{position:relative;display:inline-block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.08);padding:5px 16px;border-radius:980px;margin-bottom:20px;animation:heroIn .8s ease both}
-.ph h1{position:relative;font-size:clamp(30px,4vw,50px);font-weight:600;color:var(--white);letter-spacing:-.03em;margin-bottom:16px;animation:heroIn .9s .1s ease both}
-.ph .sub{position:relative;font-size:18px;color:rgba(255,255,255,.6);max-width:580px;margin:0 auto;font-weight:300;line-height:1.7;animation:heroIn .9s .22s ease both}
-/* PROCESS STEPS */
-.process{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:start}
-.step{text-align:center;padding:0 16px}
-.step-num{width:56px;height:56px;background:var(--gold);color:#0a0f1e;font-size:22px;font-weight:600;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.step:hover .step-num{transform:scale(1.1);box-shadow:0 8px 28px rgba(201,168,76,.4)}
-.step h3{font-size:18px;font-weight:500;color:var(--white);letter-spacing:-.01em;margin-bottom:10px}
-.step p{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;font-weight:300}
-.step-arrow{color:rgba(255,255,255,.2);font-size:28px;padding-top:16px}
-/* CONTACT GRID */
-.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
-.c-info h3{font-size:22px;font-weight:500;color:var(--white);letter-spacing:-.01em;margin-bottom:28px}
-.c-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;transition:transform .2s}
-.c-item:hover{transform:translateX(4px)}
-.c-ic{width:44px;height:44px;background:rgba(255,255,255,.06);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .3s}
-.c-item:hover .c-ic{background:rgba(255,255,255,.1)}
-.c-ic svg{width:20px;height:20px;color:rgba(255,255,255,.7)}
-.c-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.35);margin-bottom:2px;font-weight:500}
-.c-val a,.c-val p{font-size:16px;color:var(--white);text-decoration:none;font-weight:400}
-.c-val a:hover{color:rgba(255,255,255,.7)}
-/* FORM */
-.c-form{background:rgba(255,255,255,.04);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:40px 36px;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.06)}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.fg{margin-bottom:18px}
-.fg label{display:block;font-size:11px;font-weight:500;color:rgba(255,255,255,.5);margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em}
-.fg input,.fg textarea,.fg select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;color:var(--white);font-size:16px;font-family:'Inter',sans-serif;font-weight:300;outline:none;transition:border-color .2s,background .2s}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,.25)}
-.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:rgba(201,168,76,.5);background:rgba(255,255,255,.09)}
-.fg textarea{resize:vertical;min-height:120px}
-.fg select option{background:#0a0f1e;color:var(--white)}
-.f-submit{width:100%;padding:15px;background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%);color:#0a0f1e;font-size:16px;font-weight:500;border:none;border-radius:980px;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:-.01em;transition:all .3s cubic-bezier(.16,1,.3,1);box-shadow:0 0 24px rgba(201,168,76,.25)}
-.f-submit:hover{box-shadow:0 0 44px rgba(201,168,76,.45);transform:scale(1.02)}
-.f-success{display:none;text-align:center;padding:30px 0}
-.f-success svg{color:var(--gold);width:48px;height:48px;margin-bottom:16px}
-.f-success h4{color:var(--white);font-size:20px;font-weight:500;margin-bottom:8px}
-.f-success p{color:rgba(255,255,255,.55);font-size:15px;font-weight:300}
-.f-error{display:none;background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.25);border-radius:12px;padding:14px 18px;color:rgba(255,200,200,.9);font-size:15px;margin-top:14px;text-align:center}
-.f-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
-/* FOOTER */
-footer{background:rgba(5,8,18,.95);padding:52px 5% 30px;border-top:1px solid rgba(255,255,255,.06)}
-.fi{max-width:1200px;margin:0 auto}
-.ft{display:flex;justify-content:space-between;gap:40px;margin-bottom:36px;flex-wrap:wrap}
-.fb p{font-size:14px;color:rgba(255,255,255,.4);max-width:280px;line-height:1.7;margin-top:14px;font-weight:300}
-.fl h4{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:16px;font-weight:500}
-.fl a{display:block;color:rgba(255,255,255,.45);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color .2s,transform .2s;font-weight:300}
-.fl a:hover{color:var(--white);transform:translateX(3px)}
-.fc{border-top:1px solid rgba(255,255,255,.06);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.fc p{font-size:13px;color:rgba(255,255,255,.25);font-weight:300}
-@media(max-width:900px){.process{grid-template-columns:1fr;gap:24px}.step-arrow{display:none}.contact-grid{grid-template-columns:1fr;gap:40px}}
-@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}nav{height:72px}.mob{top:72px}.logo img{height:64px!important}.section{padding:80px 5%}.f-row{grid-template-columns:1fr}.c-form{padding:28px 22px}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 60px}}
-</style>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="logo">
-    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="100">
+<!-- NAV -->
+<nav class="nav" aria-label="Hauptnavigation">
+  <a href="index.html" class="nav__logo" aria-label="Kaiserstuhl Digital - Startseite">
+    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="38">
   </a>
-  <ul class="nav-ul">
+  <ul class="nav__links">
     <li><a href="leistungen.html">Leistungen</a></li>
     <li><a href="preise.html">Preise</a></li>
     <li><a href="ueber-uns.html">Über uns</a></li>
-    <li><a href="kontakt.html" class="on">Kontakt</a></li>
-    <li><a href="kontakt.html" class="cta-a">Kostenlose Demo</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
   </ul>
-  <button class="hbg" id="hbg" aria-label="Menü"><span></span><span></span><span></span></button>
+  <a href="kontakt.html" class="nav__cta">Kostenlose Demo anfragen</a>
+  <button class="nav__burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<div class="mob" id="mob">
-  <a href="leistungen.html" onclick="closeMob()">Leistungen</a>
-  <a href="preise.html" onclick="closeMob()">Preise</a>
-  <a href="ueber-uns.html" onclick="closeMob()">Über uns</a>
-  <a href="kontakt.html" class="on" onclick="closeMob()">Kontakt</a>
-  <a href="kontakt.html" class="mob-cta" onclick="closeMob()">Kostenlose Demo anfragen</a>
-</div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile Navigation">
+  <button class="drawer__close" aria-label="Menü schließen">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <a href="leistungen.html">Leistungen</a>
+  <a href="preise.html">Preise</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="kontakt.html" class="drawer__cta">Kostenlose Demo anfragen</a>
+</aside>
 
-<div class="ph">
-  <div class="tag">Immer für dich da</div>
-  <h1>Kontakt aufnehmen</h1>
-  <p class="sub">Schreib mir kurz oder ruf an – ich melde mich innerhalb von 24 Stunden persönlich bei dir. Keine automatischen Antworten.</p>
-</div>
+<!-- HERO -->
+<header class="hero hero--sub">
+  <div class="hero__bg" style="background-image:url('https://picsum.photos/seed/conversation-dark/1920/1080')"></div>
+  <div class="hero__wash"></div>
+  <div class="hero__inner">
+    <h1 class="hero__title">Lass uns <span class="accent">reden.</span></h1>
+    <p class="hero__sub">Schreib mir kurz oder ruf an. Ich melde mich persönlich innerhalb von 24 Stunden. Keine automatischen Antworten.</p>
+  </div>
+</header>
 
-<!-- ─── ABLAUF ─── -->
-<section class="section bg-g">
-  <div class="si">
-    <div style="text-align:center;margin-bottom:56px" data-anim>
-      <h2 style="font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--white);letter-spacing:-.02em;margin-bottom:14px">So läuft es ab</h2>
-      <p style="font-size:17px;color:var(--gray-m);max-width:520px;margin:0 auto">Vom ersten Kontakt bis zur fertigen Website – transparent, persönlich und ohne Überraschungen.</p>
-    </div>
-    <div class="process">
-
-      <div class="step" data-anim data-delay="0">
-        <div class="step-num">1</div>
+<!-- STEPS -->
+<section class="section">
+  <div class="wrap">
+    <div class="steps">
+      <span class="steps__line" aria-hidden="true"></span>
+      <div class="step">
+        <div class="step__num">1</div>
         <h3>Anfrage senden</h3>
-        <p>Du füllst das Formular aus oder schreibst mir direkt. Kurze Beschreibung deines Unternehmens reicht völlig.</p>
+        <p>Eine kurze Beschreibung deines Unternehmens reicht völlig.</p>
       </div>
-
-      <div class="step-arrow" data-anim>→</div>
-
-      <div class="step" data-anim data-delay="1">
-        <div class="step-num">2</div>
+      <div class="step">
+        <div class="step__num">2</div>
         <h3>Demo &amp; Beratung</h3>
-        <p>Wir telefonieren oder treffen uns – ich zeige dir Beispiele, erkläre Möglichkeiten und wir klären alle Fragen.</p>
+        <p>Ich zeige dir Beispiele, erkläre Möglichkeiten und wir klären alle Fragen.</p>
       </div>
-
-      <div class="step-arrow" data-anim>→</div>
-
-      <div class="step" data-anim data-delay="2">
-        <div class="step-num">3</div>
+      <div class="step">
+        <div class="step__num">3</div>
         <h3>Umsetzung &amp; Launch</h3>
-        <p>Ich erstelle deine Website, du gibst Feedback – in 2–4 Wochen bist du online. Danach bleibe ich für dich da.</p>
+        <p>In 2 bis 4 Wochen bist du online. Danach bleibe ich für dich da.</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ─── KONTAKT ─── -->
-<section class="section bg-n">
-  <div class="si">
+<!-- CONTACT -->
+<section class="section section--tint">
+  <div class="wrap">
     <div class="contact-grid">
-      <div class="c-info">
-        <h3>Direkt erreichbar</h3>
-        <div class="c-item" data-anim>
-          <div class="c-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-          <div><div class="c-lbl">E-Mail</div><div class="c-val"><a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a></div></div>
+      <div class="contact-info" data-reveal>
+        <h2 style="font-size:clamp(26px,3.2vw,38px);font-weight:800;margin-bottom:30px">Direkter Kontakt</h2>
+        <div class="contact-line">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></div>
+          <div>
+            <div class="contact-line__lbl">E-Mail</div>
+            <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a>
+          </div>
         </div>
-        <div class="c-item" data-anim data-delay="1">
-          <div class="c-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
-          <div><div class="c-lbl">Telefon</div><div class="c-val"><a href="tel:+4915153522586">+49 1515 3522586</a></div></div>
+        <div class="contact-line">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></div>
+          <div>
+            <div class="contact-line__lbl">Telefon</div>
+            <a href="tel:+4915153522586">+49 1515 3522586</a>
+          </div>
         </div>
-        <div class="c-item" data-anim data-delay="2">
-          <div class="c-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
-          <div><div class="c-lbl">Standort</div><div class="c-val"><p>Teningen, Baden-Württemberg</p></div></div>
+        <div class="contact-line">
+          <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+          <div>
+            <div class="contact-line__lbl">Standort</div>
+            <span>Teningen, Baden-Württemberg</span>
+          </div>
         </div>
-        <div style="margin-top:36px;padding:24px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:12px" data-anim data-delay="3">
-          <p style="font-size:15px;color:rgba(255,255,255,.7);line-height:1.7">💬 <strong style="color:var(--white)">Keine Sorge:</strong> Ich bin kein Vertriebsprofi mit Script – ich bin Tobias, und ich höre dir einfach zu. Das erste Gespräch ist immer kostenlos.</p>
-        </div>
+        <p class="soft-note">Ich bin kein Vertriebsprofi mit Script. Ich bin Tobias und ich höre dir einfach zu. Das erste Gespräch ist immer kostenlos und unverbindlich.</p>
       </div>
 
-      <div class="c-form" data-anim data-delay="1">
-        <form id="cForm" onsubmit="sendForm(event)">
-          <div class="f-row">
-            <div class="fg"><label for="fn">Name</label><input type="text" id="fn" name="name" placeholder="Dein Name" required/></div>
-            <div class="fg"><label for="fe">E-Mail</label><input type="email" id="fe" name="email" placeholder="deine@email.de" required/></div>
+      <div class="card form" data-reveal data-delay="0.1">
+        <form id="contact-form" novalidate>
+          <div class="form-row">
+            <label for="f-name">Name <span class="req">*</span></label>
+            <input class="form-control" type="text" id="f-name" name="name" autocomplete="name" placeholder="Dein Name" required>
           </div>
-          <div class="fg"><label for="fp">Telefon (optional)</label><input type="tel" id="fp" name="phone" placeholder="+49 ..."/></div>
-          <div class="fg">
-            <label for="fint">Dein Interesse</label>
-            <select id="fint" name="interesse">
-              <option value="">Bitte wählen ...</option>
-              <option>Starter-Paket (499 €)</option>
-              <option>Professionell-Paket (749 €)</option>
-              <option>Ich bin noch unsicher</option>
-              <option>Allgemeine Frage</option>
+          <div class="form-row">
+            <label for="f-email">E-Mail <span class="req">*</span></label>
+            <input class="form-control" type="email" id="f-email" name="email" autocomplete="email" placeholder="name@beispiel.de" required>
+          </div>
+          <div class="form-row">
+            <label for="f-phone">Telefon <span style="color:var(--t-4);font-weight:400">(optional)</span></label>
+            <input class="form-control" type="tel" id="f-phone" name="telefon" autocomplete="tel" placeholder="+49 ...">
+          </div>
+          <div class="form-row">
+            <label for="f-interest">Interesse</label>
+            <select class="form-control" id="f-interest" name="interesse">
+              <option value="Starter-Paket (499€)">Starter-Paket (499€)</option>
+              <option value="Professionell-Paket (749€)">Professionell-Paket (749€)</option>
+              <option value="Ich bin noch unsicher">Ich bin noch unsicher</option>
+              <option value="Allgemeine Frage">Allgemeine Frage</option>
             </select>
           </div>
-          <div class="fg"><label for="fm">Nachricht</label><textarea id="fm" name="nachricht" placeholder="Erzähl mir kurz von deinem Unternehmen und was du dir vorstellst ..." required></textarea></div>
-          <button type="submit" class="f-submit" id="fBtn">Nachricht senden →</button>
+          <div class="form-row">
+            <label for="f-message">Nachricht</label>
+            <textarea class="form-control" id="f-message" name="nachricht" rows="4" placeholder="Erzähl mir kurz von deinem Unternehmen ..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--gold btn--full">Nachricht senden →</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
         </form>
-        <div class="f-success" id="fSuccess">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          <h4>Nachricht gesendet!</h4>
-          <p>Danke – ich melde mich persönlich bei dir, normalerweise innerhalb von 24 Stunden.</p>
+
+        <div id="form-success" class="form-success is-hidden">
+          <div class="form-success__ic">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg>
+          </div>
+          <h3>Nachricht gesendet!</h3>
+          <p>Ich melde mich persönlich bei dir, normalerweise innerhalb von 24 Stunden.</p>
         </div>
-        <div class="f-error" id="fError">Es gab einen Fehler beim Senden. Bitte versuche es erneut oder schreib mir direkt an <a href="mailto:info@kaiserstuhl-digital.de" style="color:rgba(255,200,200,.9)">info@kaiserstuhl-digital.de</a>.</div>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="fi">
-    <div class="ft">
-      <div class="fb">
-        <a href="index.html" class="logo">
-          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/></svg>
-          <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
-        </a>
-        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell und aus der Region.</p>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="logo-text"><span>Kaiserstuhl</span><span class="g"> Digital</span></a>
+        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell, aus der Region.</p>
       </div>
-      <div class="fl"><h4>Navigation</h4><a href="leistungen.html">Leistungen</a><a href="preise.html">Preise</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a></div>
-      <div class="fl"><h4>Rechtliches</h4><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
-      <div class="fl"><h4>Kontakt</h4><a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><a href="tel:+4915153522586">+49 1515 3522586</a></div>
+      <nav class="footer__col" aria-label="Footer Navigation">
+        <h4>Navigation</h4>
+        <a href="leistungen.html">Leistungen</a>
+        <a href="preise.html">Preise</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Kontakt</h4>
+        <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a>
+        <a href="tel:+4915153522586">+49 1515 3522586</a>
+        <span>Teningen, Baden-Württemberg</span>
+      </div>
     </div>
-    <div class="fc"><p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p><p>Made with ♥ in Teningen</p></div>
+    <div class="footer__bottom">
+      <p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p>
+      <p>Made with ♥ in Teningen</p>
+    </div>
   </div>
 </footer>
 
-<script>
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('[data-anim]').forEach(el => {
-  if(el.dataset.delay) el.style.animationDelay = (Number(el.dataset.delay) * 0.15) + 's';
-  obs.observe(el);
-});
-window.addEventListener('scroll', () => { document.querySelector('nav').classList.toggle('scrolled', scrollY > 20); }, { passive: true });
-const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
-let open = false;
-hbg.addEventListener('click', () => {
-  open = !open; mob.classList.toggle('open', open);
-  const s = hbg.querySelectorAll('span');
-  if(open){ s[0].style.transform='rotate(45deg) translate(5px,5px)'; s[1].style.opacity='0'; s[2].style.transform='rotate(-45deg) translate(5px,-5px)'; }
-  else { s.forEach(x => { x.style.transform=''; x.style.opacity=''; }); }
-});
-function closeMob(){ open=false; mob.classList.remove('open'); hbg.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }
-async function sendForm(e) {
-  e.preventDefault();
-  const btn = document.getElementById('fBtn');
-  const errDiv = document.getElementById('fError');
-  btn.disabled = true;
-  btn.textContent = 'Wird gesendet …';
-  errDiv.style.display = 'none';
-  try {
-    const res = await fetch('https://formspree.io/f/xvznydkk', {
-      method: 'POST',
-      body: new FormData(document.getElementById('cForm')),
-      headers: { Accept: 'application/json' }
-    });
-    if (res.ok) {
-      document.getElementById('cForm').style.display = 'none';
-      document.getElementById('fSuccess').style.display = 'block';
-    } else {
-      throw new Error();
-    }
-  } catch {
-    btn.disabled = false;
-    btn.textContent = 'Nachricht senden →';
-    errDiv.style.display = 'block';
-  }
-}
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="app.js" defer></script>
 </body>
 </html>

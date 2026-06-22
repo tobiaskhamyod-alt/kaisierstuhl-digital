@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>document.documentElement.className='js';</script>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <title>Datenschutzerklärung | Kaiserstuhl Digital</title>
 <meta name="description" content="Datenschutzerklärung von Kaiserstuhl Digital – Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO."/>
 <link rel="canonical" href="https://kaiserstuhl-digital.de/datenschutz.html"/>
@@ -17,208 +15,149 @@
 <meta property="og:description" content="Datenschutzerklärung von Kaiserstuhl Digital – Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO."/>
 <meta property="og:locale" content="de_DE"/>
 <meta property="og:site_name" content="Kaiserstuhl Digital"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0a0f1e;--gold:#C9A84C;--gold-d:#b8942e;--white:#FFFFFF;--gray-m:#999999}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;font-size:17px;font-weight:300;color:rgba(255,255,255,.7);background-color:#0a0f1e;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(30,45,80,.8) 0%,#0a0f1e 60%);background-attachment:fixed;line-height:1.7;-webkit-font-smoothing:antialiased}
-@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,15,30,.7);backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);border-bottom:1px solid rgba(255,255,255,.06);height:112px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:background .3s ease,box-shadow .3s ease}
-nav.scrolled{background:rgba(8,12,24,.88);box-shadow:0 2px 30px rgba(0,0,0,.45)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.logo img{height:100px!important;width:auto}
-.logo-t{font-size:20px;font-weight:600;letter-spacing:-.02em}
-.logo-t .w{color:var(--white)}.logo-t .g{color:var(--gold)}
-.nav-ul{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-ul a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.9rem;font-weight:400;transition:color .25s cubic-bezier(.16,1,.3,1)}
-.nav-ul a:hover,.nav-ul a.on{color:var(--white)}
-.cta-a{background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%)!important;color:#0a0f1e!important;font-weight:500!important;padding:10px 22px;border-radius:980px;font-size:.9rem;letter-spacing:-.01em;box-shadow:0 0 24px rgba(201,168,76,.25);transition:box-shadow .3s ease,transform .3s ease!important}
-.cta-a:hover{box-shadow:0 0 44px rgba(201,168,76,.45)!important;transform:scale(1.02)!important}
-.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hbg span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
-.mob{display:none;position:fixed;top:112px;left:0;right:0;background:rgba(8,12,24,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.06);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.mob.open{display:block}
-.mob a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:16px;font-weight:400;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
-.mob a:hover{color:var(--white)}
-.mob-cta{display:block!important;margin-top:18px;background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%);color:#0a0f1e!important;font-weight:500;text-align:center;padding:13px;border-radius:980px;text-decoration:none;border-bottom:none!important;transition:opacity .2s}
-.mob-cta:hover{opacity:.88}
-/* PAGE HERO */
-.ph{background:transparent;padding:140px 5% 75px;text-align:center;position:relative;overflow:hidden}
-.ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(50,80,150,.1) 0%,transparent 70%);pointer-events:none}
-.ph .tag{position:relative;display:inline-block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.08);padding:5px 16px;border-radius:980px;margin-bottom:20px;animation:heroIn .8s ease both}
-.ph h1{position:relative;font-size:clamp(28px,4vw,46px);font-weight:600;color:var(--white);letter-spacing:-.03em;margin-bottom:16px;animation:heroIn .9s .1s ease both}
-.ph .sub{position:relative;font-size:17px;color:rgba(255,255,255,.55);max-width:540px;margin:0 auto;font-weight:300;line-height:1.7;animation:heroIn .9s .22s ease both}
-/* CONTENT */
-.section{padding:80px 5%}
-.si{max-width:860px;margin:0 auto}
-/* LEGAL BLOCKS */
-.legal-block{margin-bottom:48px}
-.legal-block:last-child{margin-bottom:0}
-.legal-block h2{font-size:22px;font-weight:500;color:var(--white);letter-spacing:-.02em;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
-.legal-block h3{font-size:16px;font-weight:500;color:rgba(255,255,255,.85);margin:20px 0 8px;letter-spacing:-.01em}
-.legal-block p{font-size:16px;color:rgba(255,255,255,.55);line-height:1.78;margin-bottom:14px;font-weight:300}
-.legal-block p:last-child{margin-bottom:0}
-.legal-block a{color:var(--gold);text-decoration:none;transition:color .2s}
-.legal-block a:hover{color:var(--gold-d);text-decoration:underline}
-.legal-item{background:rgba(255,255,255,.04);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:12px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.legal-item h3{font-size:14px;font-weight:500;color:rgba(255,255,255,.7);margin:0 0 6px;text-transform:uppercase;letter-spacing:.08em}
-.legal-item p{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;margin:0;font-weight:300}
-/* FOOTER */
-footer{background:rgba(5,8,18,.95);padding:52px 5% 30px;border-top:1px solid rgba(255,255,255,.06)}
-.fi{max-width:1200px;margin:0 auto}
-.ft{display:flex;justify-content:space-between;gap:40px;margin-bottom:36px;flex-wrap:wrap}
-.fb p{font-size:14px;color:rgba(255,255,255,.4);max-width:280px;line-height:1.7;margin-top:14px;font-weight:300}
-.fl h4{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:16px;font-weight:500}
-.fl a{display:block;color:rgba(255,255,255,.45);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color .2s,transform .2s;font-weight:300}
-.fl a:hover{color:var(--white);transform:translateX(3px)}
-.fc{border-top:1px solid rgba(255,255,255,.06);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.fc p{font-size:13px;color:rgba(255,255,255,.25);font-weight:300}
-@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}nav{height:72px}.mob{top:72px}.logo img{height:64px!important}.section{padding:60px 5%}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 55px}}
-</style>
+<meta name="robots" content="noindex, follow"/>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="logo">
-    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="100">
+<!-- NAV -->
+<nav class="nav" aria-label="Hauptnavigation">
+  <a href="index.html" class="nav__logo" aria-label="Kaiserstuhl Digital - Startseite">
+    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="38">
   </a>
-  <ul class="nav-ul">
+  <ul class="nav__links">
     <li><a href="leistungen.html">Leistungen</a></li>
     <li><a href="preise.html">Preise</a></li>
     <li><a href="ueber-uns.html">Über uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
-    <li><a href="kontakt.html" class="cta-a">Kostenlose Demo</a></li>
   </ul>
-  <button class="hbg" id="hbg" aria-label="Menü"><span></span><span></span><span></span></button>
+  <a href="kontakt.html" class="nav__cta">Kostenlose Demo anfragen</a>
+  <button class="nav__burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<div class="mob" id="mob">
-  <a href="leistungen.html" onclick="closeMob()">Leistungen</a>
-  <a href="preise.html" onclick="closeMob()">Preise</a>
-  <a href="ueber-uns.html" onclick="closeMob()">Über uns</a>
-  <a href="kontakt.html" onclick="closeMob()">Kontakt</a>
-  <a href="kontakt.html" class="mob-cta" onclick="closeMob()">Kostenlose Demo anfragen</a>
-</div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile Navigation">
+  <button class="drawer__close" aria-label="Menü schließen">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <a href="leistungen.html">Leistungen</a>
+  <a href="preise.html">Preise</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="kontakt.html" class="drawer__cta">Kostenlose Demo anfragen</a>
+</aside>
 
-<div class="ph">
-  <div class="tag">Rechtliches</div>
-  <h1>Datenschutzerklärung</h1>
-  <p class="sub">Informationen zur Verarbeitung Ihrer personenbezogenen Daten gemäß DSGVO.</p>
-</div>
+<!-- PAGE HEAD -->
+<header class="page-head">
+  <div class="wrap">
+    <h1>Datenschutzerklärung</h1>
+    <p>Informationen zur Verarbeitung Ihrer personenbezogenen Daten gemäß DSGVO.</p>
+  </div>
+</header>
 
-<section class="section">
-  <div class="si">
+<section class="section" style="padding-top:30px">
+  <div class="wrap legal-narrow">
 
-    <!-- DATENSCHUTZ AUF EINEN BLICK -->
     <div class="legal-block">
       <h2>Datenschutz auf einen Blick</h2>
-
       <h3>Allgemeine Hinweise</h3>
       <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
-
       <h3>Wer ist verantwortlich für die Datenerfassung?</h3>
       <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Kontaktdaten siehe Abschnitt „Hinweis zur verantwortlichen Stelle".</p>
-
       <h3>Welche Rechte haben Sie bezüglich Ihrer Daten?</h3>
       <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung oder Löschung Ihrer gespeicherten personenbezogenen Daten. Sie können eine erteilte Einwilligung jederzeit widerrufen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
     </div>
 
-    <!-- HOSTING -->
     <div class="legal-block">
       <h2>Hosting</h2>
-
       <h3>IONOS</h3>
       <p>Anbieter ist die IONOS SE, Elgendorfer Str. 57, 56410 Montabaur. Wenn Sie unsere Website besuchen, erfasst IONOS verschiedene Logfiles inklusive Ihrer IP-Adressen. Details: <a href="https://www.ionos.de/terms-gtc/terms-privacy" target="_blank" rel="noopener">https://www.ionos.de/terms-gtc/terms-privacy</a>. Die Verwendung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben einen AVV mit IONOS geschlossen.</p>
     </div>
 
-    <!-- ALLGEMEINE HINWEISE -->
     <div class="legal-block">
       <h2>Allgemeine Hinweise und Pflichtinformationen</h2>
-
       <div class="legal-item">
         <h3>Verantwortliche Stelle</h3>
         <p>Tobias Khamyod, Stockbrunnenstraße 1, 79331 Teningen<br>Telefon: +49 151 15636367<br>E-Mail: <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a></p>
       </div>
-
       <div class="legal-item">
         <h3>Speicherdauer</h3>
         <p>Ihre Daten verbleiben bei uns bis der Zweck entfällt oder Sie die Löschung verlangen.</p>
       </div>
-
       <div class="legal-item">
         <h3>Rechtsgrundlagen</h3>
         <p>Art. 6 Abs. 1 lit. a DSGVO (Einwilligung), Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung), Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).</p>
       </div>
-
       <div class="legal-item">
         <h3>Widerspruchsrecht (Art. 21 DSGVO)</h3>
         <p>Sie haben das Recht der Verarbeitung Ihrer Daten zu widersprechen, sofern diese auf Art. 6 Abs. 1 lit. e oder f DSGVO beruht.</p>
       </div>
-
       <div class="legal-item">
         <h3>Beschwerderecht</h3>
         <p>Zuständige Aufsichtsbehörde ist der Landesbeauftragte für Datenschutz Baden-Württemberg.</p>
       </div>
-
       <div class="legal-item">
         <h3>Recht auf Datenübertragbarkeit</h3>
         <p>Sie haben das Recht Ihre Daten in einem maschinenlesbaren Format zu erhalten.</p>
       </div>
-
       <div class="legal-item">
         <h3>SSL/TLS-Verschlüsselung</h3>
         <p>Diese Seite nutzt SSL/TLS-Verschlüsselung, erkennbar an „https://" und dem Schloss-Symbol in der Adressleiste Ihres Browsers.</p>
       </div>
     </div>
 
-    <!-- DATENERFASSUNG -->
     <div class="legal-block">
       <h2>Datenerfassung auf dieser Website</h2>
-
       <div class="legal-item">
         <h3>Kontaktformular</h3>
         <p>Ihre Angaben werden zwecks Bearbeitung gespeichert auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO. Die Daten verbleiben bis Sie Löschung verlangen oder der Zweck entfällt.</p>
       </div>
-
       <div class="legal-item">
         <h3>Anfrage per E-Mail oder Telefon</h3>
         <p>Ihre Anfrage wird gespeichert auf Grundlage von Art. 6 Abs. 1 lit. b oder lit. f DSGVO.</p>
       </div>
-
-      <p style="margin-top:24px;font-size:14px;color:var(--gray-m)">Quelle: e-recht24.de</p>
+      <p style="margin-top:24px;font-size:14px;color:var(--t-4)">Quelle: e-recht24.de</p>
     </div>
 
   </div>
 </section>
 
-<footer>
-  <div class="fi">
-    <div class="ft">
-      <div class="fb">
-        <a href="index.html" class="logo">
-          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/></svg>
-          <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
-        </a>
-        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell und aus der Region.</p>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="logo-text"><span>Kaiserstuhl</span><span class="g"> Digital</span></a>
+        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell, aus der Region.</p>
       </div>
-      <div class="fl"><h4>Navigation</h4><a href="leistungen.html">Leistungen</a><a href="preise.html">Preise</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a></div>
-      <div class="fl"><h4>Rechtliches</h4><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
-      <div class="fl"><h4>Kontakt</h4><a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><a href="tel:+4915153522586">+49 1515 3522586</a></div>
+      <nav class="footer__col" aria-label="Footer Navigation">
+        <h4>Navigation</h4>
+        <a href="leistungen.html">Leistungen</a>
+        <a href="preise.html">Preise</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Kontakt</h4>
+        <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a>
+        <a href="tel:+4915153522586">+49 1515 3522586</a>
+        <span>Teningen, Baden-Württemberg</span>
+      </div>
     </div>
-    <div class="fc"><p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p><p>Made with ♥ in Teningen</p></div>
+    <div class="footer__bottom">
+      <p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p>
+      <p>Made with ♥ in Teningen</p>
+    </div>
   </div>
 </footer>
 
-<script>
-window.addEventListener('scroll', () => { document.querySelector('nav').classList.toggle('scrolled', scrollY > 20); }, { passive: true });
-const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
-let open = false;
-hbg.addEventListener('click', () => {
-  open = !open; mob.classList.toggle('open', open);
-  const s = hbg.querySelectorAll('span');
-  if(open){ s[0].style.transform='rotate(45deg) translate(5px,5px)'; s[1].style.opacity='0'; s[2].style.transform='rotate(-45deg) translate(5px,-5px)'; }
-  else { s.forEach(x => { x.style.transform=''; x.style.opacity=''; }); }
-});
-function closeMob(){ open=false; mob.classList.remove('open'); hbg.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="app.js" defer></script>
 </body>
 </html>

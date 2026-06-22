@@ -1,299 +1,200 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>document.documentElement.className='js';setTimeout(function(){var h=document.documentElement;if(h.dataset.animReady!=='1')h.classList.add('anim-fallback');},2200);</script>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<title>Preise & Pakete: Webdesign ab 499 € | Kaiserstuhl Digital</title>
-<meta name="description" content="Transparente Webdesign-Preise für lokale Unternehmen in Emmendingen & der Kaiserstuhl-Region. Starter ab 499 €, Professionell ab 749 €. Keine versteckten Kosten."/>
+<title>Preise &amp; Pakete: Webdesign ab 499 € | Kaiserstuhl Digital</title>
+<meta name="description" content="Transparente Webdesign-Preise für lokale Unternehmen in Emmendingen &amp; der Kaiserstuhl-Region. Starter ab 499 €, Professionell ab 749 €. Keine versteckten Kosten."/>
 <link rel="canonical" href="https://kaiserstuhl-digital.de/preise.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://kaiserstuhl-digital.de/preise.html"/>
-<meta property="og:title" content="Preise & Pakete: Webdesign ab 499 € | Kaiserstuhl Digital"/>
-<meta property="og:description" content="Transparente Webdesign-Preise für lokale Unternehmen in Emmendingen & der Kaiserstuhl-Region. Starter ab 499 €, Professionell ab 749 €. Keine versteckten Kosten."/>
+<meta property="og:title" content="Preise &amp; Pakete: Webdesign ab 499 € | Kaiserstuhl Digital"/>
+<meta property="og:description" content="Transparente Webdesign-Preise für lokale Unternehmen in Emmendingen &amp; der Kaiserstuhl-Region. Starter ab 499 €, Professionell ab 749 €. Keine versteckten Kosten."/>
 <meta property="og:image" content="https://kaiserstuhl-digital.de/og-image.jpg"/>
 <meta property="og:locale" content="de_DE"/>
 <meta property="og:site_name" content="Kaiserstuhl Digital"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0a0f1e;--gold:#C9A84C;--gold-d:#b8942e;--white:#FFFFFF;--gray-m:#999999}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;font-size:17px;font-weight:300;color:rgba(255,255,255,.7);background-color:#0a0f1e;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(30,45,80,.8) 0%,#0a0f1e 60%);background-attachment:fixed;line-height:1.7;-webkit-font-smoothing:antialiased}
-@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(24px) scale(.99);filter:blur(4px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-[data-anim]{opacity:0}
-[data-anim].in{animation:fadeInUp .7s cubic-bezier(.16,1,.3,1) forwards}
-@media(prefers-reduced-motion:reduce){[data-anim]{opacity:1}[data-anim].in{animation:none}}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,15,30,.7);backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);border-bottom:1px solid rgba(255,255,255,.06);height:112px;display:flex;align-items:center;padding:0 5%;justify-content:space-between;transition:background .3s ease,box-shadow .3s ease}
-nav.scrolled{background:rgba(8,12,24,.88);box-shadow:0 2px 30px rgba(0,0,0,.45)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.logo img{height:100px!important;width:auto}
-.logo-t{font-size:20px;font-weight:600;letter-spacing:-.02em}
-.logo-t .w{color:var(--white)}.logo-t .g{color:var(--gold)}
-.nav-ul{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-ul a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.9rem;font-weight:400;transition:color .25s cubic-bezier(.16,1,.3,1)}
-.nav-ul a:hover,.nav-ul a.on{color:var(--white)}
-.cta-a{background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%)!important;color:#0a0f1e!important;font-weight:500!important;padding:10px 22px;border-radius:980px;font-size:.9rem;letter-spacing:-.01em;box-shadow:0 0 24px rgba(201,168,76,.25);transition:box-shadow .3s ease,transform .3s ease!important}
-.cta-a:hover{box-shadow:0 0 44px rgba(201,168,76,.45)!important;transform:scale(1.02)!important}
-.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hbg span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all .3s}
-.mob{display:none;position:fixed;top:112px;left:0;right:0;background:rgba(8,12,24,.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:20px 5% 28px;z-index:999;border-top:1px solid rgba(255,255,255,.06);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-.mob.open{display:block}
-.mob a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:16px;font-weight:400;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
-.mob a:hover,.mob a.on{color:var(--white)}
-.mob-cta{display:block!important;margin-top:18px;background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%);color:#0a0f1e!important;font-weight:500;text-align:center;padding:13px;border-radius:980px;text-decoration:none;border-bottom:none!important;transition:opacity .2s}
-.mob-cta:hover{opacity:.88}
-.btn{display:inline-block;padding:14px 28px;border-radius:980px;font-size:.95rem;font-weight:500;letter-spacing:-.01em;text-decoration:none;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.btn-p{background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%);color:#0a0f1e;box-shadow:0 0 30px rgba(201,168,76,.25)}
-.btn-p:hover{box-shadow:0 0 50px rgba(201,168,76,.45);transform:scale(1.02)}
-.btn-o{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.btn-o:hover{background:rgba(255,255,255,.13);transform:scale(1.02)}
-.section{padding:120px 5%}
-.si{max-width:1200px;margin:0 auto}
-.bg-n{background:transparent}.bg-g{background:rgba(5,8,18,.45)}
-/* PAGE HERO */
-.ph{background:transparent;padding:140px 5% 80px;text-align:center;position:relative;overflow:hidden}
-.ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.07) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 50% 0%,rgba(50,80,150,.1) 0%,transparent 70%);pointer-events:none}
-.ph .tag{position:relative;display:inline-block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.08);padding:5px 16px;border-radius:980px;margin-bottom:20px;animation:heroIn .8s ease both}
-.ph h1{position:relative;font-size:clamp(30px,4vw,50px);font-weight:600;color:var(--white);letter-spacing:-.03em;margin-bottom:16px;animation:heroIn .9s .1s ease both}
-.ph .sub{position:relative;font-size:18px;color:rgba(255,255,255,.6);max-width:580px;margin:0 auto;font-weight:300;line-height:1.7;animation:heroIn .9s .22s ease both}
-/* PRICING */
-.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:0 auto}
-.pc{border-radius:20px;padding:42px 38px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);position:relative;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.06)}
-.pc:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)}
-.pc.feat{background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.35);box-shadow:0 0 60px rgba(201,168,76,.12),0 20px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06)}
-.pc.feat:hover{background:rgba(201,168,76,.09);border-color:rgba(201,168,76,.5);box-shadow:0 0 90px rgba(201,168,76,.2),0 28px 50px rgba(0,0,0,.5)}
-.badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#C9A84C,#E8C96A);color:#0a0f1e;font-size:.7rem;font-weight:600;padding:6px 16px;border-radius:980px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
-.pc-name{font-size:22px;font-weight:500;color:var(--white);letter-spacing:-.01em;margin-bottom:6px}
-.pc-price{font-size:46px;font-weight:600;color:var(--white);letter-spacing:-.03em;line-height:1;margin-bottom:4px}
-.pc.feat .pc-price{color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.3)}
-.pc-price span{font-size:18px;color:rgba(255,255,255,.35);font-weight:300}
-.pc-note{font-size:13px;color:rgba(255,255,255,.35);margin-bottom:28px;font-weight:300}
-.pc-div{height:1px;background:rgba(255,255,255,.08);margin-bottom:26px}
-.pc-list{list-style:none;margin-bottom:34px}
-.pc-list li{display:flex;align-items:flex-start;gap:11px;font-size:15px;color:rgba(255,255,255,.6);margin-bottom:13px;font-weight:300}
-.pc-list li svg{width:17px;height:17px;color:rgba(255,255,255,.85);flex-shrink:0;margin-top:2px}
-.pc.feat .pc-list li svg{color:var(--gold)}
-.pc-list li strong{color:var(--white);font-weight:500}
-.pc-btn{display:block;width:100%;text-align:center;padding:15px;background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.15);font-weight:500;font-size:15px;border-radius:980px;text-decoration:none;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.pc-btn:hover{background:rgba(255,255,255,.14);transform:scale(1.02)}
-.pc.feat .pc-btn{background:linear-gradient(135deg,#C9A84C 0%,#E8C96A 50%,#C9A84C 100%);color:#0a0f1e;border-color:transparent;box-shadow:0 0 24px rgba(201,168,76,.3)}
-.pc.feat .pc-btn:hover{box-shadow:0 0 44px rgba(201,168,76,.5)}
-/* NOTE STRIP */
-.note-strip{text-align:center;margin-top:36px;padding:18px 24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;font-size:15px;color:rgba(255,255,255,.5);font-weight:300}
-.note-strip strong{color:var(--white);font-weight:500}
-/* FAQ */
-.faq-list{max-width:780px;margin:0 auto}
-.faq-item{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);border-radius:16px;margin-bottom:12px;overflow:hidden;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.faq-item[open]{box-shadow:0 4px 24px rgba(0,0,0,.25);border-color:rgba(255,255,255,.15)}
-.faq-item summary{padding:20px 24px;font-size:17px;font-weight:500;color:var(--white);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:background .2s;user-select:none;letter-spacing:-.01em}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:'+';font-size:24px;color:rgba(255,255,255,.4);transition:transform .3s;flex-shrink:0;font-weight:300;line-height:1}
-.faq-item[open] summary::after{transform:rotate(45deg);color:var(--white)}
-.faq-item summary:hover{background:rgba(255,255,255,.03)}
-.faq-body{padding:0 24px 22px;border-top:1px solid rgba(255,255,255,.06)}
-.faq-body p{font-size:16px;color:rgba(255,255,255,.55);line-height:1.78;margin-top:16px;font-weight:300}
-/* CTA */
-.cta-sec{background:rgba(5,8,18,.4);position:relative;overflow:hidden}
-.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none}
-.cta-box{position:relative;text-align:center;max-width:640px;margin:0 auto}
-.cta-box h2{font-size:clamp(26px,3vw,40px);font-weight:600;color:var(--white);letter-spacing:-.02em;margin-bottom:16px}
-.cta-box p{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:34px;line-height:1.7;font-weight:300}
-/* FOOTER */
-footer{background:rgba(5,8,18,.95);padding:52px 5% 30px;border-top:1px solid rgba(255,255,255,.06)}
-.fi{max-width:1200px;margin:0 auto}
-.ft{display:flex;justify-content:space-between;gap:40px;margin-bottom:36px;flex-wrap:wrap}
-.fb p{font-size:14px;color:rgba(255,255,255,.4);max-width:280px;line-height:1.7;margin-top:14px;font-weight:300}
-.fl h4{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:16px;font-weight:500}
-.fl a{display:block;color:rgba(255,255,255,.45);text-decoration:none;font-size:14px;margin-bottom:10px;transition:color .2s,transform .2s;font-weight:300}
-.fl a:hover{color:var(--white);transform:translateX(3px)}
-.fc{border-top:1px solid rgba(255,255,255,.06);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.fc p{font-size:13px;color:rgba(255,255,255,.25);font-weight:300}
-@media(max-width:768px){.nav-ul{display:none}.hbg{display:flex}nav{height:72px}.mob{top:72px}.logo img{height:64px!important}.section{padding:80px 5%}.price-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}.ft{flex-direction:column;gap:28px}.ph{padding:120px 5% 60px}.pc{padding:32px 24px}}
-</style>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Was ist im Preis alles inbegriffen?", "acceptedAnswer": { "@type": "Answer", "text": "Design, Entwicklung, alle abgesprochenen Seiten, Kontaktformular, Domain und Hosting für das erste Jahr, SSL, Impressum und Datenschutz, Basis-SEO. Alles was du brauchst um sofort professionell online zu sein. Keine versteckten Extras." } },
+    { "@type": "Question", "name": "Gibt es laufende monatliche Kosten?", "acceptedAnswer": { "@type": "Answer", "text": "Im ersten Jahr entstehen keine zusätzlichen Kosten: Domain und Hosting sind inklusive. Ab dem zweiten Jahr fällt eine Hosting-Gebühr von ca. 15 Euro pro Monat an. Kein verstecktes Abo, keine Überraschungsrechnungen." } },
+    { "@type": "Question", "name": "Wie lange dauert die Umsetzung?", "acceptedAnswer": { "@type": "Answer", "text": "Nach dem ersten Gespräch und deiner Freigabe beträgt die typische Umsetzungszeit 2 bis 4 Wochen. Das hängt hauptsächlich davon ab, wie schnell wir Texte, Bilder und Rückmeldungen abstimmen können." } },
+    { "@type": "Question", "name": "Kann ich meine Website später selbst bearbeiten?", "acceptedAnswer": { "@type": "Answer", "text": "Auf Wunsch baue ich dir ein einfaches Redaktionssystem ein. Alternativ, und das empfehlen die meisten meiner Kunden, übernehme ich die Pflege. Wir besprechen das im ersten Gespräch." } },
+    { "@type": "Question", "name": "Was passiert wenn ich nach dem Launch Änderungen brauche?", "acceptedAnswer": { "@type": "Answer", "text": "Kleine Anpassungen in den ersten Wochen nach Launch sind kostenfrei. Danach gibt es flexible Wartungspakete, stundenweise oder monatlich. Im Professionell-Paket ist bereits ein kostenloser Monat enthalten." } }
+  ]
+}
+</script>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="logo">
-    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="100">
+<!-- NAV -->
+<nav class="nav" aria-label="Hauptnavigation">
+  <a href="index.html" class="nav__logo" aria-label="Kaiserstuhl Digital - Startseite">
+    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="38">
   </a>
-  <ul class="nav-ul">
+  <ul class="nav__links">
     <li><a href="leistungen.html">Leistungen</a></li>
-    <li><a href="preise.html" class="on">Preise</a></li>
+    <li><a href="preise.html">Preise</a></li>
     <li><a href="ueber-uns.html">Über uns</a></li>
     <li><a href="kontakt.html">Kontakt</a></li>
-    <li><a href="kontakt.html" class="cta-a">Kostenlose Demo</a></li>
   </ul>
-  <button class="hbg" id="hbg" aria-label="Menü"><span></span><span></span><span></span></button>
+  <a href="kontakt.html" class="nav__cta">Kostenlose Demo anfragen</a>
+  <button class="nav__burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<div class="mob" id="mob">
-  <a href="leistungen.html" onclick="closeMob()">Leistungen</a>
-  <a href="preise.html" class="on" onclick="closeMob()">Preise</a>
-  <a href="ueber-uns.html" onclick="closeMob()">Über uns</a>
-  <a href="kontakt.html" onclick="closeMob()">Kontakt</a>
-  <a href="kontakt.html" class="mob-cta" onclick="closeMob()">Kostenlose Demo anfragen</a>
-</div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile Navigation">
+  <button class="drawer__close" aria-label="Menü schließen">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <a href="leistungen.html">Leistungen</a>
+  <a href="preise.html">Preise</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="kontakt.html" class="drawer__cta">Kostenlose Demo anfragen</a>
+</aside>
 
-<div class="ph">
-  <div class="tag">Investition in deinen Erfolg</div>
-  <h1>Transparente Preise</h1>
-  <p class="sub">Keine versteckten Kosten, keine Abo-Fallen – du weißt von Anfang an genau, was deine neue Website kostet.</p>
-</div>
-
-<!-- ─── PAKETE ─── -->
-<section class="section bg-g">
-  <div class="si">
-    <div class="price-grid">
-
-      <!-- STARTER -->
-      <div class="pc" data-anim data-delay="0">
-        <div class="pc-name">Starter</div>
-        <div class="pc-price">499€ <span>einmalig</span></div>
-        <div class="pc-note">+ ab 15 €/Monat Hosting ab dem 2. Jahr</div>
-        <div class="pc-div"></div>
-        <ul class="pc-list">
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Website bis 5 Seiten</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Vollständig mobil optimiert (Mobile-First)</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Kontaktformular mit E-Mail-Weiterleitung</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Domain &amp; Hosting (1. Jahr inklusive)</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> SSL-Zertifikat (HTTPS)</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Basis-SEO Setup</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Impressum &amp; Datenschutz inklusive</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Professionelle E-Mail-Adresse</li>
-        </ul>
-        <a href="kontakt.html" class="pc-btn">Jetzt anfragen</a>
-      </div>
-
-      <!-- PROFESSIONELL -->
-      <div class="pc feat" data-anim data-delay="1">
-        <div class="badge">Empfohlen</div>
-        <div class="pc-name">Professionell</div>
-        <div class="pc-price">749€ <span>einmalig</span></div>
-        <div class="pc-note">+ ab 15 €/Monat Hosting ab dem 2. Jahr</div>
-        <div class="pc-div"></div>
-        <ul class="pc-list">
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Website bis 10 Seiten</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Vollständig mobil optimiert (Mobile-First)</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Kontaktformular &amp; professionelle Bildergalerie</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Domain &amp; Hosting (1. Jahr inklusive)</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> SSL-Zertifikat (HTTPS)</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Erweitertes SEO Setup</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Google Business Profil Setup</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Impressum &amp; Datenschutz inklusive</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Professionelle E-Mail-Adresse</li>
-          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> <strong>1 Monat Wartung kostenlos</strong></li>
-        </ul>
-        <a href="kontakt.html" class="pc-btn">Jetzt anfragen</a>
-      </div>
-    </div>
-
-    <div class="note-strip" data-anim>
-      <strong>Nicht sicher, welches Paket passt?</strong> Kein Problem – schreib mir kurz und wir finden gemeinsam die beste Lösung für dein Business.
-      <a href="kontakt.html" style="color:#A0A8B8;font-weight:400;text-decoration:none;margin-left:8px">Beratung anfragen →</a>
-    </div>
+<!-- HERO -->
+<header class="hero hero--sub">
+  <div class="hero__bg" style="background-image:url('https://picsum.photos/seed/clear-architecture-dark/1920/1080')"></div>
+  <div class="hero__wash"></div>
+  <div class="hero__inner">
+    <h1 class="hero__title">Transparente Preise. <span class="accent">Keine</span> <span class="accent">Überraschungen.</span></h1>
+    <p class="hero__sub">Keine versteckten Kosten, keine Abo-Fallen. Du weißt von Anfang an genau, was deine neue Website kostet.</p>
   </div>
-</section>
+</header>
 
-<!-- ─── FAQ ─── -->
+<!-- PRICING -->
 <section class="section">
-  <div class="si">
-    <div style="text-align:center;margin-bottom:50px" data-anim>
-      <h2 style="font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--white);letter-spacing:-.02em;margin-bottom:14px">Häufige Fragen</h2>
-      <p style="font-size:17px;color:var(--gray-m);max-width:520px;margin:0 auto">Hier findest du Antworten auf die Fragen, die mir am häufigsten gestellt werden.</p>
+  <div class="wrap">
+    <div class="price-grid">
+      <article class="card price-card" data-reveal>
+        <div class="price-name">Starter</div>
+        <div class="price-amount">499€ <span>einmalig</span></div>
+        <p class="price-note">+ ab 15 €/Monat Hosting ab dem 2. Jahr</p>
+        <ul class="price-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Website bis 5 Seiten</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Vollständig mobil optimiert (Mobile-First)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Kontaktformular mit E-Mail-Weiterleitung</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Domain &amp; Hosting (1. Jahr inklusive)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> SSL-Zertifikat (HTTPS)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Basis-SEO Setup</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Impressum &amp; Datenschutz inklusive</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Professionelle E-Mail-Adresse</li>
+        </ul>
+        <a href="kontakt.html" class="btn btn--ghost btn--full">Jetzt anfragen</a>
+      </article>
+
+      <article class="card price-card is-feat" data-reveal data-delay="0.12">
+        <div class="price-badge">Empfohlen</div>
+        <div class="price-name">Professionell</div>
+        <div class="price-amount">749€ <span>einmalig</span></div>
+        <p class="price-note">+ ab 15 €/Monat Hosting ab dem 2. Jahr</p>
+        <ul class="price-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Website bis 10 Seiten</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Vollständig mobil optimiert (Mobile-First)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Kontaktformular &amp; professionelle Bildergalerie</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Domain &amp; Hosting (1. Jahr inklusive)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> SSL-Zertifikat (HTTPS)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Erweitertes SEO Setup</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Google Business Profil Setup</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Impressum &amp; Datenschutz inklusive</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Professionelle E-Mail-Adresse</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> 1 Monat Wartung kostenlos (Wert: 39 €)</li>
+        </ul>
+        <a href="kontakt.html" class="btn btn--gold btn--full">Jetzt anfragen</a>
+      </article>
     </div>
-    <div class="faq-list">
-
-      <details class="faq-item" data-anim>
-        <summary>Was ist im Preis alles inbegriffen?</summary>
-        <div class="faq-body">
-          <p>Im Einmalpreis enthalten sind Design, Entwicklung, alle abgesprochenen Seiten, das Kontaktformular, Domain und Hosting für das erste Jahr, SSL-Zertifikat, Impressum &amp; Datenschutzseite sowie eine Basis-SEO-Optimierung. Kurz gesagt: alles, was du brauchst, um sofort professionell online zu sein. Keine versteckten Extras.</p>
-        </div>
-      </details>
-
-      <details class="faq-item" data-anim data-delay="1">
-        <summary>Gibt es laufende monatliche Kosten?</summary>
-        <div class="faq-body">
-          <p>Im ersten Jahr entstehen keine zusätzlichen Kosten – Domain und Hosting sind inklusive. Ab dem zweiten Jahr fällt eine kleine Hosting-Gebühr von ca. 15 €/Monat an. Das ist der einzige laufende Posten. Kein verstecktes Abo, keine Überraschungsrechnungen.</p>
-        </div>
-      </details>
-
-      <details class="faq-item" data-anim data-delay="2">
-        <summary>Wie lange dauert die Umsetzung?</summary>
-        <div class="faq-body">
-          <p>Nach unserem ersten Gespräch und deiner Freigabe des Konzepts beträgt die typische Umsetzungszeit 2–4 Wochen. Das hängt hauptsächlich davon ab, wie schnell wir gemeinsam Texte, Bilder und Rückmeldungen abstimmen können. Ich halte dich während des gesamten Prozesses auf dem Laufenden.</p>
-        </div>
-      </details>
-
-      <details class="faq-item" data-anim data-delay="3">
-        <summary>Kann ich meine Website später selbst bearbeiten?</summary>
-        <div class="faq-body">
-          <p>Das kommt auf die gewählte Lösung an. Wenn du Inhalte selbst pflegen möchtest, baue ich dir auf Wunsch ein einfaches Redaktionssystem ein. Alternativ – und das empfehlen die meisten meiner Kunden – übernehme ich die Pflege für dich. Das kostet oft weniger Zeit und Nerven als man denkt. Wir besprechen das gerne in unserem ersten Gespräch.</p>
-        </div>
-      </details>
-
-      <details class="faq-item" data-anim data-delay="4">
-        <summary>Was passiert, wenn ich nach dem Launch Änderungen brauche?</summary>
-        <div class="faq-body">
-          <p>Kleinere Anpassungen (Texte, Bilder, Öffnungszeiten) sind in den ersten Wochen nach dem Launch kostenfrei. Danach biete ich flexible Wartungspakete an – entweder stundenweise oder als monatliches Paket. Im Professionell-Paket ist bereits ein kostenloser Wartungsmonat enthalten. Du erreichst mich immer direkt per Telefon oder E-Mail.</p>
-        </div>
-      </details>
-
-    </div>
+    <p class="price-hint" data-reveal>Nicht sicher welches Paket passt? Kein Problem, schreib mir kurz. <a href="kontakt.html">Beratung anfragen →</a></p>
   </div>
 </section>
 
-<!-- ─── CTA ─── -->
-<section class="section cta-sec">
-  <div class="si">
-    <div class="cta-box">
-      <h2 data-anim>Noch Fragen offen?</h2>
-      <p data-anim data-delay="1">Ruf mich einfach an oder schreib mir – ich beantworte alle deine Fragen kostenlos und unverbindlich. Kein Verkaufsgespräch, sondern ehrliche Beratung.</p>
-      <a href="kontakt.html" class="btn btn-p" data-anim data-delay="2">Jetzt kostenlos anfragen →</a>
+<!-- FAQ -->
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <h2>Häufige Fragen</h2>
+      <p>Alles, was du vor dem Start wissen möchtest.</p>
     </div>
-  </div>
-</section>
-
-<footer>
-  <div class="fi">
-    <div class="ft">
-      <div class="fb">
-        <a href="index.html" class="logo">
-          <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3L26 23H2L14 3Z" fill="#C9A84C"/><path d="M8 23L14 12L20 23" fill="#0f1628" opacity=".35"/></svg>
-          <span class="logo-t"><span class="w">Kaiserstuhl</span><span class="g">Digital</span></span>
-        </a>
-        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell und aus der Region.</p>
+    <div class="faq" data-reveal>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Was ist im Preis alles inbegriffen?<span class="faq-ic" aria-hidden="true"></span></button>
+        <div class="faq-panel"><div class="faq-panel__in">Design, Entwicklung, alle abgesprochenen Seiten, Kontaktformular, Domain &amp; Hosting für das erste Jahr, SSL, Impressum &amp; Datenschutz, Basis-SEO. Alles was du brauchst um sofort professionell online zu sein. Keine versteckten Extras.</div></div>
       </div>
-      <div class="fl"><h4>Navigation</h4><a href="leistungen.html">Leistungen</a><a href="preise.html">Preise</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a></div>
-      <div class="fl"><h4>Rechtliches</h4><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
-      <div class="fl"><h4>Kontakt</h4><a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><a href="tel:+4915153522586">+49 1515 3522586</a></div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Gibt es laufende monatliche Kosten?<span class="faq-ic" aria-hidden="true"></span></button>
+        <div class="faq-panel"><div class="faq-panel__in">Im ersten Jahr entstehen keine zusätzlichen Kosten: Domain und Hosting sind inklusive. Ab dem zweiten Jahr fällt eine Hosting-Gebühr von ca. 15 €/Monat an. Kein verstecktes Abo, keine Überraschungsrechnungen.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Wie lange dauert die Umsetzung?<span class="faq-ic" aria-hidden="true"></span></button>
+        <div class="faq-panel"><div class="faq-panel__in">Nach dem ersten Gespräch und deiner Freigabe beträgt die typische Umsetzungszeit 2 bis 4 Wochen. Das hängt hauptsächlich davon ab, wie schnell wir Texte, Bilder und Rückmeldungen abstimmen können. Ich halte dich während des gesamten Prozesses auf dem Laufenden.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Kann ich meine Website später selbst bearbeiten?<span class="faq-ic" aria-hidden="true"></span></button>
+        <div class="faq-panel"><div class="faq-panel__in">Auf Wunsch baue ich dir ein einfaches Redaktionssystem ein. Alternativ, und das empfehlen die meisten meiner Kunden, übernehme ich die Pflege. Das kostet oft weniger Zeit und Nerven als man denkt. Wir besprechen das im ersten Gespräch.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Was passiert wenn ich nach dem Launch Änderungen brauche?<span class="faq-ic" aria-hidden="true"></span></button>
+        <div class="faq-panel"><div class="faq-panel__in">Kleine Anpassungen in den ersten Wochen nach Launch sind kostenfrei. Danach gibt es flexible Wartungspakete, stundenweise oder monatlich. Im Professionell-Paket ist bereits ein kostenloser Monat enthalten. Du erreichst mich immer direkt per Telefon oder E-Mail.</div></div>
+      </div>
     </div>
-    <div class="fc"><p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p><p>Made with ♥ in Teningen</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-band">
+  <div class="wrap">
+    <div class="cta-band__box" data-reveal>
+      <h2>Noch Fragen offen?</h2>
+      <p>Ruf einfach an oder schreib mir. Ich beantworte alles kostenlos und unverbindlich.</p>
+      <a href="kontakt.html" class="btn btn--gold btn--lg">Jetzt kostenlos anfragen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="logo-text"><span>Kaiserstuhl</span><span class="g"> Digital</span></a>
+        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell, aus der Region.</p>
+      </div>
+      <nav class="footer__col" aria-label="Footer Navigation">
+        <h4>Navigation</h4>
+        <a href="leistungen.html">Leistungen</a>
+        <a href="preise.html">Preise</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Kontakt</h4>
+        <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a>
+        <a href="tel:+4915153522586">+49 1515 3522586</a>
+        <span>Teningen, Baden-Württemberg</span>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p>
+      <p>Made with ♥ in Teningen</p>
+    </div>
   </div>
 </footer>
 
-<script>
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('[data-anim]').forEach(el => {
-  if(el.dataset.delay) el.style.animationDelay = (Number(el.dataset.delay) * 0.15) + 's';
-  obs.observe(el);
-});
-window.addEventListener('scroll', () => { document.querySelector('nav').classList.toggle('scrolled', scrollY > 20); }, { passive: true });
-const hbg = document.getElementById('hbg'), mob = document.getElementById('mob');
-let open = false;
-hbg.addEventListener('click', () => {
-  open = !open; mob.classList.toggle('open', open);
-  const s = hbg.querySelectorAll('span');
-  if(open){ s[0].style.transform='rotate(45deg) translate(5px,5px)'; s[1].style.opacity='0'; s[2].style.transform='rotate(-45deg) translate(5px,-5px)'; }
-  else { s.forEach(x => { x.style.transform=''; x.style.opacity=''; }); }
-});
-function closeMob(){ open=false; mob.classList.remove('open'); hbg.querySelectorAll('span').forEach(x=>{x.style.transform='';x.style.opacity='';}); }
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="app.js" defer></script>
 </body>
 </html>
