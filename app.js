@@ -211,7 +211,7 @@
   /* ---------- CONTACT FORM: loading / success / error states ----------
      Set FORM_ENDPOINT to your real handler (Formspree id, /api/contact, etc.).
      Empty string = demo mode: simulates a successful send so the UX is visible. */
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formspree.io/f/xvznydkk';
   function initForm() {
     var form = $('#contact-form'); if (!form) return;
     var btn = $('button[type="submit"]', form);
