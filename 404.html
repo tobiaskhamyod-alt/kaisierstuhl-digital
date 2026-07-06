@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>document.documentElement.className='js';setTimeout(function(){var h=document.documentElement;if(h.dataset.animReady!=='1')h.classList.add('anim-fallback');},2200);</script>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link rel="apple-touch-icon" href="favicon.png"/>
+<meta name="theme-color" content="#0f1628"/>
+<title>Seite nicht gefunden | Kaiserstuhl Digital</title>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<!-- NAV -->
+<nav class="nav" aria-label="Hauptnavigation">
+  <a href="/" class="nav__logo" aria-label="Kaiserstuhl Digital - Startseite">
+    <img src="logo-final.png" alt="Kaiserstuhl Digital" width="176" height="120">
+  </a>
+  <ul class="nav__links">
+    <li><a href="/leistungen">Leistungen</a></li>
+    <li><a href="/preise">Preise</a></li>
+    <li><a href="/ueber-uns">Über uns</a></li>
+    <li><a href="/kontakt">Kontakt</a></li>
+  </ul>
+  <a href="/kontakt" class="nav__cta">Kostenlose Demo anfragen</a>
+  <button class="nav__burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Mobile Navigation">
+  <button class="drawer__close" aria-label="Menü schließen">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <a href="/leistungen">Leistungen</a>
+  <a href="/preise">Preise</a>
+  <a href="/ueber-uns">Über uns</a>
+  <a href="/kontakt">Kontakt</a>
+  <a href="/kontakt" class="drawer__cta">Kostenlose Demo anfragen</a>
+</aside>
+
+<main id="main">
+
+<header class="hero hero--sub">
+  <div class="hero__wash"></div>
+  <div class="hero__inner">
+    <h1 class="hero__title">Diese Seite gibt es <span class="accent">nicht.</span></h1>
+    <p class="hero__sub">Die Adresse ist falsch geschrieben oder die Seite wurde verschoben.</p>
+    <div class="hero__cta">
+      <a href="/" class="btn btn--gold btn--lg">Zur Startseite</a>
+      <a href="/kontakt" class="btn btn--ghost btn--lg">Kontakt</a>
+    </div>
+  </div>
+</header>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>

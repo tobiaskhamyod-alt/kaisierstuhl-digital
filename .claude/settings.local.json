@@ -24,7 +24,20 @@
       "Bash(pkill -f savelogo.py)",
       "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha \"logo.PNG\")",
       "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha favicon.png)",
-      "Bash(perl -i -pe 's{\\(<meta name=\"viewport\"[^>]*/>\\)}{$1\\\\n<link rel=\"icon\" type=\"image/png\" href=\"favicon.png\"/>\\\\n<link rel=\"apple-touch-icon\" href=\"favicon.png\"/>}' index.html leistungen.html preise.html ueber-uns.html kontakt.html impressum.html datenschutz.html)"
+      "Bash(perl -i -pe 's{\\(<meta name=\"viewport\"[^>]*/>\\)}{$1\\\\n<link rel=\"icon\" type=\"image/png\" href=\"favicon.png\"/>\\\\n<link rel=\"apple-touch-icon\" href=\"favicon.png\"/>}' index.html leistungen.html preise.html ueber-uns.html kontakt.html impressum.html datenschutz.html)",
+      "Bash(sips -g pixelWidth -g pixelHeight Portrait.png logo-final.png favicon.png)",
+      "Bash(sips --resampleWidth 860 -s format jpeg -s formatOptions 82 Portrait.png --out portrait.jpg)",
+      "Bash(sips --resampleHeight 120 logo-final.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight portrait.jpg logo-final.png)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 --virtual-time-budget=6000 --screenshot=/private/tmp/claude-501/-Users-tobiaskhamyod-Kaiserstuhl-Digital-Projekte---Dokumente-Kaiserstuhl-Digital-neu/fda111d8-0c9c-4f5e-b31e-ca0409879937/scratchpad/og.png file:///private/tmp/claude-501/-Users-tobiaskhamyod-Kaiserstuhl-Digital-Projekte---Dokumente-Kaiserstuhl-Digital-neu/fda111d8-0c9c-4f5e-b31e-ca0409879937/scratchpad/og.html)",
+      "Bash(sips -s format jpeg -s formatOptions 85 /private/tmp/claude-501/-Users-tobiaskhamyod-Kaiserstuhl-Digital-Projekte---Dokumente-Kaiserstuhl-Digital-neu/fda111d8-0c9c-4f5e-b31e-ca0409879937/scratchpad/og.png --out og-image.jpg)",
+      "Bash(git rm *)",
+      "Bash(python3 -)",
+      "Bash(python3 -c ' *)",
+      "Bash(GIT_EDITOR=true git rebase --continue)",
+      "Bash(cat .git/rebase-merge/msgnum)",
+      "Bash(cat .git/rebase-merge/end)",
+      "Bash(grep -rn *)"
     ]
   }
 }

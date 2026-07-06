@@ -18,14 +18,16 @@
     var nav = $('.nav');
     if (!nav) return;
 
-    // active link by current filename (works for .html and cleanUrls)
-    var path = location.pathname.replace(/\/$/, '/index.html');
-    var file = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+    // active link by current path (works for clean URLs and .html)
+    var norm = function (p) {
+      p = (p || '').split(/[?#]/)[0].replace(/\/+$/, '');
+      p = p.substring(p.lastIndexOf('/') + 1);
+      return (p || 'index').replace('.html', '');
+    };
+    var current = norm(location.pathname);
     $$('.nav__links a, .drawer a').forEach(function (a) {
-      var href = a.getAttribute('href') || '';
-      if (href && (href === file || href.replace('.html', '') === file.replace('.html', '')) && !a.classList.contains('nav__cta')) {
-        a.classList.add('is-active');
-      }
+      if (a.classList.contains('nav__cta') || a.classList.contains('drawer__cta')) return;
+      if (norm(a.getAttribute('href')) === current) a.classList.add('is-active');
     });
 
     // scrolled state via IntersectionObserver sentinel (no scroll listener)
@@ -88,8 +90,10 @@
     var title = $('.hero__title');
     if (!title) return;
     splitWords(title, 'word');
+    // opened in a background tab: rAF is frozen, so skip the intro and show content
+    if (document.hidden) { gsap.set(title.querySelectorAll('.word'), { y: 0, opacity: 1 }); return; }
     gsap.to(title.querySelectorAll('.word'), { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.05, delay: 0.15 });
-    var seq = ['.hero__sub', '.hero__cta', '.scroll-ind'];
+    var seq = ['.hero__sub', '.hero__cta'];
     seq.forEach(function (sel, i) {
       var el = $(sel); if (!el) return;
       gsap.from(el, { y: 22, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.5 + i * 0.14 });
@@ -209,8 +213,8 @@
   }
 
   /* ---------- CONTACT FORM: loading / success / error states ----------
-     Set FORM_ENDPOINT to your real handler (Formspree id, /api/contact, etc.).
-     Empty string = demo mode: simulates a successful send so the UX is visible. */
+     Formspree AJAX endpoint. Confirm the form once in the Formspree
+     dashboard so submissions are delivered to the linked inbox. */
   var FORM_ENDPOINT = 'https://formspree.io/f/xvznydkk';
   function initForm() {
     var form = $('#contact-form'); if (!form) return;
@@ -221,6 +225,7 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
       if (status) { status.textContent = ''; status.classList.remove('err'); }
       if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet...'; }
 
@@ -234,7 +239,6 @@
         }
       };
 
-      if (!FORM_ENDPOINT) { setTimeout(function () { done(true); }, 900); return; } // demo mode
       fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Accept': 'application/json' },

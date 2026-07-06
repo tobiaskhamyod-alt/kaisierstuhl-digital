@@ -6,11 +6,12 @@
 <script>document.documentElement.className='js';setTimeout(function(){var h=document.documentElement;if(h.dataset.animReady!=='1')h.classList.add('anim-fallback');},2200);</script>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
+<meta name="theme-color" content="#0f1628"/>
 <title>Preise &amp; Pakete: Webdesign ab 499 € | Kaiserstuhl Digital</title>
 <meta name="description" content="Transparente Webdesign-Preise für lokale Unternehmen in Emmendingen &amp; der Kaiserstuhl-Region. Starter ab 499 €, Professionell ab 749 €. Keine versteckten Kosten."/>
-<link rel="canonical" href="https://kaiserstuhl-digital.de/preise.html"/>
+<link rel="canonical" href="https://kaiserstuhl-digital.de/preise"/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://kaiserstuhl-digital.de/preise.html"/>
+<meta property="og:url" content="https://kaiserstuhl-digital.de/preise"/>
 <meta property="og:title" content="Preise &amp; Pakete: Webdesign ab 499 € | Kaiserstuhl Digital"/>
 <meta property="og:description" content="Transparente Webdesign-Preise für lokale Unternehmen in Emmendingen &amp; der Kaiserstuhl-Region. Starter ab 499 €, Professionell ab 749 €. Keine versteckten Kosten."/>
 <meta property="og:image" content="https://kaiserstuhl-digital.de/og-image.jpg"/>
@@ -25,29 +26,31 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Was ist im Preis alles inbegriffen?", "acceptedAnswer": { "@type": "Answer", "text": "Design, Entwicklung, alle abgesprochenen Seiten, Kontaktformular, Domain und Hosting für das erste Jahr, SSL, Impressum und Datenschutz, Basis-SEO. Alles was du brauchst um sofort professionell online zu sein. Keine versteckten Extras." } },
+    { "@type": "Question", "name": "Was ist im Preis alles inbegriffen?", "acceptedAnswer": { "@type": "Answer", "text": "Design, Entwicklung, alle abgesprochenen Seiten, Kontaktformular, Domain und Hosting für das erste Jahr, SSL, Impressum und Datenschutz, Basis-SEO. Alles, was du brauchst, um sofort professionell online zu sein. Keine versteckten Extras." } },
     { "@type": "Question", "name": "Gibt es laufende monatliche Kosten?", "acceptedAnswer": { "@type": "Answer", "text": "Im ersten Jahr entstehen keine zusätzlichen Kosten: Domain und Hosting sind inklusive. Ab dem zweiten Jahr fällt eine Hosting-Gebühr von ca. 15 Euro pro Monat an. Kein verstecktes Abo, keine Überraschungsrechnungen." } },
     { "@type": "Question", "name": "Wie lange dauert die Umsetzung?", "acceptedAnswer": { "@type": "Answer", "text": "Nach dem ersten Gespräch und deiner Freigabe beträgt die typische Umsetzungszeit 2 bis 4 Wochen. Das hängt hauptsächlich davon ab, wie schnell wir Texte, Bilder und Rückmeldungen abstimmen können." } },
     { "@type": "Question", "name": "Kann ich meine Website später selbst bearbeiten?", "acceptedAnswer": { "@type": "Answer", "text": "Auf Wunsch baue ich dir ein einfaches Redaktionssystem ein. Alternativ, und das empfehlen die meisten meiner Kunden, übernehme ich die Pflege. Wir besprechen das im ersten Gespräch." } },
-    { "@type": "Question", "name": "Was passiert wenn ich nach dem Launch Änderungen brauche?", "acceptedAnswer": { "@type": "Answer", "text": "Kleine Anpassungen in den ersten Wochen nach Launch sind kostenfrei. Danach gibt es flexible Wartungspakete, stundenweise oder monatlich. Im Professionell-Paket ist bereits ein kostenloser Monat enthalten." } }
+    { "@type": "Question", "name": "Was passiert, wenn ich nach dem Launch Änderungen brauche?", "acceptedAnswer": { "@type": "Answer", "text": "Kleine Anpassungen in den ersten Wochen nach Launch sind kostenfrei. Danach gibt es flexible Wartungspakete, stundenweise oder monatlich. Im Professionell-Paket ist bereits ein kostenloser Monat enthalten." } }
   ]
 }
 </script>
 </head>
 <body>
 
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
 <!-- NAV -->
 <nav class="nav" aria-label="Hauptnavigation">
-  <a href="index.html" class="nav__logo" aria-label="Kaiserstuhl Digital - Startseite">
-    <img src="logo-final.png" alt="Kaiserstuhl Digital" height="38">
+  <a href="/" class="nav__logo" aria-label="Kaiserstuhl Digital - Startseite">
+    <img src="logo-final.png" alt="Kaiserstuhl Digital" width="176" height="120">
   </a>
   <ul class="nav__links">
-    <li><a href="leistungen.html">Leistungen</a></li>
-    <li><a href="preise.html">Preise</a></li>
-    <li><a href="ueber-uns.html">Über uns</a></li>
-    <li><a href="kontakt.html">Kontakt</a></li>
+    <li><a href="/leistungen">Leistungen</a></li>
+    <li><a href="/preise">Preise</a></li>
+    <li><a href="/ueber-uns">Über uns</a></li>
+    <li><a href="/kontakt">Kontakt</a></li>
   </ul>
-  <a href="kontakt.html" class="nav__cta">Kostenlose Demo anfragen</a>
+  <a href="/kontakt" class="nav__cta">Kostenlose Demo anfragen</a>
   <button class="nav__burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer">
     <span></span><span></span><span></span>
   </button>
@@ -57,16 +60,17 @@
   <button class="drawer__close" aria-label="Menü schließen">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 6 6 18M6 6l12 12"/></svg>
   </button>
-  <a href="leistungen.html">Leistungen</a>
-  <a href="preise.html">Preise</a>
-  <a href="ueber-uns.html">Über uns</a>
-  <a href="kontakt.html">Kontakt</a>
-  <a href="kontakt.html" class="drawer__cta">Kostenlose Demo anfragen</a>
+  <a href="/leistungen">Leistungen</a>
+  <a href="/preise">Preise</a>
+  <a href="/ueber-uns">Über uns</a>
+  <a href="/kontakt">Kontakt</a>
+  <a href="/kontakt" class="drawer__cta">Kostenlose Demo anfragen</a>
 </aside>
+
+<main id="main">
 
 <!-- HERO -->
 <header class="hero hero--sub">
-  <div class="hero__bg" style="background-image:url('https://picsum.photos/seed/clear-architecture-dark/1920/1080')"></div>
   <div class="hero__wash"></div>
   <div class="hero__inner">
     <h1 class="hero__title">Transparente Preise. <span class="accent">Keine</span> <span class="accent">Überraschungen.</span></h1>
@@ -80,7 +84,7 @@
     <div class="price-grid">
       <article class="card price-card" data-reveal>
         <div class="price-name">Starter</div>
-        <div class="price-amount">499€ <span>einmalig</span></div>
+        <div class="price-amount">499&nbsp;€ <span>einmalig</span></div>
         <p class="price-note">+ ab 15 €/Monat Hosting ab dem 2. Jahr</p>
         <ul class="price-feats">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Website bis 5 Seiten</li>
@@ -92,13 +96,13 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Impressum &amp; Datenschutz inklusive</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Professionelle E-Mail-Adresse</li>
         </ul>
-        <a href="kontakt.html" class="btn btn--ghost btn--full">Jetzt anfragen</a>
+        <a href="/kontakt" class="btn btn--ghost btn--full">Kostenlose Demo anfragen</a>
       </article>
 
       <article class="card price-card is-feat" data-reveal data-delay="0.12">
         <div class="price-badge">Empfohlen</div>
         <div class="price-name">Professionell</div>
-        <div class="price-amount">749€ <span>einmalig</span></div>
+        <div class="price-amount">749&nbsp;€ <span>einmalig</span></div>
         <p class="price-note">+ ab 15 €/Monat Hosting ab dem 2. Jahr</p>
         <ul class="price-feats">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Website bis 10 Seiten</li>
@@ -112,10 +116,10 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> Professionelle E-Mail-Adresse</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4.5 4.5L19 7"/></svg> 1 Monat Wartung kostenlos (Wert: 39 €)</li>
         </ul>
-        <a href="kontakt.html" class="btn btn--gold btn--full">Jetzt anfragen</a>
+        <a href="/kontakt" class="btn btn--gold btn--full">Kostenlose Demo anfragen</a>
       </article>
     </div>
-    <p class="price-hint" data-reveal>Nicht sicher welches Paket passt? Kein Problem, schreib mir kurz. <a href="kontakt.html">Beratung anfragen →</a></p>
+    <p class="price-hint" data-reveal>Nicht sicher, welches Paket passt? Schreib mir kurz. <a href="/kontakt">Kostenlose Demo anfragen →</a></p>
   </div>
 </section>
 
@@ -129,7 +133,7 @@
     <div class="faq" data-reveal>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Was ist im Preis alles inbegriffen?<span class="faq-ic" aria-hidden="true"></span></button>
-        <div class="faq-panel"><div class="faq-panel__in">Design, Entwicklung, alle abgesprochenen Seiten, Kontaktformular, Domain &amp; Hosting für das erste Jahr, SSL, Impressum &amp; Datenschutz, Basis-SEO. Alles was du brauchst um sofort professionell online zu sein. Keine versteckten Extras.</div></div>
+        <div class="faq-panel"><div class="faq-panel__in">Design, Entwicklung, alle abgesprochenen Seiten, Kontaktformular, Domain &amp; Hosting für das erste Jahr, SSL, Impressum &amp; Datenschutz, Basis-SEO. Alles, was du brauchst, um sofort professionell online zu sein. Keine versteckten Extras.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Gibt es laufende monatliche Kosten?<span class="faq-ic" aria-hidden="true"></span></button>
@@ -144,7 +148,7 @@
         <div class="faq-panel"><div class="faq-panel__in">Auf Wunsch baue ich dir ein einfaches Redaktionssystem ein. Alternativ, und das empfehlen die meisten meiner Kunden, übernehme ich die Pflege. Das kostet oft weniger Zeit und Nerven als man denkt. Wir besprechen das im ersten Gespräch.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Was passiert wenn ich nach dem Launch Änderungen brauche?<span class="faq-ic" aria-hidden="true"></span></button>
+        <button class="faq-q" aria-expanded="false">Was passiert, wenn ich nach dem Launch Änderungen brauche?<span class="faq-ic" aria-hidden="true"></span></button>
         <div class="faq-panel"><div class="faq-panel__in">Kleine Anpassungen in den ersten Wochen nach Launch sind kostenfrei. Danach gibt es flexible Wartungspakete, stundenweise oder monatlich. Im Professionell-Paket ist bereits ein kostenloser Monat enthalten. Du erreichst mich immer direkt per Telefon oder E-Mail.</div></div>
       </div>
     </div>
@@ -156,39 +160,41 @@
   <div class="wrap">
     <div class="cta-band__box" data-reveal>
       <h2>Noch Fragen offen?</h2>
-      <p>Ruf einfach an oder schreib mir. Ich beantworte alles kostenlos und unverbindlich.</p>
-      <a href="kontakt.html" class="btn btn--gold btn--lg">Jetzt kostenlos anfragen →</a>
+      <p>Ruf an oder schreib mir. Die Beratung kostet nichts.</p>
+      <a href="/kontakt" class="btn btn--gold btn--lg">Kostenlose Demo anfragen</a>
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer class="footer">
   <div class="wrap">
     <div class="footer__grid">
       <div class="footer__brand">
-        <a href="index.html" class="logo-text"><span>Kaiserstuhl</span><span class="g"> Digital</span></a>
-        <p>Moderne Websites für lokale Unternehmen – persönlich, professionell, aus der Region.</p>
+        <a href="/" class="logo-text"><span>Kaiserstuhl</span><span class="g"> Digital</span></a>
+        <p>Moderne Websites für lokale Unternehmen am Kaiserstuhl.</p>
       </div>
       <nav class="footer__col" aria-label="Footer Navigation">
         <h4>Navigation</h4>
-        <a href="leistungen.html">Leistungen</a>
-        <a href="preise.html">Preise</a>
-        <a href="ueber-uns.html">Über uns</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
+        <a href="/leistungen">Leistungen</a>
+        <a href="/preise">Preise</a>
+        <a href="/ueber-uns">Über uns</a>
+        <a href="/kontakt">Kontakt</a>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
       </nav>
       <div class="footer__col">
         <h4>Kontakt</h4>
         <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a>
-        <a href="tel:+4915153522586">+49 1515 3522586</a>
+        <a href="tel:+4915115636367">+49 151 15636367</a>
         <span>Teningen, Baden-Württemberg</span>
       </div>
     </div>
     <div class="footer__bottom">
-      <p>© 2025 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p>
-      <p>Made with ♥ in Teningen</p>
+      <p>© 2026 Kaiserstuhl Digital. Alle Rechte vorbehalten.</p>
+      <p>Webdesign aus Teningen.</p>
     </div>
   </div>
 </footer>
