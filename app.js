@@ -82,7 +82,7 @@
     $$('[data-reveal]').forEach(function (e) { e.style.opacity = 1; e.style.transform = 'none'; });
     $$('.hero__title').forEach(function (h) { splitWords(h, 'word'); });
     $$('.hero__title .word').forEach(function (w) { w.style.opacity = 1; w.style.transform = 'none'; });
-    var line = $('.steps__line'); if (line) line.style.transform = 'scaleX(1)';
+    var path = $('.steps__path'); if (path) path.style.strokeDashoffset = 0;
   }
 
   /* ---------- HERO: word stagger on load ---------- */
@@ -193,12 +193,28 @@
       scrollTrigger: { trigger: '.region-badges', start: 'top 85%' } });
   }
 
-  /* ---------- KONTAKT: 3-step line draw + step pop ---------- */
+  /* ---------- 3-STEP PROCESS: ghost numerals + scroll-drawn connector ---------- */
   function initSteps() {
     var steps = $('.steps'); if (!steps) return;
-    var tl = gsap.timeline({ scrollTrigger: { trigger: steps, start: 'top 78%' } });
-    tl.from('.step', { y: 36, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.18 })
-      .fromTo('.steps__line', { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'power2.inOut' }, 0.2);
+
+    // steps + watermark numerals pop in together (one-shot)
+    gsap.from($$('.step', steps), {
+      y: 36, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.18,
+      scrollTrigger: { trigger: steps, start: 'top 80%' }
+    });
+    gsap.from($$('.step__ghost', steps), {
+      scale: 0.9, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.18,
+      scrollTrigger: { trigger: steps, start: 'top 80%' }
+    });
+
+    // connecting line: draw the SVG stroke as the section scrolls through (scrub)
+    var path = $('.steps__path', steps);
+    if (path) {
+      gsap.fromTo(path, { strokeDashoffset: 100 }, {
+        strokeDashoffset: 0, ease: 'none',
+        scrollTrigger: { trigger: steps, start: 'top 72%', end: 'bottom 60%', scrub: 0.6, invalidateOnRefresh: true }
+      });
+    }
   }
 
   /* ---------- card spotlight (pointer-follow glow) ---------- */

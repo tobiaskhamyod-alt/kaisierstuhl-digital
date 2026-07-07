@@ -244,6 +244,15 @@ h1, h2, h3, h4 { color: var(--t-1); font-weight: 700; letter-spacing: -.025em; l
 .hero__sub { max-width: 40rem; margin: 28px auto 0; font-size: clamp(17px, 2vw, 20px); color: var(--t-2); font-weight: 400; line-height: 1.6; }
 .hero__cta { margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
+/* primary gold CTA: slow, subtle glow breathing (opacity-only -> cheap repaint) */
+.hero__cta .btn--gold { position: relative; }
+.hero__cta .btn--gold::before {
+  content: ''; position: absolute; inset: -2px; z-index: -1; border-radius: inherit; pointer-events: none;
+  box-shadow: 0 0 42px 4px rgba(201,168,76,.5);
+  opacity: .3; animation: ctaGoldPulse 3.6s ease-in-out infinite;
+}
+@keyframes ctaGoldPulse { 0%, 100% { opacity: .26; } 50% { opacity: .82; } }
+
 /* sub-page hero (shorter) */
 .hero--sub { min-height: 72vh; }
 .hero--sub .hero__title { font-size: clamp(2.4rem, 4.8vw, 4.2rem); }
@@ -253,10 +262,12 @@ h1, h2, h3, h4 { color: var(--t-1); font-weight: 700; letter-spacing: -.025em; l
    ========================================================================== */
 .marquee { overflow: hidden; padding: 26px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(8,12,24,.4); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .marquee__track { display: flex; align-items: center; gap: 0; width: max-content; animation: marquee 36s linear infinite; }
-.marquee__item { font-size: 17px; font-weight: 500; color: var(--t-3); padding: 0 30px; white-space: nowrap; }
+.marquee__item { font-size: 17px; font-weight: 500; color: var(--t-3); padding: 0 30px; white-space: nowrap; transition: color .25s var(--ease), transform .25s var(--ease); }
 .marquee__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: .8; flex-shrink: 0; }
 @keyframes marquee { to { transform: translateX(-50%); } }
+/* pause the whole band on hover, then let the single word under the cursor light up gold */
 .marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee__item:hover { color: var(--gold); transform: translateY(-1px); }
 
 /* ==========================================================================
    BENTO GRID  (gapless: [A A B / A A B / C D D])
@@ -312,6 +323,10 @@ h1, h2, h3, h4 { color: var(--t-1); font-weight: 700; letter-spacing: -.025em; l
 .price-card { display: flex; flex-direction: column; padding: 40px; }
 .price-card.is-feat { border-color: rgba(201,168,76,.5); box-shadow: 0 0 0 1px rgba(201,168,76,.3), 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08); }
 .price-card.is-feat::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,.12), transparent 60%); pointer-events: none; }
+/* hover hierarchy: featured card leads (bigger lift + gold glow), others lift plainly */
+.price-card:not(.is-feat):hover { transform: translateY(-4px); border-color: var(--line-2); background: var(--glass-2); box-shadow: 0 18px 44px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06); }
+.price-card:not(.is-feat):hover::after { opacity: 0; }
+.price-card.is-feat:hover { transform: translateY(-6px); border-color: rgba(201,168,76,.6); box-shadow: 0 0 0 1px rgba(201,168,76,.45), 0 30px 72px rgba(0,0,0,.5), 0 0 48px rgba(201,168,76,.28), inset 0 1px 0 rgba(255,255,255,.1); }
 .price-badge { position: absolute; top: 22px; right: 24px; background: linear-gradient(135deg, var(--gold), var(--gold-lite)); color: var(--navy); font-size: 12.5px; font-weight: 700; letter-spacing: .03em; padding: 6px 14px; border-radius: var(--r-pill); }
 .price-name { font-size: 15px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--gold); }
 .price-amount { margin-top: 16px; font-size: 52px; font-weight: 800; color: #fff; letter-spacing: -.04em; line-height: 1; }
@@ -378,8 +393,14 @@ h1, h2, h3, h4 { color: var(--t-1); font-weight: 700; letter-spacing: -.025em; l
    KONTAKT
    ========================================================================== */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; position: relative; max-width: 940px; margin: 0 auto; }
-.steps__line { position: absolute; top: 27px; left: 12%; right: 12%; height: 2px; background: linear-gradient(90deg, var(--gold), rgba(201,168,76,.25)); transform: scaleX(0); transform-origin: left; z-index: 0; }
+/* connecting line: SVG stroke drawn on scroll via stroke-dashoffset (pathLength=100) */
+.steps__line { position: absolute; top: 24px; left: 12%; right: 12%; height: 6px; z-index: 0; overflow: visible; }
+.steps__path { fill: none; stroke: url(#stepLineGrad); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 0; filter: drop-shadow(0 0 4px rgba(201,168,76,.3)); }
+.no-js .steps__path, .anim-fallback .steps__path { stroke-dashoffset: 0 !important; }
 .step { position: relative; z-index: 1; text-align: center; }
+/* oversized watermark numeral behind each step */
+.step__ghost { position: absolute; inset: 0; z-index: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(100px, 13vw, 170px); font-weight: 900; line-height: 1; letter-spacing: -.04em; color: rgba(201,168,76,.07); pointer-events: none; user-select: none; }
+.step > .step__num, .step > h3, .step > p { position: relative; z-index: 1; }
 .step__num { width: 54px; height: 54px; margin: 0 auto 22px; border-radius: 50%; background: var(--navy); border: 2px solid var(--gold); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; box-shadow: 0 0 26px rgba(201,168,76,.25); }
 .step h3 { font-size: 19px; margin-bottom: 10px; }
 .step p { font-size: 15.5px; color: var(--t-3); max-width: 30ch; margin: 0 auto; }
@@ -492,6 +513,8 @@ textarea.form-control { resize: vertical; min-height: 120px; }
   .marquee__track { animation: none; }
   .service__media img { transform: scale(1) !important; }
   .scrub-text .w { opacity: 1 !important; }
-  .steps__line { transform: scaleX(1); }
+  .steps__path { stroke-dashoffset: 0 !important; }
+  .step__ghost { opacity: 1 !important; transform: none !important; }
+  .hero__cta .btn--gold::before { animation: none; }
   * { scroll-behavior: auto !important; }
 }

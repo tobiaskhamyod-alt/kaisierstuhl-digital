@@ -69,18 +69,29 @@
 <section class="section">
   <div class="wrap">
     <div class="steps">
-      <span class="steps__line" aria-hidden="true"></span>
+      <svg class="steps__line" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="stepLineGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#C9A84C" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="#C9A84C" stop-opacity="0.28"/>
+          </linearGradient>
+        </defs>
+        <line class="steps__path" x1="0" y1="3" x2="100" y2="3" pathLength="100"/>
+      </svg>
       <div class="step">
+        <span class="step__ghost" aria-hidden="true">1</span>
         <div class="step__num">1</div>
         <h3>Anfrage senden</h3>
         <p>Schreib mir kurz, wer du bist und was dein Betrieb macht.</p>
       </div>
       <div class="step">
+        <span class="step__ghost" aria-hidden="true">2</span>
         <div class="step__num">2</div>
         <h3>Demo &amp; Beratung</h3>
         <p>Du bekommst eine kostenlose Demo deiner neuen Website und wir besprechen, was du brauchst.</p>
       </div>
       <div class="step">
+        <span class="step__ghost" aria-hidden="true">3</span>
         <div class="step__num">3</div>
         <h3>Umsetzung &amp; Launch</h3>
         <p>In 2 bis 4 Wochen bist du online. Danach bleibe ich für dich da.</p>
