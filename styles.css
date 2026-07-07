@@ -346,7 +346,7 @@ h1, h2, h3, h4 { color: var(--t-1); font-weight: 700; letter-spacing: -.025em; l
 .service + .service { margin-top: clamp(90px, 11vw, 150px); }
 .service--rev .service__media { order: 2; }
 .service__media { position: relative; border-radius: var(--r-card); overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 70px rgba(0,0,0,.45); aspect-ratio: 4/3; }
-.service__media img { width: 100%; height: 100%; object-fit: cover; transform: scale(.85); will-change: transform; filter: grayscale(1) contrast(1.05); }
+.service__media img { width: 100%; height: 100%; object-fit: cover; transform: scale(.85); will-change: transform; }
 .service__media--gold::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,168,76,.42), rgba(15,22,40,.35)); mix-blend-mode: overlay; pointer-events: none; }
 .service__media::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 50%, rgba(10,15,30,.45)); pointer-events: none; }
 .service__body h2 { font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; margin-bottom: 20px; }
