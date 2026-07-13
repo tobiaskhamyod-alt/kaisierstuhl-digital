@@ -49,7 +49,11 @@
       "Bash(curl -sL https://kaiserstuhl-digital.de/robots.txt)",
       "Bash(curl -sL -o /dev/null -w \"HTTP %{http_code}  %{size_download} bytes\\\\n\" https://kaiserstuhl-digital.de/og-image.jpg)",
       "Bash(curl -sL https://kaiserstuhl-digital.de/)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git --no-pager diff)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.kaiserstuhl-digital.de/\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.kaiserstuhl-digital.de/styles.css\")",
+      "Bash(curl -sL -A \"Mozilla/5.0\" \"https://www.kaiserstuhl-digital.de/app.js\")"
     ]
   }
 }
