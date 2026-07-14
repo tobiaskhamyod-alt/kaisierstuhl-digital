@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script>document.documentElement.className='js';</script>
+<script>document.documentElement.className='js';setTimeout(function(){var h=document.documentElement;if(h.dataset.animReady!=='1')h.classList.add('anim-fallback');},2200);</script>
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
 <meta name="theme-color" content="#0f1628"/>
-<title>Impressum | Kaiserstuhl Digital</title>
-<meta name="description" content="Impressum von Kaiserstuhl Digital: Angaben gemäß § 5 TMG. Tobias Khamyod, Stockbrunnenstraße 1, 79331 Teningen."/>
-<link rel="canonical" href="https://www.kaiserstuhl-digital.de/impressum"/>
+<title>Beispiele: Live-Demos für lokale Unternehmen | Kaiserstuhl Digital</title>
+<meta name="description" content="Zwei Live-Demos zeigen, was für dein Unternehmen möglich ist. Beispielseiten für Handwerk und Dienstleister aus Emmendingen und der Kaiserstuhl-Region."/>
+<link rel="canonical" href="https://www.kaiserstuhl-digital.de/beispiele"/>
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://www.kaiserstuhl-digital.de/impressum"/>
-<meta property="og:title" content="Impressum | Kaiserstuhl Digital"/>
-<meta property="og:description" content="Impressum von Kaiserstuhl Digital: Angaben gemäß § 5 TMG."/>
+<meta property="og:url" content="https://www.kaiserstuhl-digital.de/beispiele"/>
+<meta property="og:title" content="Beispiele: Live-Demos für lokale Unternehmen | Kaiserstuhl Digital"/>
+<meta property="og:description" content="Zwei Live-Demos zeigen, was für dein Unternehmen möglich ist. Beispielseiten für Handwerk und Dienstleister aus Emmendingen und der Kaiserstuhl-Region."/>
+<meta property="og:image" content="https://www.kaiserstuhl-digital.de/og-image.jpg"/>
 <meta property="og:locale" content="de_DE"/>
 <meta property="og:site_name" content="Kaiserstuhl Digital"/>
-<meta name="robots" content="noindex, follow"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"/>
@@ -57,58 +58,48 @@
 
 <main id="main">
 
-<!-- PAGE HEAD -->
-<header class="page-head">
-  <div class="wrap">
-    <h1>Impressum</h1>
-    <p>Angaben gemäß § 5 TMG.</p>
+<!-- HERO -->
+<header class="hero hero--sub">
+  <div class="hero__wash"></div>
+  <div class="hero__inner">
+    <h1 class="hero__title">Sehen, was für dich <span class="accent">möglich ist.</span></h1>
+    <p class="hero__sub">Zwei Beispielseiten, gebaut wie echte Projekte, nur ohne echten Kunden dahinter.</p>
   </div>
 </header>
 
-<section class="section" style="padding-top:30px">
-  <div class="wrap legal-narrow">
+<!-- SHOWCASE -->
+<section class="section">
+  <div class="wrap">
+    <div class="showcase-grid">
 
-    <div class="legal-block">
-      <h2>Angaben gemäß § 5 TMG</h2>
-      <div class="imp-card">
-        <h3>Betreiber</h3>
-        <p>Tobias Khamyod<br>Stockbrunnenstraße 1<br>79331 Teningen</p>
-      </div>
-      <div class="imp-card">
-        <h3>Kontakt</h3>
-        <p>
-          Telefon: <a href="tel:+4915115636367">+49 151 15636367</a><br>
-          E-Mail: <a href="mailto:info@kaiserstuhl-digital.de">info@kaiserstuhl-digital.de</a><br>
-          Website: <a href="https://www.kaiserstuhl-digital.de" target="_blank" rel="noopener">kaiserstuhl-digital.de</a>
-        </p>
-      </div>
+      <!-- VOLTUM Elektrotechnik -->
+      <a class="card showcase-card" href="https://voltum-demo.vercel.app" target="_blank" rel="noopener" data-reveal>
+        <div class="showcase-card__media">
+          <img class="showcase-card__desktop" src="/assets/showcase-voltum-desktop.png" alt="Desktop-Ansicht der VOLTUM-Elektrotechnik-Demo mit Startseite und Notdienst-Hinweis" width="1600" height="1000" loading="lazy">
+          <img class="showcase-card__mobile" src="/assets/showcase-voltum-mobile.png" alt="Mobile Ansicht der VOLTUM-Elektrotechnik-Demo" width="640" height="1380" loading="lazy">
+          <span class="showcase-card__badge">Live-Demo ansehen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+        </div>
+        <div class="showcase-card__body">
+          <h3>VOLTUM Elektrotechnik</h3>
+          <p class="showcase-card__meta">Elektriker · 6 Seiten · Smart Home &amp; E-Mobilität</p>
+          <p class="showcase-card__desc">Mehrseitiger Auftritt mit eigenem Notdienst-Bereich und klarem Fokus auf Smart Home und E-Mobilität. Zeigt, wie ein Elektrobetrieb seine Spezialisierungen sichtbar macht, statt eine austauschbare Handwerker-Seite zu sein.</p>
+        </div>
+      </a>
+
+      <!-- Nächste Karte (z.B. Friseur-Demo): gleiches Markup, gleiche Klasse "card showcase-card" -->
+
     </div>
+  </div>
+</section>
 
-    <div class="legal-block">
-      <h2>Kleinunternehmerregelung gemäß § 19 UStG</h2>
-      <div class="imp-card">
-        <h3>Umsatzsteuer</h3>
-        <p>Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.</p>
-      </div>
+<!-- CTA -->
+<section class="section cta-band">
+  <div class="wrap">
+    <div class="cta-band__box" data-reveal>
+      <h2>Gefällt dir, was du siehst?</h2>
+      <p>Dann bauen wir dasselbe für dein Unternehmen, in deinem Stil und mit deinen Inhalten.</p>
+      <a href="/kontakt" class="btn btn--gold btn--lg">Kostenlose Demo anfragen</a>
     </div>
-
-    <div class="legal-block">
-      <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
-      <div class="imp-card">
-        <h3>Inhaltlich verantwortlich</h3>
-        <p>Tobias Khamyod<br>Stockbrunnenstraße 1<br>79331 Teningen</p>
-      </div>
-    </div>
-
-    <div class="legal-block">
-      <h2>Streitschlichtung</h2>
-      <div class="imp-card">
-        <h3>Online-Streitbeilegung</h3>
-        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>.</p>
-      </div>
-      <p style="margin-top:16px;font-size:15px;color:var(--t-4)">Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-    </div>
-
   </div>
 </section>
 
