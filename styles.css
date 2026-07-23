@@ -232,6 +232,10 @@ h1, h2, h3, h4 { color: var(--t-1); font-weight: 700; letter-spacing: -.025em; l
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .045;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+.hero__bg { position: absolute; inset: 0; z-index: 0;
+  background: url("/hero-bg.jpg") center 62% / cover no-repeat;
+  filter: saturate(.5) brightness(.32) contrast(1.08);
+}
 .hero__wash { position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
     radial-gradient(ellipse 60% 55% at 50% 42%, rgba(201,168,76,.13) 0%, transparent 60%),
