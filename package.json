@@ -17,11 +17,5 @@
   "bugs": {
     "url": "https://github.com/tobiaskhamyod-alt/kaisierstuhl-digital/issues"
   },
-  "homepage": "https://github.com/tobiaskhamyod-alt/kaisierstuhl-digital#readme",
-  "dependencies": {
-    "@google/model-viewer": "^4.3.1"
-  },
-  "devDependencies": {
-    "@gltf-transform/cli": "^4.4.1"
-  }
+  "homepage": "https://github.com/tobiaskhamyod-alt/kaisierstuhl-digital#readme"
 }
