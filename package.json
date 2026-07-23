@@ -1,0 +1,27 @@
+{
+  "name": "kaiserstuhl-digital-neu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobiaskhamyod-alt/kaisierstuhl-digital.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tobiaskhamyod-alt/kaisierstuhl-digital/issues"
+  },
+  "homepage": "https://github.com/tobiaskhamyod-alt/kaisierstuhl-digital#readme",
+  "dependencies": {
+    "@google/model-viewer": "^4.3.1"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.4.1"
+  }
+}

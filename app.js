@@ -100,6 +100,22 @@
     });
   }
 
+  /* ---------- HERO 3D ICON: camera-orbit azimuth tied to hero scroll progress ---------- */
+  function initHeroModel() {
+    var icon = $('#heroIcon'), hero = $('.hero');
+    if (!icon || !hero) return;
+    customElements.whenDefined('model-viewer').then(function () {
+      ScrollTrigger.create({
+        trigger: hero, start: 'top top', end: 'bottom top', scrub: true,
+        onUpdate: function (self) {
+          var azimuth = (self.progress * 360).toFixed(1);
+          icon.cameraOrbit = azimuth + 'deg 75deg 2.2m';
+          icon.jumpCameraToGoal();
+        }
+      });
+    });
+  }
+
   /* ---------- generic scroll reveal ---------- */
   function initReveal() {
     $$('[data-reveal]').forEach(function (el) {
@@ -270,6 +286,7 @@
     initForm();
     if (!hasGSAP || reduce) { revealAll(); initFAQ(); return; }
     initHero();
+    initHeroModel();
     initReveal();
     initBento();
     initPin();
