@@ -1,6 +1,6 @@
 /* ==========================================================================
    KAISERSTUHL DIGITAL - shared interactions + GSAP motion
-   GSAP + ScrollTrigger are loaded via CDN before this file (defer).
+   GSAP + ScrollTrigger are loaded locally from /vendor/gsap before this file (defer).
    Every animation is guarded so this one file runs on every page.
    ========================================================================== */
 (function () {

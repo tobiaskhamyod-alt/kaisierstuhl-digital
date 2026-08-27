@@ -1,7 +1,8 @@
 /* ==========================================================================
    KAISERSTUHL DIGITAL - Shared Design System
    Cinematic dark glassmorphism. Navy #0f1628 + Gold #C9A84C.
-   Type: Cabinet Grotesk (Fontshare). Motion: GSAP (loaded per page via CDN).
+   Type: Cabinet Grotesk (Fontshare, selbst gehostet unter /fonts).
+   Motion: GSAP (selbst gehostet unter /vendor/gsap, pro Seite eingebunden).
 
    Radius system (locked):
      - pill (980px): nav, buttons, badges, region chips  (interactive)
@@ -9,6 +10,53 @@
      - 12px:         form inputs, icon tiles
    Accent lock: gold #C9A84C only. Theme lock: dark navy, whole site.
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Webfonts - Cabinet Grotesk, selbst gehostet (Indian Type Foundry / Fontshare).
+   Lizenz: ITF Free Font License - Self-Hosting ausdruecklich gestattet.
+   Originaldateien unveraendert, kein Subsetting, keine Formatkonvertierung.
+   Gewichte wie zuvor via Fontshare-API: 400, 500, 700, 800, 900.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('/fonts/CabinetGrotesk-Regular.woff2') format('woff2'),
+       url('/fonts/CabinetGrotesk-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('/fonts/CabinetGrotesk-Medium.woff2') format('woff2'),
+       url('/fonts/CabinetGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('/fonts/CabinetGrotesk-Bold.woff2') format('woff2'),
+       url('/fonts/CabinetGrotesk-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('/fonts/CabinetGrotesk-Extrabold.woff2') format('woff2'),
+       url('/fonts/CabinetGrotesk-Extrabold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('/fonts/CabinetGrotesk-Black.woff2') format('woff2'),
+       url('/fonts/CabinetGrotesk-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
