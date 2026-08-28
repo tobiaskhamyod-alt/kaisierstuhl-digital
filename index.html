@@ -32,27 +32,48 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ProfessionalService",
+  "@id": "https://www.kaiserstuhl-digital.de/#organization",
   "name": "Kaiserstuhl Digital",
-  "description": "Professionelles Webdesign für lokale Unternehmen in Emmendingen, Teningen und der Kaiserstuhl-Region.",
+  "description": "Moderne Websites für lokale Unternehmen in der Region Emmendingen und am Kaiserstuhl.",
   "url": "https://www.kaiserstuhl-digital.de",
-  "image": "https://www.kaiserstuhl-digital.de/og-image.jpg",
-  "founder": { "@type": "Person", "name": "Tobias Khamyod" },
-  "telephone": "+4915115636367",
+  "logo": "https://www.kaiserstuhl-digital.de/logo-white.png",
+  "image": "https://www.kaiserstuhl-digital.de/logo-white.png",
   "email": "info@kaiserstuhl-digital.de",
+  "telephone": "+4915115636367",
+  "priceRange": "€€",
+  "knowsLanguage": "de-DE",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Stockbrunnenstraße 1",
-    "addressLocality": "Teningen",
     "postalCode": "79331",
+    "addressLocality": "Teningen",
+    "addressRegion": "Baden-Württemberg",
     "addressCountry": "DE"
   },
-  "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" }
+  "areaServed": [
+    { "@type": "City", "name": "Teningen" },
+    { "@type": "City", "name": "Emmendingen" },
+    { "@type": "City", "name": "Endingen am Kaiserstuhl" },
+    { "@type": "City", "name": "Waldkirch" },
+    { "@type": "City", "name": "Vogtsburg im Kaiserstuhl" },
+    { "@type": "City", "name": "Freiburg im Breisgau" }
   ],
-  "priceRange": "€€",
-  "areaServed": ["Emmendingen","Teningen","Breisach","Endingen","Vogtsburg","Freiburg im Breisgau"],
-  "serviceType": "Webdesign"
+  "sameAs": [
+    "https://maps.app.goo.gl/GH1cfzbkeYbiHW5WA",
+    "https://www.instagram.com/kaiserstuhl.digital"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Leistungen",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website-Erstellung" }, "price": "499", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mehrseitige Website" }, "price": "749", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website-Wartung" }, "price": "29", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website-Relaunch" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO" } }
+    ]
+  }
 }
 </script>
 </head>
