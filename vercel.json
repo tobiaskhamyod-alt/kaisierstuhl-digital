@@ -1,5 +1,9 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/beispiele", "destination": "/referenzen", "permanent": true },
+    { "source": "/beispiele.html", "destination": "/referenzen", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -621,3 +621,152 @@ textarea.form-control { resize: vertical; min-height: 120px; }
   .hero__cta .btn--gold::before { animation: none; }
   * { scroll-behavior: auto !important; }
 }
+
+/* ==========================================================================
+   NAV - fuenf Links brauchen bei voller Groesse 769px und passen damit erst
+   ab ~797px Viewport. Im Band 761-880px etwas enger stellen, damit die Leiste
+   bis zum Burger-Breakpoint (760px, siehe RESPONSIVE) einzeilig bleibt.
+   ========================================================================== */
+@media (max-width: 880px) and (min-width: 761px) {
+  .nav { padding-left: 16px; }
+  .nav__logo img { height: 46px; }
+  .nav__links { gap: 22px; }
+  .nav__links a { font-size: 14px; }
+  .nav__cta { font-size: 13.5px; padding: 10px 16px; }
+}
+
+/* ==========================================================================
+   REFERENZEN - Kartengrid (Kundenprojekt gross, Showcases darunter)
+   ========================================================================== */
+.ref-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.ref-grid > .is-lead { grid-column: 1 / -1; }
+.ref-grid > .is-lead .showcase-card__media { aspect-ratio: 21 / 9; }
+.ref-grid > .is-lead .showcase-card__body { padding: 46px 38px 36px; }
+.ref-grid > .is-lead .showcase-card__body h3 { font-size: 26px; }
+.ref-grid > .is-lead .showcase-card__desc { max-width: 62ch; }
+
+/* Badge-Varianten: Gold = echter Kunde, Glas = Beispielseite */
+.showcase-card__badge--demo {
+  background: rgba(8,12,24,.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--line-2);
+  color: var(--t-1);
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.showcase-card__note { margin-top: 14px; font-size: 13.5px; color: var(--t-4); }
+
+@media (max-width: 760px) {
+  .ref-grid { grid-template-columns: 1fr; }
+  .ref-grid > .is-lead .showcase-card__media { aspect-ratio: 16 / 10; }
+  .ref-grid > .is-lead .showcase-card__body { padding: 44px 26px 30px; }
+}
+
+/* ==========================================================================
+   CASE STUDY - Meta-Zeile, Textbloecke, Technik-Liste
+   ========================================================================== */
+.case-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+  margin-top: 30px;
+}
+.case-meta li {
+  list-style: none;
+  padding: 9px 20px; border-radius: var(--r-pill);
+  border: 1px solid rgba(201,168,76,.30); background: rgba(201,168,76,.06);
+  font-size: 14.5px; font-weight: 600; color: var(--t-1);
+}
+.case-meta li b { color: var(--gold); font-weight: 700; }
+
+.case-narrow { max-width: 760px; margin: 0 auto; }
+.case-block + .case-block { margin-top: clamp(56px, 7vw, 88px); }
+.case-block h2 { font-size: clamp(27px, 3.4vw, 38px); font-weight: 800; color: var(--t-1); margin-bottom: 20px; }
+.case-block p { font-size: 17.5px; color: var(--t-2); line-height: 1.75; }
+.case-block p + p { margin-top: 16px; }
+
+.case-steps { list-style: none; display: grid; gap: 18px; margin-top: 30px; }
+.case-steps li {
+  display: grid; grid-template-columns: 34px 1fr; gap: 18px; align-items: start;
+  padding-bottom: 18px; border-bottom: 1px solid var(--line);
+}
+.case-steps li:last-child { border-bottom: 0; padding-bottom: 0; }
+.case-steps b {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,.45); background: rgba(201,168,76,.08);
+  color: var(--gold); font-size: 14.5px; font-weight: 800;
+}
+.case-steps h3 { font-size: 18.5px; font-weight: 700; color: var(--t-1); margin-bottom: 6px; }
+.case-steps p { font-size: 16px; color: var(--t-3); line-height: 1.68; }
+
+.tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 32px; }
+.tech-grid .card { padding: 28px; }
+.tech-grid h3 { font-size: 18px; margin-bottom: 9px; }
+@media (max-width: 760px) { .tech-grid { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   SCREENSHOT-BLOCK - Browser-Rahmen + Phone-Rahmen (reines CSS)
+   ========================================================================== */
+.shot-stage { position: relative; max-width: 940px; margin: 0 auto; }
+
+.browser {
+  border-radius: var(--r-card); overflow: hidden;
+  border: 1px solid var(--line-2); background: rgba(8,12,24,.72);
+  box-shadow: 0 40px 90px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.browser__bar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 18px; border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.045);
+}
+.browser__dots { display: flex; gap: 7px; flex-shrink: 0; }
+.browser__dots i { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,.17); }
+.browser__url {
+  flex: 1; max-width: 300px; margin: 0 auto;
+  padding: 6px 18px; border-radius: var(--r-pill);
+  border: 1px solid var(--line); background: rgba(0,0,0,.26);
+  font-size: 13px; color: var(--t-3); text-align: center;
+}
+.browser__view { position: relative; max-height: 66vh; overflow: hidden; }
+.browser__view img { width: 100%; height: auto; }
+/* Fade nur bei Full-Page-Screenshots, die an der max-height abgeschnitten werden.
+   Die Klasse setzt app.js, sobald das Bild hoeher ist als sein Container.
+   Bei Viewport-Screenshots (Bild passt vollstaendig) bleibt der Verlauf weg. */
+.browser__view--clip::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 92px;
+  background: linear-gradient(180deg, rgba(15,22,40,0), rgba(15,22,40,.9));
+  pointer-events: none;
+}
+
+.phone {
+  position: absolute; right: -8px; bottom: -54px; z-index: 3;
+  width: 186px; border-radius: 30px; overflow: hidden;
+  border: 8px solid var(--navy-deep); background: var(--navy-deep);
+  box-shadow: 0 30px 64px rgba(0,0,0,.62), 0 0 0 1px rgba(201,168,76,.24);
+}
+.phone img { width: 100%; height: auto; border-radius: 22px; }
+
+.shot-cap { margin: 78px auto 0; max-width: 60ch; text-align: center; font-size: 15px; color: var(--t-4); }
+
+@media (max-width: 900px) {
+  .phone { width: 156px; bottom: -44px; right: 8px; }
+}
+@media (max-width: 767px) {
+  .browser__view { max-height: 58vh; }
+  .phone {
+    position: static; width: 186px; margin: 26px auto 0;
+    border-radius: 28px;
+  }
+  .shot-cap { margin-top: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-card__desktop,
+  .showcase-card:hover .showcase-card__desktop,
+  .showcase-card:hover .showcase-card__mobile { transform: none !important; }
+}

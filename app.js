@@ -217,6 +217,33 @@
     }
   }
 
+  /* ---------- CASE STUDY: Screenshot-Block (Rahmen rein, Handy mit Parallax) ---------- */
+  function initShot() {
+    var stage = $('[data-shot]'); if (!stage) return;
+    var browser = $('.browser', stage), phone = $('.phone', stage);
+    if (browser) {
+      gsap.from(browser, {
+        y: 48, opacity: 0, duration: 0.9, ease: 'power3.out',
+        scrollTrigger: { trigger: stage, start: 'top 82%' }
+      });
+    }
+    if (!phone) return;
+    gsap.from(phone, {
+      y: 70, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.15,
+      scrollTrigger: { trigger: stage, start: 'top 82%' }
+    });
+    // Tiefe zwischen den beiden Rahmen: das Handy laeuft langsamer als die Seite.
+    // Nur ab Tablet, darunter stehen die Bilder untereinander.
+    ScrollTrigger.matchMedia({
+      '(min-width: 768px)': function () {
+        gsap.fromTo(phone, { yPercent: 7 }, {
+          yPercent: -9, ease: 'none',
+          scrollTrigger: { trigger: stage, start: 'top bottom', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true }
+        });
+      }
+    });
+  }
+
   /* ---------- card spotlight (pointer-follow glow) ---------- */
   function initSpotlight() {
     $$('.card').forEach(function (card) {
@@ -263,11 +290,24 @@
     });
   }
 
+  /* ---------- Screenshot-Rahmen: Fade nur, wenn das Bild abgeschnitten wird ---------- */
+  function initShotClip() {
+    $$('.browser__view').forEach(function (view) {
+      var img = $('img', view); if (!img) return;
+      var check = function () {
+        view.classList.toggle('browser__view--clip', img.offsetHeight > view.clientHeight + 1);
+      };
+      if (img.complete) check(); else img.addEventListener('load', check);
+      window.addEventListener('resize', check);
+    });
+  }
+
   /* ---------- boot ---------- */
   function boot() {
     document.documentElement.dataset.animReady = '1'; // cancel the head failsafe
     initNav();
     initForm();
+    initShotClip();
     if (!hasGSAP || reduce) { revealAll(); initFAQ(); return; }
     initHero();
     initReveal();
@@ -277,6 +317,7 @@
     initFAQ();
     initRegion();
     initSteps();
+    initShot();
     initSpotlight();
     // Recover correct positions when a backgrounded tab becomes visible
     // (browsers freeze requestAnimationFrame while hidden).
