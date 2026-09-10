@@ -244,6 +244,19 @@
     });
   }
 
+  /* ---------- LEISTUNGEN: vollbreiter Bildstreifen mit langsamer Parallaxe ----------
+     Das Bild ist 118% hoch und um -9% versetzt, deshalb bleibt es bei +-6%
+     Versatz immer randlos. Nur gescrubbt, keine Dauerbewegung. */
+  function initBand() {
+    $$('[data-band]').forEach(function (band) {
+      var img = $('.band__img', band); if (!img) return;
+      gsap.fromTo(img, { yPercent: -6 }, {
+        yPercent: 6, ease: 'none',
+        scrollTrigger: { trigger: band, start: 'top bottom', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true }
+      });
+    });
+  }
+
   /* ---------- card spotlight (pointer-follow glow) ---------- */
   function initSpotlight() {
     $$('.card').forEach(function (card) {
@@ -318,6 +331,7 @@
     initRegion();
     initSteps();
     initShot();
+    initBand();
     initSpotlight();
     // Recover correct positions when a backgrounded tab becomes visible
     // (browsers freeze requestAnimationFrame while hidden).
