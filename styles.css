@@ -901,8 +901,8 @@ textarea.form-control { resize: vertical; min-height: 120px; }
    ========================================================================== */
 .footer { background: rgba(5,8,18,.92); border-top: 1px solid var(--line); padding: 64px 0 30px; }
 .footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1.2fr; gap: 40px; }
-.footer__brand .logo-text { display: inline-block; padding: 10px 0; font-family: var(--font-display); font-size: var(--fs-700); font-weight: 800; letter-spacing: -.02em; }
-.footer__brand .logo-text .g { color: var(--gold); }
+.footer__logo { display: inline-block; }
+.footer__logo img { height: 44px; width: auto; }
 .footer__brand p { margin-top: 16px; font-size: var(--fs-300); color: var(--t-3); max-width: 32ch; line-height: var(--lh-ui); }
 .footer__col h4 { font-size: var(--fs-100); letter-spacing: .08em; text-transform: uppercase; color: var(--t-4); margin-bottom: 18px; font-weight: 600; }
 .footer__col a, .footer__col span { display: block; font-size: var(--fs-300); color: var(--t-3); padding: 10px 0; transition: color var(--dur-fast); }
