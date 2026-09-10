@@ -491,6 +491,19 @@ h1, h2, h3, h4 {
 .price-hint a { color: var(--gold); font-weight: 600; }
 .price-hint a:hover { text-decoration: underline; }
 
+/* Uebernahme bestehender Websites: breiter Kasten unter den Wartungskarten,
+   auf der Breite des Preis-Grids, damit die Spalte nicht springt. */
+.price-takeover { max-width: 880px; margin: 30px auto 0; }
+.price-takeover p { max-width: var(--measure); }
+.price-takeover .btn { margin-top: 22px; }
+.price-fine { max-width: 880px; margin: 22px auto 0; text-align: center; font-size: var(--fs-200); color: var(--t-4); line-height: var(--lh-ui); }
+.price-fine + .price-fine { margin-top: 8px; }
+/* Laengeres Badge: unter 480px passt es nicht mehr neben den Paketnamen in die
+   Ecke, dort rueckt es deshalb in den Textfluss ueber den Namen. */
+@media (max-width: 480px) {
+  .price-badge--flow { position: static; align-self: flex-start; margin-bottom: 14px; }
+}
+
 /* ==========================================================================
    BEISPIELE - showcase cards (device-mockup pattern)
    ========================================================================== */
@@ -684,11 +697,17 @@ h1, h2, h3, h4 {
 .feat-grid li:nth-child(1), .feat-grid li:nth-child(2) { border-top: 0; }
 .feat-grid svg { width: 19px; height: 19px; color: var(--gold); flex-shrink: 0; margin-top: 3px; }
 
+/* Preishinweis unter dem Faktenraster, auf derselben Messbreite. */
+.feat-note { max-width: 880px; margin: 34px auto 0; }
+.feat-note p { font-size: var(--fs-400); color: var(--t-3); line-height: var(--lh-ui); max-width: var(--measure); }
+.feat-note .btn { margin-top: 20px; }
+
 /* wortweises Aufblenden, siehe ueber-uns */
 .scrub-text .w { opacity: .15; }
 
 @media (max-width: 700px) {
   .feat-grid { grid-template-columns: 1fr; max-width: 520px; }
+  .feat-note { max-width: 520px; }
   .feat-grid li:nth-child(2) { border-top: 1px solid var(--line); }
   /* Hochkant liegt der Text tiefer im Bild, deshalb faengt der Verlauf schon
      ab der Mitte an abzudunkeln, und der Streifen wird hoeher, damit ueber
@@ -842,6 +861,7 @@ textarea.form-control { resize: vertical; min-height: 120px; }
   .pin-wrap { grid-template-columns: 1fr; gap: 36px; }
   .price-grid { grid-template-columns: 1fr; max-width: 480px; }
   .price-card.is-feat { padding: 40px 32px; }
+  .price-takeover, .price-fine { max-width: 480px; }
   .service, .service--rev .service__media { grid-template-columns: 1fr; }
   .service--rev .service__media { order: 0; }
   .about, .region-split { grid-template-columns: 1fr; }

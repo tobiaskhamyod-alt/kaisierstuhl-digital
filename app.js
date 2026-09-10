@@ -269,6 +269,16 @@
     var success = $('#form-success');
     var btnLabel = btn ? btn.textContent : '';
 
+    // Paket aus der URL vorauswaehlen, z.B. /kontakt?paket=wartung-basis
+    var PAKETE = {
+      'wartung-basis': 'Wartung Basis (39 \u20ac/Monat)',
+      'wartung-plus': 'Wartung Plus (79 \u20ac/Monat)',
+      'bestehende-website': 'Bestehende Website \u00fcbernehmen (Check 99 \u20ac)'
+    };
+    var interest = $('#f-interest', form);
+    var paket = new URLSearchParams(location.search).get('paket');
+    if (interest && paket && PAKETE[paket]) interest.value = PAKETE[paket];
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
