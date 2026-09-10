@@ -216,15 +216,24 @@
       gsap.set(title.querySelectorAll('.word'), { y: 0, opacity: 1 });
       gsap.set(['.hero__sub', '.hero__cta'], { clearProps: 'all' });
     } else {
-      // Zeitbudget: das letzte Wort steht nach rund 0,95 s. Die H1 ist das
-      // LCP-Element, laenger darf der Auftritt nicht dauern.
+      // Auf Unterseiten liegt schon der Seitenuebergang auf dem Auftritt.
+      // Zwei Eingaenge hintereinander wirken zaeh, deshalb dort die kurze
+      // Fassung: kaum Verzoegerung, engerer Versatz.
+      var sub = title.closest('.hero--sub') !== null;
+      // Zeitbudget der Startseite: das letzte Wort steht nach rund 0,95 s.
+      // Die H1 ist das LCP-Element, laenger darf der Auftritt nicht dauern.
       gsap.to(title.querySelectorAll('.word'), {
-        y: 0, opacity: 1, duration: 0.7, ease: M.ease, stagger: 0.04, delay: 0.08
+        y: 0, opacity: 1, ease: M.ease,
+        duration: sub ? 0.5 : 0.7,
+        stagger: sub ? 0.03 : 0.04,
+        delay:   sub ? 0    : 0.08
       });
       ['.hero__sub', '.hero__cta'].forEach(function (sel, i) {
         var el = $(sel); if (!el) return;
-        gsap.from(el, { y: 18, opacity: 0, duration: M.base, ease: M.ease,
-          delay: 0.42 + i * 0.12, clearProps: 'transform' });
+        gsap.from(el, { y: 18, opacity: 0, ease: M.ease,
+          duration: sub ? 0.45 : M.base,
+          delay: (sub ? 0.22 : 0.42) + i * (sub ? 0.08 : 0.12),
+          clearProps: 'transform' });
       });
     }
 
@@ -372,8 +381,11 @@
       var shapes = $$('path, rect, circle, line', svg);
       if (!shapes.length) return;
       shapes.forEach(function (s) {
-        s.setAttribute('pathLength', '1');
-        gsap.set(s, { strokeDasharray: 1, strokeDashoffset: 1 });
+        // pathLength normiert jede Form auf dieselbe Laenge. 100 statt 1:
+        // GSAP rundet px-Werte, bei einer Spanne von 1 bliebe von der
+        // Zeichenbewegung nur ein Sprung von 1 auf 0 uebrig.
+        s.setAttribute('pathLength', '100');
+        gsap.set(s, { strokeDasharray: 100, strokeDashoffset: 100 });
       });
       gsap.to(shapes, {
         strokeDashoffset: 0, duration: 0.85, ease: M.easeUI, stagger: 0.09,
@@ -670,8 +682,8 @@
   function drawCheck() {
     var ic = $('#form-success .form-success__ic svg path');
     if (!ic || !hasGSAP || reduce) return;
-    ic.setAttribute('pathLength', '1');
-    gsap.fromTo(ic, { strokeDasharray: 1, strokeDashoffset: 1 },
+    ic.setAttribute('pathLength', '100');   // siehe initBento: 1 wuerde wegrunden
+    gsap.fromTo(ic, { strokeDasharray: 100, strokeDashoffset: 100 },
                     { strokeDashoffset: 0, duration: 0.55, ease: M.easeUI, delay: 0.12 });
     gsap.from('#form-success .form-success__ic', { scale: 0.7, opacity: 0, duration: M.base, ease: 'back.out(1.6)' });
   }
