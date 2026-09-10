@@ -79,14 +79,14 @@
 <section class="section">
   <div class="wrap">
     <div class="steps">
-      <svg class="steps__line" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <svg class="steps__line" viewBox="0 0 100 48" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="stepLineGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#C9A84C" stop-opacity="0.9"/>
-            <stop offset="1" stop-color="#C9A84C" stop-opacity="0.28"/>
+            <stop class="steps__stop steps__stop--from" offset="0"/>
+            <stop class="steps__stop steps__stop--to" offset="1"/>
           </linearGradient>
         </defs>
-        <line class="steps__path" x1="0" y1="3" x2="100" y2="3" pathLength="100"/>
+        <line class="steps__path" x1="0" y1="0" x2="100" y2="48" pathLength="100" vector-effect="non-scaling-stroke"/>
       </svg>
       <div class="step">
         <span class="step__ghost" aria-hidden="true">1</span>
@@ -115,7 +115,7 @@
   <div class="wrap">
     <div class="contact-grid">
       <div class="contact-info" data-reveal>
-        <h2 style="font-size:clamp(26px,3.2vw,38px);font-weight:800;margin-bottom:30px">Direkter Kontakt</h2>
+        <h2 class="contact-head">Direkter Kontakt</h2>
         <div class="contact-line">
           <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></div>
           <div>
