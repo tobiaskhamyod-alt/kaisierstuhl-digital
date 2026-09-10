@@ -137,18 +137,8 @@
     });
   }
 
-  /* ---------- LEISTUNGEN: image scale scrub + body word reveal ---------- */
+  /* ---------- body word reveal (ueber-uns) ---------- */
   function initServices() {
-    $$('.service__media img').forEach(function (img) {
-      gsap.fromTo(img, { scale: 0.85 }, {
-        scale: 1, ease: 'none',
-        scrollTrigger: { trigger: img, start: 'top 90%', end: 'center center', scrub: true }
-      });
-      gsap.to(img, {
-        opacity: 0.3, ease: 'none',
-        scrollTrigger: { trigger: img.closest('.service'), start: 'bottom 70%', end: 'bottom 30%', scrub: true }
-      });
-    });
     $$('.scrub-text').forEach(function (p) {
       splitWords(p, 'w');
       gsap.to(p.querySelectorAll('.w'), {

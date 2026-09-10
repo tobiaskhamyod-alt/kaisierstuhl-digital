@@ -599,31 +599,56 @@ h1, h2, h3, h4 {
 .faq-panel__in { padding: 0 4px 28px; max-width: var(--measure); color: var(--t-3); font-size: var(--fs-400); line-height: var(--lh-body); }
 
 /* ==========================================================================
-   LEISTUNGEN - service rows
-   ========================================================================== */
-.service { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 84px); align-items: center; }
-.service + .service { margin-top: var(--sp-section); }
-.service--rev .service__media { order: 2; }
-.service__media { position: relative; border-radius: var(--r-card); overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 70px rgba(0,0,0,.45); aspect-ratio: 4/3; }
-.service__media img { width: 100%; height: 100%; object-fit: cover; transform: scale(.85); will-change: transform; }
-.service__media--gold::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,168,76,.42), rgba(15,22,40,.35)); mix-blend-mode: overlay; pointer-events: none; }
-.service__media::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 50%, rgba(10,15,30,.45)); pointer-events: none; }
-.service__body h2 { font-size: var(--fs-1000); font-weight: 800; margin-bottom: 20px; }
-.service__body > p { font-size: var(--fs-600); color: var(--t-2); line-height: var(--lh-body); max-width: var(--measure); }
-.feat-list { list-style: none; margin-top: 28px; display: grid; gap: 13px; }
-.feat-list li { display: flex; gap: 12px; align-items: flex-start; font-size: var(--fs-400); color: var(--t-2); }
-.feat-list svg { width: 20px; height: 20px; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
-.scrub-text .w { opacity: .15; }
-
-/* ==========================================================================
-   LEISTUNGEN - Faktenraster und Bildstreifen
-   Die Seite bestand aus drei identischen Bild-Text-Splits mit je einer
-   6-7-zeiligen Hakenliste. Jetzt drei verschiedene Familien: Split mit Foto,
-   zentrierter Kopf mit Faktenraster, vollbreiter Bildstreifen.
+   LEISTUNGEN - Bildstreifen und Faktenraster
+   Alle drei Leistungen nutzen dieselbe Familie: vollbreiter Bildstreifen mit
+   Kopf darauf, darunter das zweispaltige Faktenraster.
    ========================================================================== */
 
-/* Faktenraster: zwei Spalten, Haarlinien nur zwischen den Zeilen, keine Kaesten.
-   Ersetzt die tiefe Einspaltenliste, ohne die Formulierungen anzufassen. */
+/* Vollbreiter Bildstreifen. Der Verlauf blendet oben UND unten nach
+   var(--navy) aus, damit das Foto aus der Seite auftaucht statt als Kachel
+   darauf zu liegen. Ohne die obere Blende sitzt an der Bildkante eine harte
+   waagerechte Naht. */
+.band {
+  position: relative; overflow: hidden;
+  min-height: clamp(400px, 48vw, 580px);
+  display: flex; align-items: flex-end;
+  margin-bottom: clamp(28px, 3.4vw, 48px);
+}
+.band__img {
+  position: absolute; left: 0; right: 0; top: -9%; z-index: 0;
+  width: 100%; height: 118%; object-fit: cover;
+  object-position: center var(--band-focus, 56%);
+  will-change: transform;
+}
+.band::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      var(--navy) 0%,
+      rgba(15,22,40,.82) 9%,
+      rgba(15,22,40,.40) 27%,
+      rgba(15,22,40,.42) 46%,
+      rgba(15,22,40,.88) 82%,
+      var(--navy) 100%),
+    linear-gradient(90deg, rgba(15,22,40,.78) 0%, rgba(15,22,40,.34) 52%, rgba(15,22,40,.08) 100%);
+}
+.band > .wrap { position: relative; z-index: 2; }
+.band__body { max-width: 54ch; padding-bottom: clamp(30px, 4vw, 52px); }
+.band__body h2 { font-size: var(--fs-1000); font-weight: 800; margin-bottom: 16px; }
+.band__body p { font-size: var(--fs-600); color: var(--t-2); line-height: var(--lh-body); }
+
+/* Bildausschnitt je Motiv, damit im schmalen Streifen das Motiv steht und
+   nicht Tischplatte oder Himmel. */
+.band--webdesign { --band-focus: 44%; }
+.band--hosting   { --band-focus: 62%; }
+.band--region    { --band-focus: 56%; }
+
+/* Das Serverbild ist im Original bunt-neon. Entsaettigt liegt es im
+   Navy-Gold-Raum der Marke wie die beiden anderen Motive. */
+.band--hosting .band__img { filter: saturate(.5) contrast(1.04); }
+
+/* Faktenraster: zwei Spalten, Haarlinien nur zwischen den Zeilen, keine
+   Kaesten. Ersetzt die tiefe Einspaltenliste. */
 .feat-grid {
   list-style: none;
   display: grid; grid-template-columns: repeat(2, 1fr);
@@ -638,39 +663,28 @@ h1, h2, h3, h4 {
 .feat-grid li:nth-child(1), .feat-grid li:nth-child(2) { border-top: 0; }
 .feat-grid svg { width: 19px; height: 19px; color: var(--gold); flex-shrink: 0; margin-top: 3px; }
 
-/* breiterer Lead fuer Sektionskoepfe mit laengerem Absatz */
-.sec-head--wide { max-width: 880px; }
-.sec-head--wide p { max-width: 62ch; }
-
-/* Vollbreiter Bildstreifen. Der Verlauf laeuft unten in var(--navy) aus,
-   damit das Foto in die Seite uebergeht statt als Kachel darauf zu liegen. */
-.band {
-  position: relative; overflow: hidden;
-  min-height: clamp(360px, 44vw, 520px);
-  display: flex; align-items: flex-end;
-  margin-bottom: clamp(28px, 3.4vw, 48px);
-}
-.band__img {
-  position: absolute; left: 0; right: 0; top: -9%; z-index: 0;
-  width: 100%; height: 118%; object-fit: cover; object-position: center 56%;
-  will-change: transform;
-}
-.band::after {
-  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(15,22,40,.58) 0%, rgba(15,22,40,.34) 30%, rgba(15,22,40,.90) 78%, var(--navy) 100%),
-    linear-gradient(90deg, rgba(15,22,40,.76) 0%, rgba(15,22,40,.34) 52%, rgba(15,22,40,.08) 100%);
-}
-.band > .wrap { position: relative; z-index: 2; }
-.band__body { max-width: 54ch; padding-bottom: clamp(30px, 4vw, 52px); }
-.band__body h2 { font-size: var(--fs-1000); font-weight: 800; margin-bottom: 16px; }
-.band__body p { font-size: var(--fs-600); color: var(--t-2); line-height: var(--lh-body); }
+/* wortweises Aufblenden, siehe ueber-uns */
+.scrub-text .w { opacity: .15; }
 
 @media (max-width: 700px) {
   .feat-grid { grid-template-columns: 1fr; max-width: 520px; }
   .feat-grid li:nth-child(2) { border-top: 1px solid var(--line); }
-  .band { min-height: 300px; }
+  /* Hochkant liegt der Text tiefer im Bild, deshalb faengt der Verlauf schon
+     ab der Mitte an abzudunkeln, und der Streifen wird hoeher, damit ueber
+     dem Text noch ein Bildfenster bleibt. */
+  .band { min-height: 440px; }
   .band__body { max-width: none; }
+  .band::after {
+    background:
+      linear-gradient(180deg,
+        var(--navy) 0%,
+        rgba(15,22,40,.84) 9%,
+        rgba(15,22,40,.46) 24%,
+        rgba(15,22,40,.80) 46%,
+        rgba(15,22,40,.94) 74%,
+        var(--navy) 100%),
+      linear-gradient(90deg, rgba(15,22,40,.55) 0%, rgba(15,22,40,.28) 100%);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .band__img { transform: none !important; }
