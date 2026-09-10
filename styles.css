@@ -347,6 +347,17 @@ h1, h2, h3, h4 {
    HERO - cinematic center
    ========================================================================== */
 .hero { position: relative; min-height: 100dvh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 150px 24px 90px; overflow: hidden; }
+/* Der Body-Glow ist viewport-fixiert (background-attachment: fixed) und reicht
+   bis etwa 47 Prozent Viewporthoehe. Hero-Wash und Hero-Bild enden in
+   deckendem Navy und schneiden diesen Glow an der Hero-Unterkante ab: eine
+   harte waagerechte Linie, die beim Scrollen mitwandert. Die Maske loest die
+   Unterkante auf, darunter steht unveraendert der Seitenhintergrund.
+   Der Ausblendbereich liegt unter den Hero-CTAs, Text wird nicht erfasst. */
+.hero {
+  -webkit-mask-image: linear-gradient(180deg, #000 93%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 93%, transparent 100%);
+}
+
 /* atmosphere: local gradients + grain instead of external hero photography */
 .hero::before {
   content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
@@ -604,30 +615,40 @@ h1, h2, h3, h4 {
    Kopf darauf, darunter das zweispaltige Faktenraster.
    ========================================================================== */
 
-/* Vollbreiter Bildstreifen. Der Verlauf blendet oben UND unten nach
-   var(--navy) aus, damit das Foto aus der Seite auftaucht statt als Kachel
-   darauf zu liegen. Ohne die obere Blende sitzt an der Bildkante eine harte
-   waagerechte Naht. */
+/* Vollbreiter Bildstreifen.
+   Wichtig: der Streifen darf NICHT in var(--navy) auslaufen. Der Body traegt
+   einen blauen Radial-Glow mit background-attachment: fixed, der am oberen
+   Viewportrand klebt. Deckendes Navy schneidet den Glow ab und erzeugt genau
+   an der Bildkante eine harte waagerechte Naht, die beim Scrollen mitwandert.
+   Deshalb liegen Bild und Tonung in .band__media und werden per mask-image
+   nach transparent ausgeblendet. Darunter bleibt der Seitenhintergrund
+   unveraendert stehen, egal was gerade dahinter liegt. */
 .band {
   position: relative; overflow: hidden;
   min-height: clamp(400px, 48vw, 580px);
   display: flex; align-items: flex-end;
   margin-bottom: clamp(28px, 3.4vw, 48px);
 }
+/* Die Maske sitzt auf dem statischen Wrapper, nicht auf dem Bild: das Bild
+   wird gescrubbt und wuerde seine Maske mitnehmen. */
+.band__media {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 87%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 17%, #000 87%, transparent 100%);
+}
 .band__img {
-  position: absolute; left: 0; right: 0; top: -9%; z-index: 0;
+  position: absolute; left: 0; right: 0; top: -9%;
   width: 100%; height: 118%; object-fit: cover;
   object-position: center var(--band-focus, 56%);
   will-change: transform;
 }
-.band::after {
-  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+.band__media::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
     linear-gradient(180deg,
-      var(--navy) 0%,
-      rgba(15,22,40,.82) 9%,
-      rgba(15,22,40,.40) 27%,
-      rgba(15,22,40,.42) 46%,
+      rgba(15,22,40,.90) 0%,
+      rgba(15,22,40,.44) 27%,
+      rgba(15,22,40,.46) 46%,
       rgba(15,22,40,.88) 82%,
       var(--navy) 100%),
     linear-gradient(90deg, rgba(15,22,40,.78) 0%, rgba(15,22,40,.34) 52%, rgba(15,22,40,.08) 100%);
@@ -674,12 +695,11 @@ h1, h2, h3, h4 {
      dem Text noch ein Bildfenster bleibt. */
   .band { min-height: 440px; }
   .band__body { max-width: none; }
-  .band::after {
+  .band__media::after {
     background:
       linear-gradient(180deg,
-        var(--navy) 0%,
-        rgba(15,22,40,.84) 9%,
-        rgba(15,22,40,.46) 24%,
+        rgba(15,22,40,.90) 0%,
+        rgba(15,22,40,.48) 24%,
         rgba(15,22,40,.80) 46%,
         rgba(15,22,40,.94) 74%,
         var(--navy) 100%),
