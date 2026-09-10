@@ -1,24 +1,117 @@
 /* ==========================================================================
    KAISERSTUHL DIGITAL - shared interactions + GSAP motion
-   GSAP + ScrollTrigger are loaded locally from /vendor/gsap before this file (defer).
-   Every animation is guarded so this one file runs on every page.
+
+   Ladereihenfolge pro Seite (alle defer):
+     /vendor/gsap/gsap.min.js
+     /vendor/gsap/ScrollTrigger.min.js
+     /vendor/gsap/SplitText.min.js   (nur Inhaltsseiten)
+     /vendor/lenis/lenis.min.js      (nur Inhaltsseiten)
+     app.js
+
+   Grundregel fuer jeden neuen Effekt: versteckte Anfangszustaende werden
+   ausschliesslich hier per GSAP gesetzt, nie in CSS. Ohne JS, ohne GSAP oder
+   bei prefers-reduced-motion existiert der Anfangszustand damit gar nicht
+   erst und kein Inhalt kann unsichtbar haengen bleiben. Die beiden Ausnahmen
+   sind die schon vorhandenen [data-reveal] und .hero__title .word - fuer die
+   greifen .no-js, .anim-fallback und revealAll().
    ========================================================================== */
 (function () {
   'use strict';
 
   var hasGSAP = typeof window.gsap !== 'undefined';
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine    = window.matchMedia('(pointer: fine)').matches;
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
   if (hasGSAP && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- NAV: active link + glass scroll state + mobile drawer ---------- */
+  /* ---------- MOTION-TOKENS ----------
+     Eine Leiter statt verstreuter Einzelwerte. Die Spiegelbilder in CSS
+     heissen --dur-fast / --dur-base / --dur-slow (siehe styles.css).
+       fast  Hover und Feedback, muss sofort antworten
+       base  Reveals beim Hereinscrollen
+       slow  Hero-Auftritt, der einzige Moment mit Laenge
+     Der Reveal-Versatz ist bewusst klein (14px): er soll als Aufblenden
+     gelesen werden, nicht als Sprung. */
+  var M = {
+    fast:    0.25,
+    base:    0.6,
+    slow:    0.95,
+    ease:    'power3.out',
+    easeUI:  'power2.out',
+    easeIO:  'power2.inOut',
+    stagger: 0.08,
+    scrub:   0.6,
+    y:       14,
+    start:   'top 88%'
+  };
+
+  var lenis = null;
+  var drawerOpen = false;
+  var clamp = function (v, max) { return Math.max(-max, Math.min(max, v)); };
+
+  /* Schriften first: Zeilenumbrueche stehen erst fest, wenn die Webfonts da
+     sind. Sonst splittet SplitText auf den Fallback-Umbruechen. */
+  function whenFontsReady(cb) {
+    var done = false, run = function () { if (!done) { done = true; cb(); } };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(run);
+      setTimeout(run, 1500);            // Sicherheitsnetz
+    } else { run(); }
+  }
+
+  /* ==========================================================================
+     SMOOTH SCROLL (Lenis)
+     Nur mit Maus/Trackpad und nur ohne reduced motion. Auf Touch bleibt das
+     native Scrollen - Lenis wuerde dort das Momentum des Systems ersetzen und
+     sich schlechter anfuehlen als das Original.
+     ========================================================================== */
+  function initLenis() {
+    if (typeof window.Lenis === 'undefined' || !fine || reduce) return;
+
+    lenis = new Lenis({ lerp: 0.1, smoothWheel: true, syncTouch: false, autoRaf: false });
+
+    // Lenis und ScrollTrigger muessen auf derselben Uhr laufen.
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    // schaltet html{scroll-behavior:smooth} ab, sonst kaempfen beide
+    document.documentElement.classList.add('has-lenis');
+
+    // Ankerlinks uebernehmen. lenis.scrollTo beachtet scroll-padding-top,
+    // der Nav-Versatz steht also weiterhin nur an einer Stelle (styles.css).
+    document.addEventListener('click', function (e) {
+      if (!lenis || e.defaultPrevented || e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || a.target === '_blank') return;
+
+      var href = a.getAttribute('href') || '';
+      if (href.indexOf('#') === -1) return;
+      var url;
+      try { url = new URL(a.href, location.href); } catch (err) { return; }
+      if (url.origin !== location.origin) return;
+      var norm = function (p) { return p.replace(/\/+$/, ''); };
+      if (norm(url.pathname) !== norm(location.pathname)) return;   // andere Seite: normal navigieren
+      if (!url.hash || url.hash === '#') return;
+      var target = document.getElementById(url.hash.slice(1));
+      if (!target) return;
+
+      e.preventDefault();
+      lenis.scrollTo(target);
+      history.pushState(null, '', url.hash);
+    });
+  }
+
+  /* ==========================================================================
+     NAV: aktiver Link, Glas-Zustand, Drawer
+     ========================================================================== */
   function initNav() {
     var nav = $('.nav');
     if (!nav) return;
 
-    // active link by current path (works for clean URLs and .html)
     var norm = function (p) {
       p = (p || '').split(/[?#]/)[0].replace(/\/+$/, '');
       p = p.substring(p.lastIndexOf('/') + 1);
@@ -30,7 +123,7 @@
       if (norm(a.getAttribute('href')) === current) a.classList.add('is-active');
     });
 
-    // scrolled state via IntersectionObserver sentinel (no scroll listener)
+    // Glas-Zustand ueber einen Sentinel statt ueber einen Scroll-Listener
     var sentinel = document.createElement('div');
     sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:24px;pointer-events:none;';
     document.body.appendChild(sentinel);
@@ -38,10 +131,10 @@
       nav.classList.toggle('scrolled', !e[0].isIntersecting);
     }, { threshold: 0 }).observe(sentinel);
 
-    // mobile drawer
     var burger = $('.nav__burger'), drawer = $('.drawer'), scrim = $('.scrim');
     function setOpen(open) {
       if (!drawer) return;
+      drawerOpen = open;
       drawer.classList.toggle('open', open);
       if (scrim) scrim.classList.toggle('open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -49,6 +142,9 @@
       if (open) { s[0].style.transform = 'translateY(7px) rotate(45deg)'; s[1].style.opacity = '0'; s[2].style.transform = 'translateY(-7px) rotate(-45deg)'; }
       else { s.forEach(function (x) { x.style.transform = ''; x.style.opacity = ''; }); }
       document.body.style.overflow = open ? 'hidden' : '';
+      if (lenis) { open ? lenis.stop() : lenis.start(); }
+      // bei offenem Drawer darf die Leiste nie wegfahren
+      if (open) nav.classList.remove('nav--away');
     }
     if (burger) burger.addEventListener('click', function () { setOpen(!drawer.classList.contains('open')); });
     if (scrim) scrim.addEventListener('click', function () { setOpen(false); });
@@ -57,7 +153,29 @@
     if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
   }
 
-  /* ---------- word splitter (keeps inline accent spans as their own word) ---------- */
+  /* ---------- NAV-Bewegung: Fortschrittslinie + Wegfahren beim Runterscrollen ----------
+     Die Linie sagt, wie weit die Seite noch geht. Das Wegfahren gibt beim
+     Lesen den oberen Rand frei und holt die Navigation zurueck, sobald man
+     hochscrollt, also sucht. Erst ab 400px, damit der Hero nichts flackert. */
+  function initNavMotion() {
+    var nav = $('.nav'); if (!nav) return;
+
+    gsap.to(nav, {
+      '--nav-progress': 1, ease: 'none',
+      scrollTrigger: { start: 0, end: 'max', scrub: 0.3 }
+    });
+
+    ScrollTrigger.create({
+      start: 400, end: 'max',
+      onUpdate: function (self) {
+        if (drawerOpen) { nav.classList.remove('nav--away'); return; }
+        nav.classList.toggle('nav--away', self.direction === 1);
+      },
+      onLeaveBack: function () { nav.classList.remove('nav--away'); }
+    });
+  }
+
+  /* ---------- Wortsplitter (haelt inline-Akzentspans als eigenes Wort) ---------- */
   function splitWords(el, cls) {
     if (!el || el.dataset.split) return;
     el.dataset.split = '1';
@@ -77,7 +195,7 @@
     nodes.forEach(function (n) { el.appendChild(n); });
   }
 
-  /* ---------- fallback: reveal everything if no motion / no GSAP ---------- */
+  /* ---------- Fallback: alles zeigen, wenn keine Bewegung / kein GSAP ---------- */
   function revealAll() {
     $$('[data-reveal]').forEach(function (e) { e.style.opacity = 1; e.style.transform = 'none'; });
     $$('.hero__title').forEach(function (h) { splitWords(h, 'word'); });
@@ -85,47 +203,226 @@
     var path = $('.steps__path'); if (path) path.style.strokeDashoffset = 0;
   }
 
-  /* ---------- HERO: word stagger on load ---------- */
+  /* ==========================================================================
+     HERO
+     ========================================================================== */
   function initHero() {
     var title = $('.hero__title');
     if (!title) return;
     splitWords(title, 'word');
-    // opened in a background tab: rAF is frozen, so skip the intro and show content
-    if (document.hidden) { gsap.set(title.querySelectorAll('.word'), { y: 0, opacity: 1 }); return; }
-    gsap.to(title.querySelectorAll('.word'), { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', stagger: 0.05, delay: 0.15 });
-    var seq = ['.hero__sub', '.hero__cta'];
-    seq.forEach(function (sel, i) {
-      var el = $(sel); if (!el) return;
-      gsap.from(el, { y: 22, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.5 + i * 0.14 });
+
+    // im Hintergrundtab friert rAF ein: Intro ueberspringen, Inhalt zeigen
+    if (document.hidden) {
+      gsap.set(title.querySelectorAll('.word'), { y: 0, opacity: 1 });
+      gsap.set(['.hero__sub', '.hero__cta'], { clearProps: 'all' });
+    } else {
+      // Zeitbudget: das letzte Wort steht nach rund 0,95 s. Die H1 ist das
+      // LCP-Element, laenger darf der Auftritt nicht dauern.
+      gsap.to(title.querySelectorAll('.word'), {
+        y: 0, opacity: 1, duration: 0.7, ease: M.ease, stagger: 0.04, delay: 0.08
+      });
+      ['.hero__sub', '.hero__cta'].forEach(function (sel, i) {
+        var el = $(sel); if (!el) return;
+        gsap.from(el, { y: 18, opacity: 0, duration: M.base, ease: M.ease,
+          delay: 0.42 + i * 0.12, clearProps: 'transform' });
+      });
+    }
+
+    // Beim Wegscrollen sinkt der Hero-Inhalt leicht ab und blendet aus,
+    // das Hintergrundbild zieht langsam auf. Zwei Ebenen, zwei Tempi.
+    var hero = $('.hero');
+    if (!hero || reduce) return;
+    var inner = $('.hero__inner', hero);
+    if (inner) {
+      gsap.to(inner, {
+        yPercent: -12, opacity: 0.25, ease: 'none',
+        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.4 }
+      });
+    }
+    var bg = $('.hero__bg', hero);
+    if (bg) {
+      gsap.fromTo(bg, { scale: 1 }, {
+        scale: 1.08, ease: 'none',
+        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.4 }
+      });
+    }
+  }
+
+  /* ==========================================================================
+     ABSCHNITTSUEBERSCHRIFTEN - Zeilen-Masken-Reveal (SplitText)
+     Die Zeile schiebt sich hinter ihrer eigenen Maske hervor. Ersetzt den
+     bisherigen Fade des ganzen Kopfblocks; der Absatz folgt versetzt.
+     ========================================================================== */
+  function collectHeadlines() {
+    var out = [];
+    $$('.sec-head').forEach(function (head) {
+      var h2 = $('h2', head); if (!h2) return;
+      head.removeAttribute('data-reveal');    // dieser Block gehoert ab jetzt uns
+      out.push({ h2: h2, p: $('p', head) });
+    });
+    $$('.band__body h2, .case-block h2, .about__body h2, h2.contact-head').forEach(function (h2) {
+      if (h2.hasAttribute('data-reveal') || h2.closest('[data-reveal]')) return;
+      out.push({ h2: h2, p: null });
+    });
+    return out;
+  }
+
+  function hideHeadlines(items) {
+    items.forEach(function (it) {
+      gsap.set(it.h2, { opacity: 0 });
+      if (it.p) gsap.set(it.p, { opacity: 0, y: M.y });
     });
   }
 
-  /* ---------- generic scroll reveal ---------- */
-  function initReveal() {
-    $$('[data-reveal]').forEach(function (el) {
-      var d = parseFloat(el.dataset.delay || 0);
-      gsap.to(el, {
-        y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', delay: d,
-        scrollTrigger: { trigger: el, start: 'top 88%' }
+  function buildHeadlines(items) {
+    if (typeof SplitText === 'undefined') {          // Plugin fehlt: schlicht aufblenden
+      items.forEach(function (it) {
+        gsap.to([it.h2, it.p].filter(Boolean), {
+          opacity: 1, y: 0, duration: M.base, ease: M.ease, stagger: 0.1,
+          scrollTrigger: { trigger: it.h2, start: M.start, once: true }
+        });
+      });
+      return;
+    }
+    items.forEach(function (it) {
+      SplitText.create(it.h2, {
+        type: 'lines', mask: 'lines', autoSplit: true, linesClass: 'sline',
+        onSplit: function (self) {
+          gsap.set(it.h2, { opacity: 1 });
+          // Nach dem ersten Durchlauf nur noch den Endzustand herstellen -
+          // autoSplit teilt bei Resize neu, das darf nicht neu animieren.
+          if (it.done) {
+            gsap.set(self.lines, { yPercent: 0 });
+            if (it.p) gsap.set(it.p, { opacity: 1, y: 0 });
+            return;
+          }
+          var tl = gsap.timeline({
+            scrollTrigger: { trigger: it.h2, start: M.start, once: true },
+            onComplete: function () { it.done = true; }
+          });
+          tl.from(self.lines, { yPercent: 108, duration: M.base, ease: M.ease, stagger: M.stagger });
+          if (it.p) tl.to(it.p, { opacity: 1, y: 0, duration: M.base, ease: M.ease }, '-=0.38');
+          return tl;
+        }
       });
     });
   }
 
-  /* ---------- BENTO: stack in from below ---------- */
-  function initBento() {
-    var grid = $('.bento'); if (!grid) return;
-    gsap.from(grid.children, {
-      y: 64, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1,
-      scrollTrigger: { trigger: grid, start: 'top 80%' }
+  /* ==========================================================================
+     GENERISCHES SCROLL-REVEAL
+     clearProps + Attribut entfernen: danach gehoert das Element wieder dem
+     CSS, sonst blockiert das inline-transform jeden :hover-Lift.
+     ========================================================================== */
+  function initReveal() {
+    $$('[data-reveal]').forEach(function (el) {
+      var d = parseFloat(el.dataset.delay || 0);
+      gsap.to(el, {
+        y: 0, opacity: 1, duration: M.base, ease: M.ease, delay: d,
+        scrollTrigger: { trigger: el, start: M.start },
+        onComplete: function () {
+          el.removeAttribute('data-reveal');
+          gsap.set(el, { clearProps: 'transform,opacity' });
+        }
+      });
     });
   }
 
-  /* ---------- PINNED "WARUM" (desktop only) ---------- */
+  /* ---------- vom CSS gesetzter Startversatz auf den Token ziehen ---------- */
+  function tuneRevealOffset() {
+    $$('[data-reveal]').forEach(function (el) { gsap.set(el, { y: M.y }); });
+  }
+
+  /* ==========================================================================
+     MAGNETISCHE BUTTONS
+     Nur die beiden Hauptaktionen, nur mit Maus. quickTo haelt die Bewegung
+     ausserhalb des Renderzyklus, der Ausschlag ist auf 7px gedeckelt, damit
+     der Button seine Trefferflaeche nie verlaesst.
+     ========================================================================== */
+  function initMagnetic() {
+    if (!fine || reduce) return;
+    $$('.btn--gold, .nav__cta').forEach(function (el) {
+      var xTo = gsap.quickTo(el, 'x', { duration: 0.45, ease: 'power3.out' });
+      var yTo = gsap.quickTo(el, 'y', { duration: 0.45, ease: 'power3.out' });
+      var onMove = function (e) {
+        var r = el.getBoundingClientRect();
+        xTo(clamp((e.clientX - r.left - r.width / 2) * 0.3, 7));
+        yTo(clamp((e.clientY - r.top - r.height / 2) * 0.5, 7));
+      };
+      var onLeave = function () { xTo(0); yTo(0); };
+      el.addEventListener('pointermove', onMove);
+      el.addEventListener('pointerleave', onLeave);
+      el.addEventListener('blur', onLeave);
+    });
+  }
+
+  /* ==========================================================================
+     BENTO: Karten stapeln sich herein, die Icons zeichnen ihre Linien
+     pathLength=1 normiert jede Form, damit dasarray/dashoffset fuer path,
+     rect, circle und line gleich funktioniert.
+     ========================================================================== */
+  function initBento() {
+    var grid = $('.bento'); if (!grid) return;
+    gsap.from(grid.children, {
+      y: 44, opacity: 0, duration: M.base, ease: M.ease, stagger: 0.1,
+      scrollTrigger: { trigger: grid, start: 'top 80%' },
+      clearProps: 'transform'
+    });
+
+    $$('.bento .icon-tile svg').forEach(function (svg) {
+      var shapes = $$('path, rect, circle, line', svg);
+      if (!shapes.length) return;
+      shapes.forEach(function (s) {
+        s.setAttribute('pathLength', '1');
+        gsap.set(s, { strokeDasharray: 1, strokeDashoffset: 1 });
+      });
+      gsap.to(shapes, {
+        strokeDashoffset: 0, duration: 0.85, ease: M.easeUI, stagger: 0.09,
+        scrollTrigger: { trigger: svg.closest('.card'), start: 'top 85%', once: true }
+      });
+    });
+  }
+
+  /* ==========================================================================
+     MARQUEE: GSAP-Schleife, die auf das Scrolltempo hoert
+     Die Spur enthaelt den Inhalt doppelt, -50% ist genau eine Runde.
+     ========================================================================== */
+  function initMarquee() {
+    var track = $('.marquee__track'); if (!track) return;
+    var band = track.parentElement;
+
+    track.style.animation = 'none';               // CSS-Schleife abloesen
+    var loop = gsap.to(track, { xPercent: -50, duration: 36, ease: 'none', repeat: -1 });
+    var setSpeed = gsap.quickTo(loop, 'timeScale', { duration: 0.6, ease: M.easeUI });
+    var calmTimer = null, dir = 1;
+
+    ScrollTrigger.create({
+      trigger: band, start: 'top bottom', end: 'bottom top',
+      onUpdate: function (self) {
+        var v = self.getVelocity();
+        if (v !== 0) dir = v < 0 ? -1 : 1;
+        setSpeed(dir * gsap.utils.clamp(1, 4, 1 + Math.abs(v) / 900));
+        clearTimeout(calmTimer);
+        calmTimer = setTimeout(function () { setSpeed(dir); }, 180);   // wieder beruhigen
+      },
+      // ausserhalb des Viewports steht die Dauerbewegung still
+      onToggle: function (self) { self.isActive ? loop.play() : loop.pause(); }
+    });
+    if (!ScrollTrigger.isInViewport(band)) loop.pause();
+
+    if (fine) {
+      band.addEventListener('mouseenter', function () { loop.pause(); });
+      band.addEventListener('mouseleave', function () { if (ScrollTrigger.isInViewport(band)) loop.play(); });
+    }
+  }
+
+  /* ---------- gepinnte "Warum"-Spalte (nur Desktop) ---------- */
   function initPin() {
     var wrap = $('.pin-wrap'); if (!wrap) return;
     var cards = $$('.pin-right .value-card');
-    gsap.from(cards, { y: 60, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12,
-      scrollTrigger: { trigger: '.pin-right', start: 'top 82%' } });
+    gsap.from(cards, {
+      y: 40, opacity: 0, duration: M.base, ease: M.ease, stagger: 0.12,
+      scrollTrigger: { trigger: '.pin-right', start: 'top 82%' }, clearProps: 'transform'
+    });
 
     ScrollTrigger.matchMedia({
       '(min-width: 961px)': function () {
@@ -137,7 +434,7 @@
     });
   }
 
-  /* ---------- body word reveal (ueber-uns) ---------- */
+  /* ---------- wortweises Aufblenden (ueber-uns) ---------- */
   function initServices() {
     $$('.scrub-text').forEach(function (p) {
       splitWords(p, 'w');
@@ -148,7 +445,7 @@
     });
   }
 
-  /* ---------- FAQ: GSAP height accordion ---------- */
+  /* ---------- FAQ-Akkordeon (einzige Stelle, die Hoehe animiert) ---------- */
   function initFAQ() {
     var items = $$('.faq-item'); if (!items.length) return;
     items.forEach(function (item) {
@@ -158,17 +455,17 @@
         items.forEach(function (other) {
           if (other !== item && other.classList.contains('open')) {
             other.classList.remove('open');
-            gsap.to($('.faq-panel', other), { height: 0, duration: 0.45, ease: 'power2.inOut' });
+            gsap.to($('.faq-panel', other), { height: 0, duration: 0.45, ease: M.easeIO });
             $('.faq-q', other).setAttribute('aria-expanded', 'false');
           }
         });
         if (isOpen) {
           item.classList.remove('open');
-          gsap.to(panel, { height: 0, duration: 0.45, ease: 'power2.inOut' });
+          gsap.to(panel, { height: 0, duration: 0.45, ease: M.easeIO });
           q.setAttribute('aria-expanded', 'false');
         } else {
           item.classList.add('open');
-          gsap.to(panel, { height: inner.offsetHeight, duration: 0.5, ease: 'power2.out',
+          gsap.to(panel, { height: inner.offsetHeight, duration: 0.5, ease: M.easeUI,
             onComplete: function () { panel.style.height = 'auto'; } });
           q.setAttribute('aria-expanded', 'true');
         }
@@ -176,65 +473,170 @@
     });
   }
 
-  /* ---------- REGION badges: stagger pop-in ---------- */
+  /* ---------- Region-Chips ---------- */
   function initRegion() {
     var chips = $$('.region-chip'); if (!chips.length) return;
-    gsap.from(chips, { scale: 0.6, opacity: 0, duration: 0.6, ease: 'back.out(1.7)', stagger: 0.07,
-      scrollTrigger: { trigger: '.region-badges', start: 'top 85%' } });
+    gsap.from(chips, {
+      scale: 0.6, opacity: 0, duration: M.base, ease: 'back.out(1.7)', stagger: 0.07,
+      scrollTrigger: { trigger: '.region-badges', start: 'top 85%' }, clearProps: 'transform'
+    });
   }
 
-  /* ---------- 3-STEP PROCESS: ghost numerals + scroll-drawn connector ---------- */
+  /* ---------- 3 Schritte: Ziffern + gezeichnete Verbindungslinie ---------- */
   function initSteps() {
     var steps = $('.steps'); if (!steps) return;
 
-    // steps + watermark numerals pop in together (one-shot)
     gsap.from($$('.step', steps), {
-      y: 36, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.18,
-      scrollTrigger: { trigger: steps, start: 'top 80%' }
+      y: 30, opacity: 0, duration: M.base, ease: M.ease, stagger: 0.18,
+      scrollTrigger: { trigger: steps, start: 'top 80%' }, clearProps: 'transform'
     });
     gsap.from($$('.step__ghost', steps), {
-      scale: 0.9, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.18,
-      scrollTrigger: { trigger: steps, start: 'top 80%' }
+      scale: 0.9, opacity: 0, duration: M.slow, ease: M.ease, stagger: 0.18,
+      scrollTrigger: { trigger: steps, start: 'top 80%' }, clearProps: 'transform'
     });
 
-    // connecting line: draw the SVG stroke as the section scrolls through (scrub)
     var path = $('.steps__path', steps);
     if (path) {
       gsap.fromTo(path, { strokeDashoffset: 100 }, {
         strokeDashoffset: 0, ease: 'none',
-        scrollTrigger: { trigger: steps, start: 'top 72%', end: 'bottom 60%', scrub: 0.6, invalidateOnRefresh: true }
+        scrollTrigger: { trigger: steps, start: 'top 72%', end: 'bottom 60%', scrub: M.scrub, invalidateOnRefresh: true }
       });
     }
   }
 
-  /* ---------- CASE STUDY: Screenshot-Block (Rahmen rein, Handy mit Parallax) ---------- */
-  function initShot() {
-    var stage = $('[data-shot]'); if (!stage) return;
-    var browser = $('.browser', stage), phone = $('.phone', stage);
-    if (browser) {
-      gsap.from(browser, {
-        y: 48, opacity: 0, duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: stage, start: 'top 82%' }
-      });
+  /* ==========================================================================
+     BILDKARTEN: Clip-Reveal von unten, Bild laeuft dabei auf Groesse
+     Gilt fuer die Referenzleiste (Startseite) und das Showcase-Grid
+     (/referenzen). Ein Effekt, zwei Orte, damit die Seiten zusammengehoeren.
+     ========================================================================== */
+  function clipReveal(media, img) {
+    if (!media) return;
+    gsap.set(media, { clipPath: 'inset(0% 0% 100% 0%)' });
+    var tl = gsap.timeline({ scrollTrigger: { trigger: media, start: 'top 86%', once: true } });
+    tl.to(media, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.85, ease: M.ease });
+    if (img) {
+      gsap.set(img, { scale: 1.12 });
+      tl.to(img, { scale: 1, duration: 1.1, ease: M.ease, clearProps: 'transform' }, 0);
     }
-    if (!phone) return;
-    gsap.from(phone, {
-      y: 70, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.15,
-      scrollTrigger: { trigger: stage, start: 'top 82%' }
+    tl.set(media, { clearProps: 'clipPath' });
+  }
+
+  function initProof() {
+    $$('.proof-card').forEach(function (card) {
+      clipReveal($('.proof-card__media', card), $('.proof-card__media img', card));
     });
-    // Tiefe zwischen den beiden Rahmen: das Handy laeuft langsamer als die Seite.
-    // Nur ab Tablet, darunter stehen die Bilder untereinander.
+    if (!fine || reduce) return;
+
+    // leichtes Kippen zur Maus, maximal 4 Grad
+    $$('.proof-card').forEach(function (card) {
+      var rx = gsap.quickTo(card, 'rotationX', { duration: 0.5, ease: 'power3.out' });
+      var ry = gsap.quickTo(card, 'rotationY', { duration: 0.5, ease: 'power3.out' });
+      gsap.set(card, { transformPerspective: 900 });
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        rx(((r.top + r.height / 2 - e.clientY) / r.height) * 8);
+        ry(((e.clientX - r.left - r.width / 2) / r.width) * 8);
+      });
+      card.addEventListener('pointerleave', function () { rx(0); ry(0); });
+    });
+  }
+
+  function initShowcase() {
+    var cards = $$('.showcase-card'); if (!cards.length) return;
+    cards.forEach(function (card, i) {
+      clipReveal($('.showcase-card__media', card), $('.showcase-card__desktop', card));
+    });
+    if (reduce) return;
+    // Das Handy laeuft langsamer als der Desktop-Screenshot dahinter.
     ScrollTrigger.matchMedia({
       '(min-width: 768px)': function () {
-        gsap.fromTo(phone, { yPercent: 7 }, {
-          yPercent: -9, ease: 'none',
-          scrollTrigger: { trigger: stage, start: 'top bottom', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true }
+        $$('.showcase-card__mobile').forEach(function (phone) {
+          gsap.fromTo(phone, { yPercent: 6 }, {
+            yPercent: -8, ease: 'none',
+            scrollTrigger: { trigger: phone.closest('.showcase-card'), start: 'top bottom', end: 'bottom top', scrub: M.scrub, invalidateOnRefresh: true }
+          });
         });
       }
     });
   }
 
-  /* ---------- LEISTUNGEN: vollbreiter Bildstreifen mit langsamer Parallaxe ----------
+  /* ==========================================================================
+     PREISKARTEN: gestaffelt herein, das empfohlene Paket bekommt einmal
+     einen Lichtschweif am Rand. Einmal, nicht im Takt - ein Dauerpuls zieht
+     Aufmerksamkeit, ohne etwas zu sagen.
+     ========================================================================== */
+  function initPrices() {
+    var feat = $('.price-card.is-feat'); if (!feat) return;
+
+    var sheen = document.createElement('span');
+    sheen.className = 'sheen';
+    sheen.setAttribute('aria-hidden', 'true');
+    feat.appendChild(sheen);                 // nur im Bewegungsfall ueberhaupt vorhanden
+
+    gsap.timeline({ scrollTrigger: { trigger: feat, start: 'top 78%', once: true } })
+      .set(sheen, { opacity: 1 })
+      .fromTo(sheen, { backgroundPosition: '220% 0' },
+                     { backgroundPosition: '-120% 0', duration: 1.5, ease: 'power2.inOut' })
+      .to(sheen, { opacity: 0, duration: 0.3 }, '-=0.3');
+  }
+
+  /* ==========================================================================
+     CTA-BAND: der goldene Glow folgt der Maus. Auf Touch atmet er langsam,
+     aber nur solange das Band im Bild ist.
+     ========================================================================== */
+  function initCtaGlow() {
+    var box = $('.cta-band__box'); if (!box || reduce) return;
+
+    if (fine) {
+      var setX = gsap.quickSetter(box, '--gx', '%');
+      var setY = gsap.quickSetter(box, '--gy', '%');
+      box.addEventListener('pointermove', function (e) {
+        var r = box.getBoundingClientRect();
+        setX(((e.clientX - r.left) / r.width) * 100);
+        setY(((e.clientY - r.top) / r.height) * 100);
+      });
+      box.addEventListener('pointerleave', function () {
+        gsap.to(box, { '--gx': '50%', '--gy': '0%', duration: 0.8, ease: M.easeUI });
+      });
+      return;
+    }
+
+    var breathe = gsap.to(box, {
+      '--gy': '22%', duration: 3.6, ease: 'sine.inOut',
+      yoyo: true, repeat: -1, paused: true
+    });
+    ScrollTrigger.create({
+      trigger: box, start: 'top bottom', end: 'bottom top',
+      onToggle: function (self) { self.isActive ? breathe.play() : breathe.pause(); }
+    });
+  }
+
+  /* ---------- Case Study: Screenshot-Block mit Tiefe ---------- */
+  function initShot() {
+    var stage = $('[data-shot]'); if (!stage) return;
+    var browser = $('.browser', stage), phone = $('.phone', stage);
+    if (browser) {
+      gsap.from(browser, {
+        y: 36, opacity: 0, duration: M.slow, ease: M.ease,
+        scrollTrigger: { trigger: stage, start: 'top 82%' }, clearProps: 'transform'
+      });
+    }
+    if (!phone) return;
+    gsap.from(phone, {
+      y: 50, opacity: 0, duration: M.slow, ease: M.ease, delay: 0.15,
+      scrollTrigger: { trigger: stage, start: 'top 82%' }
+    });
+    ScrollTrigger.matchMedia({
+      '(min-width: 768px)': function () {
+        gsap.fromTo(phone, { yPercent: 7 }, {
+          yPercent: -9, ease: 'none',
+          scrollTrigger: { trigger: stage, start: 'top bottom', end: 'bottom top', scrub: M.scrub, invalidateOnRefresh: true }
+        });
+      }
+    });
+  }
+
+  /* ---------- Leistungen: vollbreiter Bildstreifen mit langsamer Parallaxe ----------
      Das Bild ist 118% hoch und um -9% versetzt, deshalb bleibt es bei +-6%
      Versatz immer randlos. Nur gescrubbt, keine Dauerbewegung. */
   function initBand() {
@@ -242,13 +644,14 @@
       var img = $('.band__img', band); if (!img) return;
       gsap.fromTo(img, { yPercent: -6 }, {
         yPercent: 6, ease: 'none',
-        scrollTrigger: { trigger: band, start: 'top bottom', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true }
+        scrollTrigger: { trigger: band, start: 'top bottom', end: 'bottom top', scrub: M.scrub, invalidateOnRefresh: true }
       });
     });
   }
 
-  /* ---------- card spotlight (pointer-follow glow) ---------- */
+  /* ---------- Karten-Spotlight (Glanz folgt dem Zeiger) ---------- */
   function initSpotlight() {
+    if (!fine) return;
     $$('.card').forEach(function (card) {
       card.addEventListener('pointermove', function (e) {
         var r = card.getBoundingClientRect();
@@ -258,10 +661,31 @@
     });
   }
 
-  /* ---------- CONTACT FORM: loading / success / error states ----------
-     Formspree AJAX endpoint. Confirm the form once in the Formspree
-     dashboard so submissions are delivered to the linked inbox. */
+  /* ==========================================================================
+     KONTAKTFORMULAR: Zustaende + gestaffeltes Einblenden + gezeichnetes Haekchen
+     Formspree AJAX-Endpunkt.
+     ========================================================================== */
   var FORM_ENDPOINT = 'https://formspree.io/f/xvznydkk';
+
+  function drawCheck() {
+    var ic = $('#form-success .form-success__ic svg path');
+    if (!ic || !hasGSAP || reduce) return;
+    ic.setAttribute('pathLength', '1');
+    gsap.fromTo(ic, { strokeDasharray: 1, strokeDashoffset: 1 },
+                    { strokeDashoffset: 0, duration: 0.55, ease: M.easeUI, delay: 0.12 });
+    gsap.from('#form-success .form-success__ic', { scale: 0.7, opacity: 0, duration: M.base, ease: 'back.out(1.6)' });
+  }
+
+  function initFormMotion() {
+    var form = $('#contact-form'); if (!form) return;
+    var rows = $$('.form-row, button[type="submit"]', form);
+    if (!rows.length) return;
+    gsap.from(rows, {
+      y: M.y, opacity: 0, duration: M.base, ease: M.ease, stagger: 0.07,
+      scrollTrigger: { trigger: form, start: 'top 85%' }, clearProps: 'transform'
+    });
+  }
+
   function initForm() {
     var form = $('#contact-form'); if (!form) return;
     var btn = $('button[type="submit"]', form);
@@ -269,11 +693,10 @@
     var success = $('#form-success');
     var btnLabel = btn ? btn.textContent : '';
 
-    // Paket aus der URL vorauswaehlen, z.B. /kontakt?paket=wartung-basis
     var PAKETE = {
-      'wartung-basis': 'Wartung Basis (39 \u20ac/Monat)',
-      'wartung-plus': 'Wartung Plus (79 \u20ac/Monat)',
-      'bestehende-website': 'Bestehende Website \u00fcbernehmen (Check 99 \u20ac)'
+      'wartung-basis': 'Wartung Basis (39 €/Monat)',
+      'wartung-plus': 'Wartung Plus (79 €/Monat)',
+      'bestehende-website': 'Bestehende Website übernehmen (Check 99 €)'
     };
     var interest = $('#f-interest', form);
     var paket = new URLSearchParams(location.search).get('paket');
@@ -288,7 +711,7 @@
       var done = function (ok) {
         if (ok) {
           form.classList.add('is-hidden');
-          if (success) success.classList.remove('is-hidden');
+          if (success) { success.classList.remove('is-hidden'); drawCheck(); }
         } else {
           if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
           if (status) { status.classList.add('err'); status.textContent = 'Es gab einen Fehler. Bitte schreib mir direkt an info@kaiserstuhl-digital.de'; }
@@ -315,26 +738,47 @@
     });
   }
 
-  /* ---------- boot ---------- */
+  /* ==========================================================================
+     BOOT
+     ========================================================================== */
   function boot() {
-    document.documentElement.dataset.animReady = '1'; // cancel the head failsafe
+    document.documentElement.dataset.animReady = '1';   // Head-Failsafe abbestellen
     initNav();
     initForm();
     initShotClip();
+
     if (!hasGSAP || reduce) { revealAll(); initFAQ(); return; }
+
+    initLenis();
+    tuneRevealOffset();
+
+    // Ueberschriften sofort verstecken, damit zwischen jetzt und fonts.ready
+    // nichts aufblitzt. Gebaut wird erst, wenn die Schriften stehen.
+    var heads = collectHeadlines();
+    hideHeadlines(heads);
+    whenFontsReady(function () { buildHeadlines(heads); ScrollTrigger.refresh(); });
+
     initHero();
+    initNavMotion();
     initReveal();
     initBento();
+    initMarquee();
     initPin();
     initServices();
     initFAQ();
     initRegion();
     initSteps();
+    initProof();
+    initShowcase();
+    initPrices();
+    initCtaGlow();
     initShot();
     initBand();
     initSpotlight();
-    // Recover correct positions when a backgrounded tab becomes visible
-    // (browsers freeze requestAnimationFrame while hidden).
+    initMagnetic();
+    initFormMotion();
+
+    // Im Hintergrundtab friert rAF ein; beim Zurueckwechseln neu vermessen.
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden && window.ScrollTrigger) ScrollTrigger.refresh();
     });

@@ -68,6 +68,12 @@
   font-display: swap;
 }
 
+/* Typisiert, damit der Browser sie sauber interpolieren kann statt sie als
+   Zeichenkette zu behandeln. */
+@property --nav-progress { syntax: '<number>';     inherits: false; initial-value: 0; }
+@property --gx           { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
+@property --gy           { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -97,7 +103,19 @@
   --r-card: 20px;
   --r-sm:   12px;
 
+  /* ----- MOTION-TOKENS -----
+     Eine Leiter fuer alle Dauern. Die Namen spiegeln die JS-Konstante M oben
+     in app.js, damit CSS-Hover und GSAP-Reveals dieselbe Sprache sprechen.
+       fast  Hover und Feedback, muss sofort antworten      -> M.fast
+       ui    Karten, Panels, Drawer
+       base  Reveals beim Hereinscrollen                    -> M.base
+       slow  Hero und lange Auftritte                       -> M.slow */
+  --dur-fast: .25s;
+  --dur-ui:   .45s;
+  --dur-base: .6s;
+  --dur-slow: .95s;
   --ease: cubic-bezier(.16,1,.3,1);
+  --ease-ui: cubic-bezier(.33,1,.68,1);
   --wrap: 1200px;
 
   /* ----- SCHRIFT -----
@@ -151,6 +169,9 @@
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+/* Lenis uebernimmt das Scrollen. Beide gleichzeitig kaempfen um dieselbe
+   Position und erzeugen ein Nachziehen bei jedem Ankersprung. */
+html.has-lenis { scroll-behavior: auto; }
 
 body {
   font-family: var(--font-text);
@@ -209,6 +230,11 @@ h1, h2, h3, h4 {
 .sec-head h2 { font-size: var(--fs-1000); font-weight: 800; }
 .sec-head p { max-width: var(--measure-lead); margin: 16px auto 0; font-size: var(--fs-600); line-height: var(--lh-ui); color: var(--t-3); font-weight: 400; }
 
+/* SplitText legt pro Zeile einen Maskenrahmen an. Die Zeile schiebt sich
+   dahinter hervor, deshalb darf der Rahmen nicht clippen, was Unterlaengen
+   abschneidet - ein bisschen Luft nach unten. */
+.sline { will-change: transform; }
+
 /* ----- REVEAL (GSAP-driven; CSS no-JS fallback) ----- */
 [data-reveal] { opacity: 0; transform: translateY(28px); }
 .js .hero__title .word { opacity: 0; transform: translateY(32px); }
@@ -234,8 +260,25 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(201,168,76,.20);
   border-radius: var(--r-pill);
   box-shadow: 0 10px 40px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.08);
-  transition: background .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
+  --nav-progress: 0;
+  translate: 0 0;
+  transition: background var(--dur-ui) var(--ease), border-color var(--dur-ui) var(--ease),
+              box-shadow var(--dur-ui) var(--ease), translate var(--dur-ui) var(--ease);
 }
+/* Duenne Fortschrittslinie am unteren Rand der Glas-Leiste. Sie sagt, wie
+   weit die Seite noch geht, und erscheint erst, sobald wirklich gescrollt
+   wird - unter dem Hero waere sie eine Linie ohne Aussage. */
+.nav::after {
+  content: ''; position: absolute; left: 26px; right: 26px; bottom: 5px; height: 2px;
+  border-radius: 2px; pointer-events: none;
+  background: linear-gradient(90deg, rgba(201,168,76,.30), var(--gold-lite));
+  transform: scaleX(var(--nav-progress)); transform-origin: left center;
+  opacity: 0; transition: opacity var(--dur-fast) var(--ease);
+}
+.nav.scrolled::after { opacity: .9; }
+/* Beim Runterscrollen faehrt die Leiste weg und gibt den oberen Rand frei,
+   beim Hochscrollen ist sie sofort wieder da. */
+.nav--away { translate: 0 -160%; }
 .nav.scrolled {
   background: rgba(8,12,24,.82);
   border-color: rgba(201,168,76,.34);
@@ -244,7 +287,7 @@ h1, h2, h3, h4 {
 .nav__logo { display: flex; align-items: center; flex-shrink: 0; }
 .nav__logo img { height: 54px; width: auto; }
 .nav__links { display: flex; align-items: center; gap: 30px; list-style: none; }
-.nav__links a { font-size: var(--fs-300); font-weight: 500; color: var(--t-2); transition: color .25s var(--ease); position: relative; }
+.nav__links a { font-size: var(--fs-300); font-weight: 500; color: var(--t-2); transition: color var(--dur-fast) var(--ease); position: relative; }
 .nav__links a:hover { color: var(--white); }
 .nav__links a.is-active { color: var(--gold); }
 
@@ -253,15 +296,18 @@ h1, h2, h3, h4 {
   color: var(--navy); font-weight: 600; font-size: var(--fs-200); letter-spacing: -.01em;
   padding: 11px 22px; border-radius: var(--r-pill);
   box-shadow: 0 6px 16px -6px rgba(201,168,76,.42), inset 0 1px 0 rgba(255,255,255,.3);
-  transition: box-shadow .3s var(--ease), transform .3s var(--ease);
+  /* transform gehoert dem Magneteffekt in app.js. Lift und Druckpunkt laufen
+     deshalb ueber die eigenstaendigen Eigenschaften translate und scale, die
+     sich mit transform verrechnen statt es zu ueberschreiben. */
+  transition: box-shadow var(--dur-fast) var(--ease), translate var(--dur-fast) var(--ease), scale var(--dur-fast) var(--ease);
 }
-.nav__cta:hover { box-shadow: 0 10px 22px -7px rgba(201,168,76,.56), inset 0 1px 0 rgba(255,255,255,.42); transform: translateY(-1px); }
-.nav__cta:active { transform: scale(.98); }
+.nav__cta:hover { box-shadow: 0 10px 22px -7px rgba(201,168,76,.56), inset 0 1px 0 rgba(255,255,255,.42); translate: 0 -1px; }
+.nav__cta:active { scale: .98; }
 
 /* Touch-Target 44x44: 3 Balken a 2px + 2 Luecken a 5px = 16px Inhalt,
    also 14px vertikal und 10px horizontal Padding. */
 .nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 14px 10px; margin-right: 2px; }
-.nav__burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: transform .3s var(--ease), opacity .3s var(--ease); }
+.nav__burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease); }
 
 /* mobile drawer - slides from right */
 .drawer {
@@ -273,10 +319,10 @@ h1, h2, h3, h4 {
   border-left: 1px solid var(--line);
   box-shadow: -20px 0 60px rgba(0,0,0,.5);
   padding: 96px 30px 40px; display: flex; flex-direction: column; gap: 4px;
-  transition: transform .45s var(--ease); visibility: hidden;
+  transition: transform var(--dur-ui) var(--ease); visibility: hidden;
 }
 .drawer.open { transform: translateX(0); visibility: visible; }
-.drawer a { font-size: var(--fs-600); font-weight: 500; color: var(--t-2); padding: 16px 0; border-bottom: 1px solid var(--line); transition: color .2s; }
+.drawer a { font-size: var(--fs-600); font-weight: 500; color: var(--t-2); padding: 16px 0; border-bottom: 1px solid var(--line); transition: color var(--dur-fast); }
 .drawer a:hover, .drawer a.is-active { color: var(--white); }
 .drawer__cta {
   margin-top: 22px; text-align: center; border-bottom: none !important;
@@ -284,7 +330,7 @@ h1, h2, h3, h4 {
   color: var(--navy) !important; font-weight: 600; padding: 15px !important; border-radius: var(--r-pill);
 }
 .drawer__close { position: absolute; top: 26px; right: 26px; background: none; border: none; color: var(--t-2); cursor: pointer; padding: 6px; }
-.scrim { position: fixed; inset: 0; z-index: 1090; background: rgba(5,8,18,.6); backdrop-filter: blur(3px); opacity: 0; visibility: hidden; transition: opacity .4s var(--ease); }
+.scrim { position: fixed; inset: 0; z-index: 1090; background: rgba(5,8,18,.6); backdrop-filter: blur(3px); opacity: 0; visibility: hidden; transition: opacity var(--dur-ui) var(--ease); }
 .scrim.open { opacity: 1; visibility: visible; }
 
 /* ==========================================================================
@@ -294,7 +340,10 @@ h1, h2, h3, h4 {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   font-family: var(--font); font-size: var(--fs-300); font-weight: 600; letter-spacing: -.01em;
   padding: 15px 30px; border-radius: var(--r-pill); border: 1px solid transparent;
-  cursor: pointer; white-space: nowrap; transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease);
+  cursor: pointer; white-space: nowrap;
+  /* siehe .nav__cta: transform ist fuer den Magneteffekt reserviert */
+  transition: translate var(--dur-fast) var(--ease), scale var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
 }
 .btn--gold {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lite) 50%, var(--gold) 100%);
@@ -303,10 +352,10 @@ h1, h2, h3, h4 {
      das Licht kommt von oben, der Button liegt auf der Seite statt zu leuchten */
   box-shadow: 0 8px 20px -6px rgba(201,168,76,.45), inset 0 1px 0 rgba(255,255,255,.34);
 }
-.btn--gold:hover { box-shadow: 0 14px 30px -8px rgba(201,168,76,.6), inset 0 1px 0 rgba(255,255,255,.46); transform: translateY(-2px); }
+.btn--gold:hover { box-shadow: 0 14px 30px -8px rgba(201,168,76,.6), inset 0 1px 0 rgba(255,255,255,.46); translate: 0 -2px; }
 .btn--ghost { background: rgba(255,255,255,.06); color: var(--white); border-color: var(--line-2); backdrop-filter: blur(10px); }
-.btn--ghost:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
-.btn:active { transform: scale(.98); }
+.btn--ghost:hover { background: rgba(255,255,255,.12); translate: 0 -2px; }
+.btn:active { scale: .98; }
 .btn--lg { padding: 18px 38px; font-size: var(--fs-400); }
 .btn--full { width: 100%; }
 
@@ -322,21 +371,23 @@ h1, h2, h3, h4 {
   border-radius: var(--r-card);
   padding: 34px;
   box-shadow: 0 4px 24px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.06);
-  transition: transform .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease), background .45s var(--ease);
+  /* transform bleibt frei fuer Reveal und Tilt aus app.js */
+  transition: translate var(--dur-ui) var(--ease), border-color var(--dur-ui) var(--ease),
+              box-shadow var(--dur-ui) var(--ease), background var(--dur-ui) var(--ease);
 }
 .card::after {
   content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: radial-gradient(420px circle at var(--mx,50%) var(--my,0%), rgba(201,168,76,.10), transparent 65%);
-  opacity: 0; transition: opacity .45s var(--ease);
+  opacity: 0; transition: opacity var(--dur-ui) var(--ease);
 }
-.card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,.30); background: var(--glass-2); box-shadow: 0 22px 50px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.10); }
+.card:hover { translate: 0 -4px; border-color: rgba(201,168,76,.30); background: var(--glass-2); box-shadow: 0 22px 50px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.10); }
 .card:hover::after { opacity: 1; }
 
 .icon-tile {
   width: 50px; height: 50px; border-radius: var(--r-sm);
   background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.2);
   display: flex; align-items: center; justify-content: center; margin-bottom: 22px;
-  color: var(--gold); transition: transform .4s var(--ease), background .3s;
+  color: var(--gold); transition: transform var(--dur-ui) var(--ease), background var(--dur-fast);
 }
 .card:hover .icon-tile { transform: scale(1.08) rotate(-4deg); background: rgba(201,168,76,.18); }
 .icon-tile svg { width: 24px; height: 24px; }
@@ -400,7 +451,7 @@ h1, h2, h3, h4 {
    ========================================================================== */
 .marquee { overflow: hidden; padding: 26px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(8,12,24,.4); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .marquee__track { display: flex; align-items: center; gap: 0; width: max-content; animation: marquee 36s linear infinite; }
-.marquee__item { font-size: var(--fs-500); font-weight: 500; color: var(--t-3); padding: 0 30px; white-space: nowrap; transition: color .25s var(--ease), transform .25s var(--ease); }
+.marquee__item { font-size: var(--fs-500); font-weight: 500; color: var(--t-3); padding: 0 30px; white-space: nowrap; transition: color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
 .marquee__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: .8; flex-shrink: 0; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 /* pause the whole band on hover, then let the single word under the cursor light up gold */
@@ -437,7 +488,7 @@ h1, h2, h3, h4 {
 .bento-d.is-accent .icon-tile { background: rgba(15,22,40,.16); border-color: rgba(15,22,40,.18); color: var(--navy); margin-bottom: 0; flex-shrink: 0; }
 .bento-d.is-accent h3 { color: var(--navy); margin-bottom: 4px; }
 .bento-d.is-accent p { color: rgba(15,22,40,.78); font-weight: 500; }
-.bento-d.is-accent:hover { transform: translateY(-5px); box-shadow: 0 22px 60px rgba(201,168,76,.4); }
+.bento-d.is-accent:hover { translate: 0 -5px; box-shadow: 0 22px 60px rgba(201,168,76,.4); }
 
 /* ==========================================================================
    PINNED "WARUM" SECTION
@@ -475,9 +526,23 @@ h1, h2, h3, h4 {
 .price-card.is-feat { border-color: rgba(201,168,76,.5); box-shadow: 0 0 0 1px rgba(201,168,76,.3), 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08); }
 .price-card.is-feat::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,.12), transparent 60%); pointer-events: none; }
 /* hover hierarchy: featured card leads (bigger lift + gold glow), others lift plainly */
-.price-card:not(.is-feat):hover { transform: translateY(-4px); border-color: var(--line-2); background: var(--glass-2); box-shadow: 0 18px 44px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06); }
+.price-card:not(.is-feat):hover { translate: 0 -4px; border-color: var(--line-2); background: var(--glass-2); box-shadow: 0 18px 44px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06); }
 .price-card:not(.is-feat):hover::after { opacity: 0; }
-.price-card.is-feat:hover { transform: translateY(-6px); border-color: rgba(201,168,76,.6); box-shadow: 0 0 0 1px rgba(201,168,76,.45), 0 30px 72px rgba(0,0,0,.5), 0 0 48px rgba(201,168,76,.28), inset 0 1px 0 rgba(255,255,255,.1); }
+.price-card.is-feat:hover { translate: 0 -6px; border-color: rgba(201,168,76,.6); box-shadow: 0 0 0 1px rgba(201,168,76,.45), 0 30px 72px rgba(0,0,0,.5), 0 0 48px rgba(201,168,76,.28), inset 0 1px 0 rgba(255,255,255,.1); }
+/* Lichtschweif entlang des Randes, einmal beim ersten Sichtkontakt.
+   Das Element legt app.js selbst an - ohne Bewegung existiert es nicht.
+   Die zwei Masken lassen nur den 1px-Rahmen stehen, nicht die Flaeche. */
+.sheen {
+  position: absolute; inset: 0; z-index: 3; padding: 1px;
+  border-radius: inherit; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 41%, rgba(232,201,106,.8) 50%, transparent 59%);
+  background-size: 260% 100%; background-repeat: no-repeat;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
 .price-badge { position: absolute; top: 22px; right: 24px; background: linear-gradient(135deg, var(--gold), var(--gold-lite)); color: var(--navy); font-size: var(--fs-100); font-weight: 700; letter-spacing: .03em; padding: 6px 14px; border-radius: var(--r-pill); }
 .price-name { font-size: var(--fs-300); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--gold); }
 .price-amount { margin-top: 16px; font-family: var(--font-display); font-size: var(--fs-price); font-weight: 800; color: #fff; letter-spacing: -.04em; line-height: 1; }
@@ -525,17 +590,17 @@ h1, h2, h3, h4 {
   border-bottom: 1px solid var(--line);
   background: rgba(5,8,18,.5);
 }
-.showcase-card__desktop { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .6s var(--ease); }
-.showcase-card:hover .showcase-card__desktop { transform: scale(1.04); }
+.showcase-card__desktop { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: scale var(--dur-base) var(--ease); }
+.showcase-card:hover .showcase-card__desktop { scale: 1.04; }
 .showcase-card__mobile {
   position: absolute; right: 22px; bottom: -34px; z-index: 2;
   width: 26%; max-width: 118px; height: auto; aspect-ratio: 9 / 19.5;
   object-fit: cover; border-radius: 14px;
   border: 3px solid var(--navy-deep);
   box-shadow: 0 20px 44px rgba(0,0,0,.55), 0 0 0 1px rgba(201,168,76,.25);
-  transition: transform .45s var(--ease);
+  transition: translate var(--dur-ui) var(--ease);
 }
-.showcase-card:hover .showcase-card__mobile { transform: translateY(-6px); }
+.showcase-card:hover .showcase-card__mobile { translate: 0 -6px; }
 .showcase-card__badge {
   position: absolute; top: 18px; left: 18px; z-index: 3;
   display: inline-flex; align-items: center; gap: 7px;
@@ -543,9 +608,9 @@ h1, h2, h3, h4 {
   color: var(--navy); font-size: var(--fs-100); font-weight: 700; letter-spacing: -.01em;
   padding: 8px 14px; border-radius: var(--r-pill);
   box-shadow: 0 8px 24px rgba(201,168,76,.35);
-  transition: transform .3s var(--ease);
+  transition: transform var(--dur-fast) var(--ease);
 }
-.showcase-card__badge svg { width: 14px; height: 14px; transition: transform .3s var(--ease); }
+.showcase-card__badge svg { width: 14px; height: 14px; transition: transform var(--dur-fast) var(--ease); }
 .showcase-card:hover .showcase-card__badge { transform: translateY(-1px); }
 .showcase-card:hover .showcase-card__badge svg { transform: translate(2px, -2px); }
 .showcase-card__body { padding: 44px 32px 32px; }
@@ -565,8 +630,8 @@ h1, h2, h3, h4 {
 
 .proof-card { padding: 0; overflow: hidden; }
 .proof-card__media { position: relative; overflow: hidden; background: rgba(5,8,18,.5); }
-.proof-card__media img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .6s var(--ease); }
-.proof-card:hover .proof-card__media img { transform: scale(1.035); }
+.proof-card__media img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: scale var(--dur-base) var(--ease); }
+.proof-card:hover .proof-card__media img { scale: 1.035; }
 
 .proof-card__body h3 { font-weight: 700; }
 /* Die Textregeln sind bewusst mit .proof-card praefixiert: .card p ist (0,1,1)
@@ -605,7 +670,7 @@ h1, h2, h3, h4 {
   .proof-card--mini .proof-card__body { padding: 16px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .proof-card__media img, .proof-card:hover .proof-card__media img { transform: none !important; }
+  .proof-card__media img, .proof-card:hover .proof-card__media img { transform: none !important; scale: 1 !important; }
 }
 
 /* ==========================================================================
@@ -616,7 +681,7 @@ h1, h2, h3, h4 {
 .faq-q { width: 100%; background: none; border: none; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 26px 4px; font-family: var(--font); font-size: var(--fs-600); font-weight: 600; color: var(--t-1); }
 .faq-q:hover { color: #fff; }
 .faq-ic { flex-shrink: 0; width: 26px; height: 26px; position: relative; }
-.faq-ic::before, .faq-ic::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 2px; background: var(--gold); border-radius: 2px; transform: translate(-50%,-50%); transition: transform .3s var(--ease); }
+.faq-ic::before, .faq-ic::after { content: ''; position: absolute; top: 50%; left: 50%; width: 14px; height: 2px; background: var(--gold); border-radius: 2px; transform: translate(-50%,-50%); transition: transform var(--dur-fast) var(--ease); }
 .faq-ic::after { transform: translate(-50%,-50%) rotate(90deg); }
 .faq-item.open .faq-ic::after { transform: translate(-50%,-50%) rotate(0deg); }
 .faq-panel { height: 0; overflow: hidden; }
@@ -803,7 +868,9 @@ h1, h2, h3, h4 {
 .form-control {
   width: 100%; font-family: var(--font); font-size: var(--fs-400); color: #fff;
   background: rgba(255,255,255,.05); border: 1px solid var(--line-2); border-radius: var(--r-sm);
-  padding: 14px 16px; transition: border-color .25s, box-shadow .25s, background .25s;
+  /* Weicher Gold-Ring beim Fokus: der Ring waechst, statt hart zu erscheinen. */
+  padding: 14px 16px;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
 }
 .form-control::placeholder { color: var(--t-4); }
 .form-control:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,.07); box-shadow: 0 0 0 3px rgba(201,168,76,.18); }
@@ -822,7 +889,10 @@ textarea.form-control { resize: vertical; min-height: 120px; }
    ========================================================================== */
 .cta-band { text-align: center; }
 .cta-band__box { position: relative; overflow: hidden; max-width: 880px; margin: 0 auto; padding: clamp(50px, 7vw, 84px) 32px; border-radius: var(--r-card); border: 1px solid rgba(201,168,76,.22); background: linear-gradient(160deg, rgba(201,168,76,.10), rgba(255,255,255,.02)); box-shadow: 0 30px 80px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.08); }
-.cta-band__box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(201,168,76,.16), transparent 60%); pointer-events: none; }
+/* Der Glow sitzt auf zwei Variablen, die app.js dem Zeiger nachfuehrt.
+   Ohne JS bleibt er auf den Ausgangswerten stehen und sieht aus wie vorher. */
+.cta-band__box { --gx: 50%; --gy: 0%; }
+.cta-band__box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at var(--gx) var(--gy), rgba(201,168,76,.16), transparent 60%); pointer-events: none; }
 .cta-band h2 { font-size: var(--fs-1100); font-weight: 800; position: relative; }
 .cta-band p { margin: 18px auto 36px; max-width: 48ch; font-size: var(--fs-600); color: var(--t-2); position: relative; }
 
@@ -835,7 +905,7 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 .footer__brand .logo-text .g { color: var(--gold); }
 .footer__brand p { margin-top: 16px; font-size: var(--fs-300); color: var(--t-3); max-width: 32ch; line-height: var(--lh-ui); }
 .footer__col h4 { font-size: var(--fs-100); letter-spacing: .08em; text-transform: uppercase; color: var(--t-4); margin-bottom: 18px; font-weight: 600; }
-.footer__col a, .footer__col span { display: block; font-size: var(--fs-300); color: var(--t-3); padding: 10px 0; transition: color .2s; }
+.footer__col a, .footer__col span { display: block; font-size: var(--fs-300); color: var(--t-3); padding: 10px 0; transition: color var(--dur-fast); }
 .footer__col a:hover { color: var(--gold); }
 .footer__bottom { margin-top: 50px; padding-top: 26px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: var(--fs-200); color: var(--t-3); }
 
@@ -894,6 +964,10 @@ textarea.form-control { resize: vertical; min-height: 120px; }
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  /* Kein Seitenuebergang, keine wandernde Leiste, kein Lichtschweif. */
+  .nav--away { translate: 0 !important; }
+  .nav::after { opacity: 0 !important; }
+  .sheen { display: none !important; }
   [data-reveal] { opacity: 1 !important; transform: none !important; }
   .hero__title .word { opacity: 1 !important; transform: none !important; }
   .marquee__track { animation: none; }
@@ -1050,5 +1124,38 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 @media (prefers-reduced-motion: reduce) {
   .showcase-card__desktop,
   .showcase-card:hover .showcase-card__desktop,
-  .showcase-card:hover .showcase-card__mobile { transform: none !important; }
+  .showcase-card:hover .showcase-card__mobile { transform: none !important; translate: 0 !important; }
+}
+
+/* ==========================================================================
+   SEITENUEBERGAENGE (View Transitions API, cross-document, reines CSS)
+   Kein Skript, kein Overlay: der Browser blendet die alte Seite aus und laesst
+   die neue leicht heraufgleiten. Browser ohne Unterstuetzung wechseln normal,
+   es gibt also nichts zu ueberpruefen und nichts zu polyfillen.
+   Der Ausgang ist kuerzer als der Eingang - so fuehlt sich Zurueck schnell an
+   und die Navigation wartet nie auf eine Animation.
+   ========================================================================== */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root) { animation: vt-out 150ms var(--ease-ui) both; }
+::view-transition-new(root) { animation: vt-in  340ms var(--ease)    both; }
+@keyframes vt-out { to   { opacity: 0; } }
+@keyframes vt-in  { from { opacity: 0; transform: translateY(16px); } }
+
+/* Die Navigationsleiste bekommt einen eigenen Namen und ist damit nicht Teil
+   des Wurzelbildes. Sie gleitet beim Wechsel nicht mit, sondern bleibt stehen. */
+.nav { view-transition-name: nav; }
+::view-transition-old(nav),
+::view-transition-new(nav) { animation-duration: 120ms; }
+
+/* Das Enlupa-Bild traegt auf allen drei Seiten, auf denen es vorkommt,
+   denselben Namen. Beim Wechsel wandert es dadurch von der Karte in den
+   Screenshot, statt zu verschwinden und neu aufzutauchen. Pro Seite gibt es
+   den Namen genau einmal, sonst faellt der Uebergang stillschweigend aus. */
+.proof-card--lead .proof-card__media img,
+.ref-grid > .is-lead .showcase-card__desktop,
+.browser__view img { view-transition-name: shot-enlupa; }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
 }
