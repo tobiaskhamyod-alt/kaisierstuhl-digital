@@ -140,7 +140,7 @@
   /* ---------- LEISTUNGEN: image scale scrub + body word reveal ---------- */
   function initServices() {
     $$('.service__media img').forEach(function (img) {
-      gsap.fromTo(img, { scale: 0.85 }, {
+      gsap.fromTo(img, { scale: 1.08 }, {
         scale: 1, ease: 'none',
         scrollTrigger: { trigger: img, start: 'top 90%', end: 'center center', scrub: true }
       });
