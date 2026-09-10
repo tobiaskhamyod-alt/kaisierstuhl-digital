@@ -258,6 +258,62 @@
   }
 
   /* ==========================================================================
+     HERO-LOGO - Auftritt der Bildmarke
+
+     Das Logo liegt seit dem Vektor-Tausch inline im Markup und ist dort
+     vollstaendig sichtbar. Jeder versteckte Anfangszustand wird ausschliesslich
+     hier gesetzt (Grundregel oben): ohne JS, ohne GSAP, im Hintergrundtab oder
+     bei reduced motion passiert schlicht nichts und die Marke steht einfach da.
+
+     Die Reihenfolge erzaehlt die Marke in vier Schritten:
+       1 der Berg zeichnet sich als Linie und fuellt sich dahinter auf  (der Ort)
+       2 der Pfeil laeuft seine eigene Richtung entlang                 (Wachstum)
+       3 die Pixel stieben von der Pfeilspitze nach aussen weg          (digital)
+       4 der Schriftzug setzt sich von links nach rechts                (der Name)
+     Nach rund 1,15 s steht alles. Der Auftritt laeuft parallel zur H1, nicht
+     davor: die H1 ist das LCP-Element und darf nicht warten.
+     ========================================================================== */
+  function initHeroLogo() {
+    var svg = $('.hero__logo');
+    if (!svg || reduce || document.hidden) return;
+
+    var mountain = $('#kd-mountain', svg);
+    var rect     = $('#kd-sweep-rect', svg);
+    var pixels   = $$('#kd-pixels path', svg);
+    var word     = $$('#kd-word path', svg);
+    var digital  = $$('#kd-digital path', svg);
+    if (!mountain || !rect) return;
+
+    var full = rect.getAttribute('width');   // volle Breite steht im Markup
+
+    gsap.timeline()
+      /* 1 - pathLength="1" am Pfad macht die Strichlaenge unabhaengig von der
+         Geometrie: 1 ist immer die ganze Kontur. Die Linie laeuft den Grat ab,
+         die Flaeche zieht dahinter nach, dann verschwindet die Linie wieder. */
+      .set(mountain, { fillOpacity: 0, stroke: 'currentColor', strokeWidth: 2.5,
+                       strokeDasharray: 1, strokeDashoffset: 1 })
+      .to(mountain, { strokeDashoffset: 0, duration: 0.60, ease: M.easeIO }, 0)
+      .to(mountain, { fillOpacity: 1, duration: 0.42, ease: M.easeUI }, 0.22)
+      .to(mountain, { strokeWidth: 0, duration: 0.25, ease: M.easeUI }, 0.45)
+
+      /* 2 - der Pfeil wird nicht eingeblendet, sondern von links nach rechts
+         freigegeben. Er bewegt sich dadurch in die Richtung, in die er zeigt. */
+      .fromTo(rect, { attr: { width: 0 } },
+                    { attr: { width: full }, duration: 0.50, ease: M.easeUI }, 0.32)
+
+      /* 3 - die Pixel liegen in der Reihenfolge ihres Abstands zur Pfeilspitze
+         im Markup, der Stagger laesst sie daher nach aussen wegstieben. */
+      .from(pixels, { scale: 0, opacity: 0, transformOrigin: '50% 50%',
+                      duration: 0.36, ease: 'back.out(2)', stagger: 0.04 }, 0.58)
+
+      /* 4 - Schriftzug: kurzer Weg, enger Versatz. Soll sich setzen, nicht laufen. */
+      .from(word,    { y: 14, opacity: 0, duration: 0.42, ease: M.ease,
+                       stagger: 0.028 }, 0.40)
+      .from(digital, { y: 9,  opacity: 0, duration: 0.38, ease: M.ease,
+                       stagger: 0.025 }, 0.62);
+  }
+
+  /* ==========================================================================
      ABSCHNITTSUEBERSCHRIFTEN - Zeilen-Masken-Reveal (SplitText)
      Die Zeile schiebt sich hinter ihrer eigenen Maske hervor. Ersetzt den
      bisherigen Fade des ganzen Kopfblocks; der Absatz folgt versetzt.
@@ -771,6 +827,7 @@
     whenFontsReady(function () { buildHeadlines(heads); ScrollTrigger.refresh(); });
 
     initHero();
+    initHeroLogo();
     initNavMotion();
     initReveal();
     initBento();

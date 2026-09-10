@@ -432,7 +432,13 @@ h1, h2, h3, h4 {
     linear-gradient(180deg, rgba(15,22,40,.4) 0%, transparent 25%, transparent 60%, var(--navy) 100%);
 }
 .hero__inner { position: relative; z-index: 2; max-width: 62rem; }
-.hero__logo { width: clamp(260px, 32vw, 460px); height: auto; margin: 0 auto 24px; display: block; }
+/* Das Logo ist jetzt Vektor und inline, damit die Teile einzeln animiert werden
+   koennen (siehe initHeroLogo in app.js). Die frueheren Rastermasse enthielten
+   den Schein-Rand der PNG: sichtbar waren davon nur 68,44 % Breite. Breite und
+   Abstand unten sind darauf zurueckgerechnet, damit der Hero gleich sitzt. */
+.hero__logo { width: clamp(178px, 21.9vw, 315px); height: auto; display: block;
+  margin: clamp(28px, 3.48vw, 50px) auto clamp(79px, calc(6.72vw + 24px), 121px);
+  color: #fff; overflow: visible; }
 .hero__title { font-size: var(--fs-hero); font-weight: 800; line-height: 1.04; letter-spacing: -.035em; color: #fff; }
 .hero__title .word { display: inline-block; will-change: transform; }
 .hero__sub { max-width: var(--measure-lead); margin: 28px auto 0; font-size: var(--fs-600); color: var(--t-2); font-weight: 400; line-height: var(--lh-ui); }
