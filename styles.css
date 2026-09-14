@@ -554,6 +554,8 @@ h1, h2, h3, h4 {
 .price-amount { margin-top: 16px; font-family: var(--font-display); font-size: var(--fs-price); font-weight: 800; color: #fff; letter-spacing: -.04em; line-height: 1; }
 .price-amount span { font-size: var(--fs-500); font-weight: 500; color: var(--t-3); letter-spacing: 0; }
 .price-note { margin-top: 12px; font-size: var(--fs-200); color: var(--t-4); }
+.price-note a { color: var(--gold); font-weight: 600; }
+.price-note a:hover { text-decoration: underline; }
 .price-feats { list-style: none; margin: 28px 0 32px; display: flex; flex-direction: column; gap: 13px; border-top: 1px solid var(--line); padding-top: 26px; }
 .price-feats li { display: flex; gap: 12px; align-items: flex-start; font-size: var(--fs-300); color: var(--t-2); }
 .price-feats svg { width: 19px; height: 19px; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
