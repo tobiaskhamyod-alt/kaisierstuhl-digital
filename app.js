@@ -764,6 +764,7 @@
     var PAKETE = {
       'wartung-basis': 'Wartung Basis (39 €/Monat)',
       'wartung-plus': 'Wartung Plus (79 €/Monat)',
+      'nur-hosting': 'Nur Hosting (15 €/Monat)',
       'bestehende-website': 'Bestehende Website übernehmen (Check 99 €)'
     };
     var interest = $('#f-interest', form);
